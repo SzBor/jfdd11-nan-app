@@ -10,23 +10,31 @@ class TrackPanel extends Component {
   state = {
     lat: 54.4032034,
     lng: 18.5694926,
-    zoom: 15
+    zoom: 15,
+    latDelivered: 54.3520,
+    lngDelivered: 18.6466,
+  
   };
   render() {
     const position = [this.state.lat, this.state.lng];
-
+const positionDelivered = [this.state.latDelivered, this.state.lngDelivered]
     return (
       <div className="TrackPanel">
         <h2>Track Panel</h2>
         <input type="text" placeholder="Search" />
         <ul className="deliveredParcels" />
         <ul className="history" />
-        <LeafletMap center={position} zoom={this.state.zoom} style={{ height: 300 }}>
+        <LeafletMap center={position}  zoom={this.state.zoom} style={{ height: 300 }}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           />
           <Marker position={position}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+          <Marker position={positionDelivered}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
