@@ -14,6 +14,7 @@ class MainMenu extends Component {
             <NavLink to="/app">Default App</NavLink>
           </li>
           <li>
+            <NavLink to="/dashboard">Dashboard</NavLink>
             <NavLink to="/trackpanel">Track panel</NavLink>
           </li>
         </ul>
