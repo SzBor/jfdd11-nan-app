@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import App from '../App';
 import MainMenu from '../MainMenu';
+import TrackPanel from '../TrackPanel';
 
 class Root extends Component {
   render() {
@@ -22,6 +23,7 @@ class Root extends Component {
             }}
           >
             <Route path="/app" component={App} />
+            <Route path="/trackpanel" component={TrackPanel} />
           </div>
         </div>
       </Router>
