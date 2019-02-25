@@ -13,11 +13,17 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.85.0"
   },
+  "devDependencies": {
+    "react-scripts": "2.1.5",
+    "yeoman-generator": "3.2.0",
+    "yo": "2.0.5"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate:component": "yo ./generators/component/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
