@@ -3,18 +3,6 @@ import './HomeView.css';
 import SearchBar from '../SearchBar';
 import {
   Button,
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  List,
-  Menu,
-  Responsive,
-  Segment,
-  Sidebar,
-  Visibility,
 } from 'semantic-ui-react'
 
 class HomeView extends Component {
@@ -24,8 +12,7 @@ class HomeView extends Component {
   showFixedMenu = () => this.setState({ fixed: true })
   
   render() {
-    const { children } = this.props
-    const { fixed } = this.state
+    
     return (
       <div className="HomeView">
         <header className="">
