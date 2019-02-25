@@ -1,9 +1,7 @@
-
-.HomeView{
+.HomeView {
   background: black;
   color: rgb(255, 0, 242);
   height: 200px;
-
 }
 
 .homeView-buttons {
@@ -13,9 +11,8 @@
 }
 
 .homeView-search {
-justify-self: center;
-padding: 10px;
-margin: 0 auto 0 auto;
-max-width: 400px;
-
+  justify-self: center;
+  padding: 10px;
+  margin: 0 auto 0 auto;
+  max-width: 400px;
 }
