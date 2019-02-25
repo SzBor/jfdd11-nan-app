@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import './firebaseSetup';
+
 import Root from './components/Root';
 
 import 'semantic-ui-css/semantic.min.css'
