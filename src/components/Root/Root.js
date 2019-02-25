@@ -22,7 +22,7 @@ class Root extends Component {
             }}
           >
             <Route path="/app" component={App} />
-            <Route path="/home" component={HomeView} />
+            <Route exact path="" component={HomeView} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/parcel" component={Parcel} />
           </div>
