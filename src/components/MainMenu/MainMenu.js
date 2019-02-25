@@ -16,14 +16,14 @@ class MainMenu extends Component {
     return (
       <Menu stackable>
         <Menu.Item>
-          <img src={image} />
+          <img src={image}  alt='tracken-logo'/>
         </Menu.Item>
 
         <Menu.Item
           name="Home"
           active={activeItem === "Home"}
           onClick={this.handleItemClick}
-          to="/home"
+          exact to="/"
           as={NavLink}
         >
           Home
@@ -54,7 +54,7 @@ class MainMenu extends Component {
           name="track-panel"
           active={activeItem === "track-panel"}
           onClick={this.handleItemClick}
-          to="/trackpanel"
+          to="/parcel"
           as={NavLink}
         >
           Track Panel
