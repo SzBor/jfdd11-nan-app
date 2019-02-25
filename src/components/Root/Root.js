@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import App from '../App';
-import TrackPanel from '../TrackPanel';
+
+import Parcel from '../Parcel';
+import HomeView from '../HomeView';
+
 import Dashboard from '../Dashboard';
 
 class Root extends Component {
@@ -19,8 +22,9 @@ class Root extends Component {
             }}
           >
             <Route path="/app" component={App} />
+            <Route exact path="" component={HomeView} />
             <Route path="/dashboard" component={Dashboard} />
-            <Route path="/trackpanel" component={TrackPanel} />
+            <Route path="/parcel" component={Parcel} />
           </div>
         </div>
       </Router>
