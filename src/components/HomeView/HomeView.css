@@ -5,3 +5,17 @@
   height: 200px;
 
 }
+
+.homeView-buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+}
+
+.homeView-search {
+justify-self: center;
+padding: 10px;
+margin: 0 auto 0 auto;
+max-width: 400px;
+
+}
