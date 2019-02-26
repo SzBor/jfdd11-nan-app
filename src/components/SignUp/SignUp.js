@@ -114,7 +114,7 @@ class SignUp extends Component {
             />
           </Form.Group>
 
-          <Form.Checkbox label="I agree to the Terms and Conditions" required />
+          <input type="checkbox" label="I agree to the Terms and Conditions" required />
           <Button type="submit">Submit</Button>
         </Form>
         {this.state.error && (
