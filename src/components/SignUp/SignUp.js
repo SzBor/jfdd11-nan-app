@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form } from "semantic-ui-react";
+import firebase from 'firebase';
+
 import "./SignUp.css";
 
 class SignUp extends Component {
@@ -10,10 +12,23 @@ class SignUp extends Component {
     address:'',
     email:'',
     password:'',
+    error:null,
+    success:null,
   }
 
+  handleChange = event =>{
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
 
+  handleSubmit = event => {
+    event.preventDefault();
+  };
 
+  
+
+  
 
 
 
