@@ -20,6 +20,7 @@ class HomeView extends Component {
     return (
       <div className="HomeView">
         <header className="homeView-buttons">
+        
           <Button as="a" inverted>
             Log in
           </Button>
