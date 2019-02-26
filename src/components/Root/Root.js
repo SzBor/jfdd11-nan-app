@@ -7,7 +7,8 @@ import Parcel from '../Parcel';
 import HomeView from '../HomeView';
 
 import Dashboard from '../Dashboard';
-import LogIn from '../LogIn/LogIn';
+import SignUp from '../SignUp'
+import LogIn from '../LogIn'
 
 class Root extends Component {
   render() {
@@ -27,6 +28,8 @@ class Root extends Component {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/parcel" component={Parcel} />
             <Route path="/login" component={LogIn} />
+            <Route path="/sign-up" component={SignUp} />
+
           </div>
         </div>
       </Router>

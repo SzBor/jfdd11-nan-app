@@ -4,6 +4,12 @@ import SearchBar from "../SearchBar";
 import { Button } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
+class CustomButton extends Component {
+  render() {
+    return <NavLink {...this.props} />
+  }
+}
+
 class HomeView extends Component {
   state = {};
 
@@ -14,16 +20,16 @@ class HomeView extends Component {
     return (
       <div className="HomeView">
         <header className="homeView-buttons">
-          <Button to="/login" as={NavLink} inverted>
+          <Button to="/login" as={CustomButton} inverted>
             Log in
           </Button>
-          <Button as="a" inverted style={{ marginLeft: "0.5em" }}>
+          <Button to="/sign-up" as={CustomButton} inverted style={{ marginLeft: "0.5em" }}>
             Sign Up
           </Button>
         </header>
         <div className="homeView-search">
           <h1>Find your package</h1>
-          <SearchBar/>
+          <SearchBar />
         </div>
       </div>
     );
