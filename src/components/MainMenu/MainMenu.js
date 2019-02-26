@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Menu } from "semantic-ui-react";
 import image from "./trackenLogo.svg"
 
-import "./mainMenu.css";
+
 
 class MainMenu extends Component {
   state = {};
