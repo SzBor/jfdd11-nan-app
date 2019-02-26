@@ -32,6 +32,7 @@ class Dashboard extends Component {
             <tr>
               <th>Status</th>
               <th>ClientID</th>
+              <th>PackageID</th>
               <th>Delivery Name</th>
               <th>Delivery city</th>
               <th>Delivery street</th>
@@ -43,6 +44,7 @@ class Dashboard extends Component {
               <tr key={pack.id}>
                 <td>{pack.status}</td>
                 <td>{pack.client_id}</td>
+                <td>{pack.id}</td>
                 <td>{pack.delivery.city}</td>
                 <td>{pack.dimensions.width}</td>
                 <td />
