@@ -3,7 +3,6 @@ import Leaflet from "leaflet";
 
 import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
 import { getPackagesPromise } from "../../services";
-import { red } from "ansi-colors";
 import MainMenu from "../MainMenu";
 Leaflet.Icon.Default.imagePath =
   "//cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/";
