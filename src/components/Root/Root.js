@@ -8,7 +8,6 @@ import HomeView from '../HomeView';
 
 import Dashboard from '../Dashboard';
 import SignUp from '../SignUp'
-import LogIn from '../LogIn'
 
 class Root extends Component {
   render() {
@@ -24,10 +23,9 @@ class Root extends Component {
             }}
           >
             <Route path="/app" component={App} />
-            <Route exact path="" component={HomeView} />
+            <Route exact path="/" component={HomeView} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/parcel" component={Parcel} />
-            <Route path="/login" component={LogIn} />
             <Route path="/sign-up" component={SignUp} />
 
           </div>
