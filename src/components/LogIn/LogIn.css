@@ -1,3 +1,8 @@
-.LogIn {
+.LogIn .ui.button {
+    margin-top: 10px;
+  
+}
+.LogIn .ui.form .field>label {
+    margin-top: 10px;
   
 }
