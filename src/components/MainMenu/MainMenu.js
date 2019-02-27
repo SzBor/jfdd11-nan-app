@@ -24,18 +24,7 @@ class MainMenu extends Component {
         <Menu.Item>
           <img src={image} alt="tracken-logo" />
         </Menu.Item>
-        <Menu.Item>
-          {user && (
-            <p>
-              <span id="loggenInAs">Logged in as:</span>
-              <span id="loggedInUser">{user.email} </span>
-
-              <Button id="signOutButton" negative size='mini' onClick={() => firebase.auth().signOut()}>
-                Sign out
-              </Button>
-            </p>
-          )}
-        </Menu.Item>
+        
 
         <Menu.Item
           name="Home"
@@ -66,6 +55,18 @@ class MainMenu extends Component {
           as={NavLink}
         >
           Track Panel
+        </Menu.Item>
+        <Menu.Item>
+          {user && (
+            <p>
+              <span id="loggenInAs">Logged in as:</span>
+              <span id="loggedInUser">{user.email} </span>
+
+              <Button id="signOutButton" negative size='mini' onClick={() => firebase.auth().signOut()}>
+                Sign out
+              </Button>
+            </p>
+          )}
         </Menu.Item>
       </Menu>
     );
