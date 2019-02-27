@@ -4,6 +4,7 @@ import firebase from "firebase";
 
 import "./SignUp.css";
 
+
 class SignUp extends Component {
   state = {
     name: "",
@@ -113,8 +114,17 @@ class SignUp extends Component {
               required
             />
           </Form.Group>
-
-          <Form.Checkbox label="I agree to the Terms and Conditions" required />
+          <Form.Group>
+          <label id="termsnConditionsLabel">
+            <input
+              id="termsnConditions"
+              type="checkbox"
+              label="I agree to the Terms and Conditions"
+              required
+            />
+            I agree to the Terms and Conditions
+          </label>
+          </Form.Group>
           <Button type="submit">Submit</Button>
         </Form>
         {this.state.error && (
