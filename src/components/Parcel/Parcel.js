@@ -71,7 +71,7 @@ class Parcel extends Component {
           />
 
           <Marker position={positionDelivered}>
-            <Popup>Delivery address</Popup>
+            <Popup>Sending address</Popup>
           </Marker>
 
           <Marker
@@ -104,7 +104,7 @@ class Parcel extends Component {
             </tr>
           </tbody>
         </table>
-        <button>Parcel delivered</button>
+        
       </div>
     );
   }
