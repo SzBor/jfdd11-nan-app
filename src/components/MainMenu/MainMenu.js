@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu } from "semantic-ui-react";
+import { Menu, Button } from "semantic-ui-react";
 import image from "./trackenLogo.svg";
 import firebase from "firebase";
 import "./MainMenu.css";
@@ -30,9 +30,9 @@ class MainMenu extends Component {
               <span id="loggenInAs">Logged in as:</span>
               <span id="loggedInUser">{user.email} </span>
 
-              <button onClick={() => firebase.auth().signOut()}>
+              <Button id="signOutButton" negative size='mini' onClick={() => firebase.auth().signOut()}>
                 Sign out
-              </button>
+              </Button>
             </p>
           )}
         </Menu.Item>
