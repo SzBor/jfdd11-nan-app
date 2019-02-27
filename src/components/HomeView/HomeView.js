@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import "./HomeView.css";
+
 import SearchBar from "../SearchBar";
 import { Button, Popup } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import LogIn from "../LogIn";
+
+import "./HomeView.css";
 
 class CustomButton extends Component {
   render() {
