@@ -7,13 +7,13 @@ class LogIn extends Component {
 
   render() {
     return (
-      <div>
+      <div className="LogIn">
         <Form unstackable>
-          <Form.Group widths={2}>
-            <Form.Input label="Email" placeholder="email" />
-            <Form.Input label="Password" placeholder="password" />
+          <Form.Group widths={1}>
+            <Form.Input type="email" label="Email" placeholder="email" />
+            <Form.Input type="password" label="Password" placeholder="password" />
           </Form.Group>
-          <Button type="login">Log In</Button>
+          <Button type="signin">Log In</Button>
         </Form>
       </div>
     );

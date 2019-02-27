@@ -4,7 +4,6 @@ import SearchBar from "../SearchBar";
 import { Button, Popup } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import LogIn from "../LogIn";
-import { width } from "window-size";
 
 class CustomButton extends Component {
   render() {
@@ -24,16 +23,14 @@ class HomeView extends Component {
         <header className="homeView-buttons">
           <Popup
             content={<LogIn />}
-            trigger={<Button inverted>Log in</Button>}
-            hideOnScroll={"false"}
+            trigger={<Button  inverted>Log in</Button>}
+            hideOnScroll={false}
             on={"click"}
             position= {"top center"}
             basic
-            style={{position:"fixed",left:"40%", width: "500px"}}
+            style={{ position:"fixed",left:"20%", width: "80%"}}
           />
-          <Button to="/login" as={CustomButton} inverted>
-            Log in
-          </Button>
+        
           <Button
             to="/sign-up"
             as={CustomButton}
