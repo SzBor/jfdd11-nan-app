@@ -23,9 +23,9 @@ class Root extends Component {
             }}
           >
             <Route path="/app" component={App} />
-            <Route exact path="/" component={HomeView} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/parcel" component={Parcel} />
+            <Route exact path="" component={HomeView} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route path="/dashboard/:parcelId" component={Parcel} />
             <Route path="/sign-up" component={SignUp} />
 
           </div>
