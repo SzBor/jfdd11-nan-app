@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import MainMenu from "../MainMenu";
 import { Link } from "react-router-dom";
+
+import { Select } from "semantic-ui-react";
 import moment from "moment";
 import "./Dashboard.css";
 import { getCustomersPromise, getPackagesPromise } from "../../services";
@@ -10,7 +12,8 @@ class Dashboard extends Component {
     packages: [],
     customers: "",
     searchPhrase: "",
-    pagination:1
+    pagination: 0,
+    option: "all"
   };
 
   syncClients = () =>
@@ -30,8 +33,16 @@ class Dashboard extends Component {
     });
   };
   handlePaginationChange = event => {
-
-  }
+    const paginationPage = event.target.value;
+    this.setState({
+      pagination: paginationPage * 10
+    });
+  };
+  handleOptionChange = (event,data) => {
+    this.setState({
+      option: data.value
+    });
+  };
 
   render() {
     return (
@@ -40,7 +51,23 @@ class Dashboard extends Component {
           <MainMenu />
         </div>
         <h1>Dashboard</h1>
-        <input value={this.state.searchPhrase} onChange={this.handleChange} />
+        <div className="ui input">
+          <input
+            placeholder="Search..."
+            value={this.state.searchPhrase}
+            onChange={this.handleChange}
+          />
+        </div>
+        <Select
+          placeholder="Select status"
+          options={[
+            { key: 1, value: "all", text: "All" },
+            { key: 2, value: "received", text: "Received" },
+            { key: 3, value: "send", text: "Send" },
+            { key: 4, value: "pending", text: "Pending"}
+          ]}
+          onChange={this.handleOptionChange}
+        />
         <table className="ui celled table">
           <thead>
             <tr>
@@ -68,6 +95,11 @@ class Dashboard extends Component {
               .filter(pack =>
                 pack.searchData.includes(this.state.searchPhrase.toLowerCase())
               )
+              .filter(pack =>
+                this.state.option === "all"
+                  ? true
+                  : pack.status === this.state.option
+              )
               .map(pack => (
                 <tr key={pack.id}>
                   <td>{pack.date_send}</td>
@@ -94,11 +126,21 @@ class Dashboard extends Component {
                   </td>
                 </tr>
               ))
-              .slice(0,10)}
+              .slice(this.state.pagination, this.state.pagination + 10)}
           </tbody>
         </table>
-        <div>
-          {Array.from({length:Math.ceil(this.state.packages.length/10)}).map(((button,index)=>(<input type="button" value={index+1} onClick={this.handlePaginationChang} />)
+        <div className="ui text container">
+          {Array.from({
+            length: Math.ceil(this.state.packages.length / 10)
+          }).map((button, index) => (
+            <button
+              className="ui button"
+              key={index}
+              value={index}
+              onClick={this.handlePaginationChange}
+            >
+              {index + 1}
+            </button>
           ))}
         </div>
       </div>
