@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import MainMenu from "../MainMenu";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 import { Select } from "semantic-ui-react";
-import moment from "moment";
+
 import "./Dashboard.css";
 import { getCustomersPromise, getPackagesPromise } from "../../services";
+import SendParcel from "../SendParcel/SendParcel";
 import Auth from "../Auth/Auth";
 import { withAuth } from "../../contexts/AuthContext";
 
@@ -54,6 +56,7 @@ class Dashboard extends Component {
         </div>
         <Auth cover={() => <p>Dashboard is available for logged in users only.</p>}>
         <h1>Dashboard</h1>
+        <SendParcel />
         <div className="ui input">
           <input
             placeholder="Search..."
@@ -74,7 +77,8 @@ class Dashboard extends Component {
         <table className="ui celled table">
           <thead>
             <tr>
-              <th>Data send</th>
+              <th>Date order</th>
+              <th>Date send</th>
               <th>Status</th>
               <th>Delivery Name</th>
               <th>Delivery address</th>
@@ -105,6 +109,7 @@ class Dashboard extends Component {
               )
               .map(pack => (
                 <tr key={pack.id}>
+                  <td>{pack.date_order}</td>
                   <td>{pack.date_send}</td>
                   <td
                     style={{
