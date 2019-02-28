@@ -1,4 +1,4 @@
-
+import firebase from 'firebase';
 const firebaseUrl = 'https://project-nan-app.firebaseio.com/';
 
 export const getCustomersPromise = () =>
@@ -20,3 +20,11 @@ export const getPackagesPromise = () =>
         ...value,
       }))
     );
+    export const updatePackagePromise = (client_id, status) =>
+  firebase
+    .database()
+    .ref('packages')
+    .child(client_id)
+    .update({
+     status
+    });
