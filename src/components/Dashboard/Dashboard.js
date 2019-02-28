@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import MainMenu from "../MainMenu";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 import { Select } from "semantic-ui-react";
-import moment from "moment";
+
 import "./Dashboard.css";
 import { getCustomersPromise, getPackagesPromise } from "../../services";
+import SendParcel from "../SendParcel/SendParcel";
 
 class Dashboard extends Component {
   state = {
@@ -51,6 +53,7 @@ class Dashboard extends Component {
           <MainMenu />
         </div>
         <h1>Dashboard</h1>
+        <SendParcel />
         <div className="ui input">
           <input
             placeholder="Search..."
