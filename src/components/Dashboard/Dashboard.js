@@ -6,6 +6,8 @@ import { Select } from "semantic-ui-react";
 import moment from "moment";
 import "./Dashboard.css";
 import { getCustomersPromise, getPackagesPromise } from "../../services";
+import Auth from "../Auth/Auth";
+import { withAuth } from "../../contexts/AuthContext";
 
 class Dashboard extends Component {
   state = {
@@ -50,6 +52,7 @@ class Dashboard extends Component {
         <div style={{ width: "100%", background: "#eee" }}>
           <MainMenu />
         </div>
+        <Auth cover={() => <p>Dashboard is available for logged in users only.</p>}>
         <h1>Dashboard</h1>
         <div className="ui input">
           <input
@@ -143,9 +146,11 @@ class Dashboard extends Component {
             </button>
           ))}
         </div>
+        </Auth>
       </div>
+      
     );
   }
 }
 
-export default Dashboard;
+export default withAuth(Dashboard);
