@@ -63,7 +63,7 @@ class LogIn extends Component {
               placeholder="password"
             />
           </Form.Group>
-          <Button type="submit">Log In</Button>
+          <Button color="purple" type="submit">Log In</Button>
         </Form>
       </div>
     );
