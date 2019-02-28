@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { Button, Form } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 
-import firebase from "firebase";
-
 import "./LogIn.css";
+import { withAuth } from "../../contexts/AuthContext";
 
 class LogIn extends Component {
   state = {
@@ -23,9 +22,8 @@ class LogIn extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
+    const { signIn } = this.props.authContext;
+    signIn(this.state.email, this.state.password)
       .then(data => {
         this.props.history.push("/dashboard");
         this.setState({ error: null, success: "Sign in successful" });
@@ -71,4 +69,4 @@ class LogIn extends Component {
     );
   }
 }
-export default withRouter(LogIn);
+export default withAuth(withRouter(LogIn));
