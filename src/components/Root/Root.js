@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Parcel from "../Parcel";
 import HomeView from "../HomeView";
-
+import Chat from "../Chat";
 import Dashboard from "../Dashboard";
 import SignUp from "../SignUp";
 
@@ -24,6 +24,7 @@ class Root extends Component {
             <Route exact path="/dashboard" component={Dashboard} />
             <Route path="/dashboard/:parcelId" component={Parcel} />
             <Route path="/sign-up" component={SignUp} />
+            <Route path="/chat" component={Chat} />
           </div>
         </div>
       </Router>
