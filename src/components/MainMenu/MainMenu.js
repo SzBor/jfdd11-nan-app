@@ -67,6 +67,15 @@ class MainMenu extends Component {
         >
           Track Panel
         </Menu.Item>
+        <Menu.Item
+          name="chat"
+          active={activeItem === "chat"}
+          onClick={this.handleItemClick}
+          to="/chat"
+          as={NavLink}
+        >
+        Chat
+        </Menu.Item>
       </Menu>
     );
   }
