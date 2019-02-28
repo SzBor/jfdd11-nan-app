@@ -1,8 +1,10 @@
 #loggenInAs{
-    margin-right: 10px;
+    margin-right: 5px;
 }
-
 #loggedInUser{
-    margin-right: 20px;
+    font-weight: bold;
+}
+#signOutButton{
+    margin-left: 30px;
 
 }
