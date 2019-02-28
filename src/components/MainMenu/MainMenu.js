@@ -51,7 +51,7 @@ class MainMenu extends Component {
           name="track-panel"
           active={activeItem === "track-panel"}
           onClick={this.handleItemClick}
-          to="/parcel"
+          to="/dashboard/:parcelId"
           as={NavLink}
         >
           Track Panel
