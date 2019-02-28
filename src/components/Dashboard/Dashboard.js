@@ -71,7 +71,8 @@ class Dashboard extends Component {
         <table className="ui celled table">
           <thead>
             <tr>
-              <th>Data send</th>
+              <th>Date order</th>
+              <th>Date send</th>
               <th>Status</th>
               <th>Delivery Name</th>
               <th>Delivery address</th>
@@ -102,6 +103,7 @@ class Dashboard extends Component {
               )
               .map(pack => (
                 <tr key={pack.id}>
+                  <td>{pack.date_order}</td>
                   <td>{pack.date_send}</td>
                   <td
                     style={{
