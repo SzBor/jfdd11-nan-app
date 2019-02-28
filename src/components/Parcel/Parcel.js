@@ -93,8 +93,9 @@ class Parcel extends Component {
           <tbody>
             <tr>
               <td>{parcel.date_send}</td>
-            <td>{parcel.delivery.address}</td>
-              <td>{parcel.delivery.city}</td>
+            <td>`{parcel.delivery.city} {parcel.delivery.postalcode},
+            {parcel.delivery.street} {parcel.delivery.number}`</td>
+              <td>{parcel.courier_id}</td>
               <td>{parcel.date_delivery}</td>
               <td>depth(mm): {parcel.dimensions.depth}<br/>
              height(mm): {parcel.dimensions.height}<br/>
