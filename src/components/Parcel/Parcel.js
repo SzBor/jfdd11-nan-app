@@ -61,7 +61,7 @@ class Parcel extends Component {
         <ul className="history" />
 
         <LeafletMap
-          center={[parcel.longitude, parcel.latitude]}
+          center={[parcel.latitude, parcel.longitude]}
           zoom={this.state.zoom}
           style={{ height: 300 }}
         >
