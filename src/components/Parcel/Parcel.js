@@ -84,8 +84,9 @@ class Parcel extends Component {
           <thead>
             <tr>
             <th>Sending Date</th>
-            <th>Delivery Address</th>
-              <th>City</th>
+            <th>Status</th>
+              <th>Delivery Address</th>
+              <th>Courier ID</th>
               <th>Delivery Date</th>
               <th>Dimensions</th>
             </tr>
@@ -93,14 +94,14 @@ class Parcel extends Component {
           <tbody>
             <tr>
               <td>{parcel.date_send}</td>
-            <td>`{parcel.delivery.city} {parcel.delivery.postalcode},
-            {parcel.delivery.street} {parcel.delivery.number}`</td>
+              <td>{parcel.status}</td>
+            <td>{parcel.delivery.city} {parcel.delivery.postalcode}, {parcel.delivery.street} {parcel.delivery.number}</td>
               <td>{parcel.courier_id}</td>
               <td>{parcel.date_delivery}</td>
               <td>depth(mm): {parcel.dimensions.depth}<br/>
              height(mm): {parcel.dimensions.height}<br/>
-             weight(kg): {parcel.dimensions.weight}<br/>
              width(mm): {parcel.dimensions.width}<br/>
+             weight(kg): {parcel.dimensions.weight}<br/>
              </td>
             </tr>
           </tbody>
