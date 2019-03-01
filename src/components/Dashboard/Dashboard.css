@@ -1,0 +1,7 @@
+.Dashboard .field {
+    width: unset !important;
+}
+
+.Dashboard .fields {
+    flex-wrap: wrap;
+}
