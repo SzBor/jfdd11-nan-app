@@ -40,9 +40,11 @@ class LogIn extends Component {
         {this.state.success && (
           <p style={{ color: "green" }}>{this.state.success}</p>
         )}
-        <Form onSubmit={this.handleSubmit} unstackable>
+        <Form size="large" onSubmit={this.handleSubmit} unstackable>
           <Form.Group widths={1}>
             <Form.Input
+            icon="user"
+            iconPosition="left"
               onChange={this.handleChange}
               name="email"
               value={this.state.email}
@@ -51,6 +53,8 @@ class LogIn extends Component {
               placeholder="email"
             />
             <Form.Input
+              icon="lock"
+              iconPosition="left"
               onChange={this.handleChange}
               name="password"
               value={this.state.password}
@@ -59,7 +63,7 @@ class LogIn extends Component {
               placeholder="password"
             />
           </Form.Group>
-          <Button type="submit">Log In</Button>
+          <Button color="purple" type="submit">Log In</Button>
         </Form>
       </div>
     );
