@@ -7,6 +7,7 @@ import LogIn from "../LogIn";
 import Auth from "../Auth/Auth";
 import { withAuth } from "../../contexts/AuthContext";
 import firebase from "firebase";
+import image from "../MainMenu/trackenLogo.svg";
 
 import "./HomeView.css";
 
@@ -25,9 +26,11 @@ class HomeView extends Component {
   render() {
     return (
       <div className="HomeView">
+       
         <Auth
           cover={() => (
             <header className="homeView-buttons">
+         
               <Popup
                 content={<LogIn />}
                 trigger={<Button inverted>Log in</Button>}
@@ -54,7 +57,6 @@ class HomeView extends Component {
               Dashboard
             </Button>
             <Button
-              negative
               onClick={() =>
                 firebase
                   .auth()
@@ -67,6 +69,7 @@ class HomeView extends Component {
           </header>
         </Auth>
         <div>
+       
           <div className="homeView-search">
             <h1>Find your package</h1>
             <SearchBar />

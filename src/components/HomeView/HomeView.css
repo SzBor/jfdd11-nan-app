@@ -1,17 +1,23 @@
+
 .HomeView {
-  background: black;
-  color: rgb(255, 0, 242);
-  height: 200px;
+  background: rgb(241, 241, 241);
+  color: black;
+  height: 100vh;
 }
 
 .homeView-buttons {
   display: flex;
   justify-content: flex-end;
   padding: 5px;
+  
 }
 
 .homeView-search {
   padding: 10px;
   margin: 0 auto 0 auto;
   max-width: 400px;
+}
+
+.ui.inverted.button {
+  background:#a333c8;
 }
