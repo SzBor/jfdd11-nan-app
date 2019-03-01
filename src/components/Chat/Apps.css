@@ -47,3 +47,7 @@
         transform: rotate(360deg);
     }
 }
+
+.app .mainMenuChat{
+    margin-bottom: 10px;
+}

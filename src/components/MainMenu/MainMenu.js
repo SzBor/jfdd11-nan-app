@@ -8,7 +8,8 @@ import Auth from "../Auth/Auth";
 
 class MainMenu extends Component {
   state = {
-    user: null
+    user: null,
+    isOpen: false
   };
 
   componentDidMount() {
