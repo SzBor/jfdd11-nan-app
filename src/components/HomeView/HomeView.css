@@ -13,11 +13,32 @@
 }
 
 .homeView-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
-  margin: 0 auto 0 auto;
   max-width: 400px;
+  margin: 0 auto;
 }
 
 .ui.inverted.button {
   background:#a333c8;
 }
+
+.tracken-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10px 10px 0;
+  max-width: 100hh;
+  margin: 0 auto;
+}
+
+.tracken-logo p {
+  padding-right: 10px;
+font-family: 'Coiny', cursive;
+font-size: 50px;
+color: #572172;
+}
+

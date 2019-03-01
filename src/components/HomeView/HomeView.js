@@ -38,7 +38,7 @@ class HomeView extends Component {
                 on={"click"}
                 position={"top center"}
                 basic
-                style={{ position: "fixed", left: "20%", width: "80%" }}
+               
               />
 
               <Button
@@ -69,9 +69,12 @@ class HomeView extends Component {
           </header>
         </Auth>
         <div>
-       
+       <div className="tracken-logo">
+       <img src={image} alt="tracken-logo" />
+       <p>TRACKEN</p>
+       </div>
           <div className="homeView-search">
-            <h1>Find your package</h1>
+            <h2>Find your package</h2>
             <SearchBar />
           </div>
         </div>
