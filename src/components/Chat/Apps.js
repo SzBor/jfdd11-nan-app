@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './Apps.css';
 import Form from '../Chat/Form.js';
-import { Button, Popup } from "semantic-ui-react";
-import LogIn from "../LogIn";
+
+
 import firebase from 'firebase';
+import MainMenu from '../MainMenu';
 
 class Apps extends Component {
   constructor(props) {
@@ -30,26 +31,12 @@ class Apps extends Component {
   render() {
     return (
       <div className="app">
-        <div className="app__header">
-        
-          { !this.state.user ? (
-            <Popup
-            content={<LogIn />}
-            trigger={<Button  inverted>Log in</Button>}
-            hideOnScroll={false}
-            on={"click"}
-            position= {"top center"}
-            basic
-            style={{ position:"fixed",right:"4%", width: "80%"}}
-          />
-          ) : (
-            <button
-              className="app__button"
-              onClick={this.handleLogOut.bind(this)}
-            >
-              Logout
-            </button>
-          )}
+      <div style={{ width: "100%", background: "#eee"}}>
+          <MainMenu />
+        </div>
+        <div>
+        <h1>Welocome to Tracken Chat</h1>
+         
         </div>
         <div className="app__list">
           <Form user={this.state.user} />
