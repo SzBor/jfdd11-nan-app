@@ -48,6 +48,16 @@ class MainMenu extends Component {
           Dashboard
         </Menu.Item>
         <Auth>
+        <Menu.Item
+          name="contacts-book"
+          active={activeItem === "contacts-book"}
+          onClick={this.handleItemClick}
+          to="/contacts-book"
+          as={NavLink}
+        >
+          Contacts Book
+        </Menu.Item>
+        
           <Menu.Item
             name="chat"
             active={activeItem === "chat"}
@@ -57,7 +67,9 @@ class MainMenu extends Component {
           >
             Chat
           </Menu.Item>
+       
 
+        
           <Menu.Item>
             {user && (
               <p>
