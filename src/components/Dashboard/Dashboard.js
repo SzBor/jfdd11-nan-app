@@ -3,6 +3,7 @@ import MainMenu from "../MainMenu";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
+
 import { Select } from "semantic-ui-react";
 
 import "./Dashboard.css";
@@ -52,7 +53,7 @@ class Dashboard extends Component {
     return (
       <div className="Dashboard">
         <div style={{ width: "100%", background: "#eee" }}>
-          <MainMenu />
+        <MainMenu />
         </div>
         <Auth cover={() => <p>Dashboard is available for logged in users only.</p>}>
         <h1>Dashboard</h1>

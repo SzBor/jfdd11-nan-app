@@ -94,7 +94,14 @@ class Parcel extends Component {
           <tbody>
             <tr>
               <td>{parcel.date_send}</td>
-              <td>{parcel.status}</td>
+              <td style={{
+                      color:
+                        parcel.status === "received"
+                          ? "#006622"
+                          : parcel.status === "send"
+                          ? "#0099ff"
+                          : "#e68a00"
+                    }}>{parcel.status}</td>
             <td>{parcel.delivery.city} {parcel.delivery.postalcode}, {parcel.delivery.street} {parcel.delivery.number}</td>
               <td>{parcel.courier_id}</td>
               <td>{parcel.date_delivery}</td>

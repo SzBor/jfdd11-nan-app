@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./HomeView.css";
+
 import SearchBar from "../SearchBar";
 import { Button, Popup } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
@@ -7,6 +7,9 @@ import LogIn from "../LogIn";
 import Auth from "../Auth/Auth";
 import { withAuth } from "../../contexts/AuthContext";
 import firebase from "firebase";
+import image from "../MainMenu/trackenLogo.svg";
+
+import "./HomeView.css";
 
 class CustomButton extends Component {
   render() {
@@ -23,9 +26,11 @@ class HomeView extends Component {
   render() {
     return (
       <div className="HomeView">
+       
         <Auth
           cover={() => (
             <header className="homeView-buttons">
+         
               <Popup
                 content={<LogIn />}
                 trigger={<Button inverted>Log in</Button>}
@@ -52,7 +57,6 @@ class HomeView extends Component {
               Dashboard
             </Button>
             <Button
-              negative
               onClick={() =>
                 firebase
                   .auth()
@@ -65,10 +69,21 @@ class HomeView extends Component {
           </header>
         </Auth>
         <div>
+       <div className="tracken-logo">
+       <img src={image} alt="tracken-logo" />
+       <p>TRACKEN</p>
+       </div>
           <div className="homeView-search">
-            <h1>Find your package</h1>
+            <h2>Find your package</h2>
             <SearchBar />
           </div>
+         
+        </div>
+        <div className="homeView-footer">
+            Footer
+            <div>
+              Contact us
+            </div>
         </div>
       </div>
     );
