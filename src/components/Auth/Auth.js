@@ -7,7 +7,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 const Auth = ({ cover, children }) => {
   const { user } = useContext(AuthContext);
 
-  return user ? children : cover ? cover() : <p>You have to be logged in</p>;
+  return user ? children : cover ? cover() : <p></p>;
 };
 
 export default Auth;

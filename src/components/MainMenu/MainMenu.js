@@ -4,6 +4,7 @@ import { Menu, Button } from "semantic-ui-react";
 import image from "./trackenLogo.svg";
 import firebase from "firebase";
 import "./MainMenu.css";
+import Auth from "../Auth/Auth";
 
 class MainMenu extends Component {
   state = {
@@ -45,38 +46,40 @@ class MainMenu extends Component {
         >
           Dashboard
         </Menu.Item>
+        <Auth>
+          <Menu.Item
+            name="chat"
+            active={activeItem === "chat"}
+            onClick={this.handleItemClick}
+            to="/chat"
+            as={NavLink}
+          >
+            Chat
+          </Menu.Item>
 
-        <Menu.Item>
-          {user && (
-            <p>
-              <span id="loggenInAs">Logged in as:</span>
-              <span id="loggedInUser">{user.email} </span>
+          <Menu.Item>
+            {user && (
+              <p>
+                <span id="loggenInAs">Logged in as:</span>
+                <span id="loggedInUser">{user.email} </span>
 
-              <Button
-                id="signOutButton"
-                negative
-                size="mini"
-                onClick={() =>
-                  firebase
-                    .auth()
-                    .signOut()
-                    .then(() => this.props.history.push("/"))
-                }
-              >
-                Sign out
-              </Button>
-            </p>
-          )}
-        </Menu.Item>
-        <Menu.Item
-          name="chat"
-          active={activeItem === "chat"}
-          onClick={this.handleItemClick}
-          to="/chat"
-          as={NavLink}
-        >
-        Chat
-        </Menu.Item>
+                <Button
+                  id="signOutButton"
+                  negative
+                  size="mini"
+                  onClick={() =>
+                    firebase
+                      .auth()
+                      .signOut()
+                      .then(() => this.props.history.push("/"))
+                  }
+                >
+                  Sign out
+                </Button>
+              </p>
+            )}
+          </Menu.Item>
+        </Auth>
       </Menu>
     );
   }

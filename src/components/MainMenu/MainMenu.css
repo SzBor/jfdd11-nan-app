@@ -1,10 +1,12 @@
-#loggenInAs{
+#loggenInAs {
     margin-right: 5px;
 }
-#loggedInUser{
+
+#loggedInUser {
     font-weight: bold;
 }
-#signOutButton{
-    margin-left: 30px;
 
+#signOutButton {
+    margin-left: 30px;
 }
+
