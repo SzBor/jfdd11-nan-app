@@ -45,7 +45,15 @@ class MainMenu extends Component {
         >
           Dashboard
         </Menu.Item>
-
+        <Menu.Item
+          name="chat"
+          active={activeItem === "chat"}
+          onClick={this.handleItemClick}
+          to="/chat"
+          as={NavLink}
+        >
+        Chat
+        </Menu.Item>
         <Menu.Item>
           {user && (
             <p>
@@ -68,15 +76,7 @@ class MainMenu extends Component {
             </p>
           )}
         </Menu.Item>
-        <Menu.Item
-          name="chat"
-          active={activeItem === "chat"}
-          onClick={this.handleItemClick}
-          to="/chat"
-          as={NavLink}
-        >
-        Chat
-        </Menu.Item>
+       
       </Menu>
     );
   }
