@@ -14,3 +14,7 @@
     padding-bottom: 0.5em;
     padding-left: 0.5em;
 }
+
+.SignUp .submit-button {
+    width:100px;
+}

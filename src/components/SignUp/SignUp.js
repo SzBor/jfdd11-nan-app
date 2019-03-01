@@ -125,7 +125,7 @@ class SignUp extends Component {
               I agree to the Terms and Conditions
             </label>
           </Form.Group>
-          <Button size="medium" type="submit">
+          <Button className="submit-button" size="medium" type="submit">
             Submit
           </Button>
         </Form>
