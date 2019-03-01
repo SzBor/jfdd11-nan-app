@@ -54,6 +54,15 @@ class MainMenu extends Component {
         >
         Chat
         </Menu.Item>
+        <Menu.Item
+          name="contacts-book"
+          active={activeItem === "contacts-book"}
+          onClick={this.handleItemClick}
+          to="/contacts-book"
+          as={NavLink}
+        >
+        Contacts Book
+        </Menu.Item>
         <Menu.Item>
           {user && (
             <p>

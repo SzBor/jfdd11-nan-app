@@ -6,7 +6,7 @@ import HomeView from "../HomeView";
 import Chat from "../Chat";
 import Dashboard from "../Dashboard";
 import SignUp from "../SignUp";
-
+import ContactsBook from "../ContactsBook/ContactsBook";
 class Root extends Component {
   render() {
     return (
@@ -25,6 +25,7 @@ class Root extends Component {
             <Route path="/dashboard/:parcelId" component={Parcel} />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/chat" component={Chat} />
+            <Route path="/contacts-book" component={ContactsBook} />
           </div>
         </div>
       </Router>
