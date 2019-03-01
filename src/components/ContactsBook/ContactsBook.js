@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Form } from "semantic-ui-react";
 
 import "./ContactsBook.css";
-
+import MainMenu from "../MainMenu";
 
 class ContactsBook extends Component {
   state = {
@@ -10,7 +10,7 @@ class ContactsBook extends Component {
     surname: "",
     zipCode: "",
     address: "",
-    phone:"",
+    phone: "",
     email: "",
     error: null,
     success: null
@@ -22,12 +22,11 @@ class ContactsBook extends Component {
     });
   };
 
-        
-
-
   render() {
     return (
       <div className="ContactsBook">
+          <MainMenu />
+
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Input
@@ -62,7 +61,7 @@ class ContactsBook extends Component {
               onChange={this.handleChange}
               required
             />
-             <Form.Input
+            <Form.Input
               label="Phone"
               placeholder="Phone"
               width={5}
@@ -74,7 +73,7 @@ class ContactsBook extends Component {
             />
           </Form.Group>
           <Form.Group>
-          <Form.Input
+            <Form.Input
               label="Address"
               placeholder="Coutry"
               width={3}
@@ -88,17 +87,16 @@ class ContactsBook extends Component {
               value={this.state.zipCode}
               onChange={this.handleChange}
             />
-             <Form.Input
+            <Form.Input
               label="ZIP code"
               placeholder="ZIP code"
               width={3}
               value={this.state.zipCode}
               onChange={this.handleChange}
             />
-            
           </Form.Group>
           <Form.Group>
-          <Form.Input
+            <Form.Input
               label="Street"
               placeholder="Street"
               width={3}

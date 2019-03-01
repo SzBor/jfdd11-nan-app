@@ -4,10 +4,12 @@ import { Menu, Button } from "semantic-ui-react";
 import image from "./trackenLogo.svg";
 import firebase from "firebase";
 import "./MainMenu.css";
+import Auth from "../Auth/Auth";
 
 class MainMenu extends Component {
   state = {
-    user: null
+    user: null,
+    isOpen: false
   };
 
   componentDidMount() {
@@ -45,15 +47,7 @@ class MainMenu extends Component {
         >
           Dashboard
         </Menu.Item>
-        <Menu.Item
-          name="chat"
-          active={activeItem === "chat"}
-          onClick={this.handleItemClick}
-          to="/chat"
-          as={NavLink}
-        >
-        Chat
-        </Menu.Item>
+        <Auth>
         <Menu.Item
           name="contacts-book"
           active={activeItem === "contacts-book"}
@@ -61,31 +55,44 @@ class MainMenu extends Component {
           to="/contacts-book"
           as={NavLink}
         >
-        Contacts Book
+          Contacts Book
         </Menu.Item>
-        <Menu.Item>
-          {user && (
-            <p>
-              <span id="loggenInAs">Logged in as:</span>
-              <span id="loggedInUser">{user.email} </span>
-
-              <Button
-                id="signOutButton"
-                negative
-                size="mini"
-                onClick={() =>
-                  firebase
-                    .auth()
-                    .signOut()
-                    .then(() => this.props.history.push("/"))
-                }
-              >
-                Sign out
-              </Button>
-            </p>
-          )}
-        </Menu.Item>
+        
+          <Menu.Item
+            name="chat"
+            active={activeItem === "chat"}
+            onClick={this.handleItemClick}
+            to="/chat"
+            as={NavLink}
+          >
+            Chat
+          </Menu.Item>
        
+
+        
+          <Menu.Item>
+            {user && (
+              <p>
+                <span id="loggenInAs">Logged in as:</span>
+                <span id="loggedInUser">{user.email} </span>
+
+                <Button
+                  id="signOutButton"
+                  negative
+                  size="mini"
+                  onClick={() =>
+                    firebase
+                      .auth()
+                      .signOut()
+                      .then(() => this.props.history.push("/"))
+                  }
+                >
+                  Sign out
+                </Button>
+              </p>
+            )}
+          </Menu.Item>
+        </Auth>
       </Menu>
     );
   }

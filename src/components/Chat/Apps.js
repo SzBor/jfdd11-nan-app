@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import './Apps.css';
-import Form from '../Chat/Form.js';
+import React, { Component } from "react";
+import "./Apps.css";
+import Form from "../Chat/Form.js";
 
-
-import firebase from 'firebase';
+import firebase from "firebase";
+import MainMenu from "../MainMenu";
 
 class Apps extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
-    }
+      user: null
+    };
   }
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
@@ -18,11 +18,13 @@ class Apps extends Component {
     });
   }
   handleSignIn() {
-    firebase.auth().signInWithEmailAndPassword()
-    .then(data => {
-      
-      this.setState({ error: null, success: 'Sign in successful' })})
-    .catch(error => this.setState({ error: error, success: null }));
+    firebase
+      .auth()
+      .signInWithEmailAndPassword()
+      .then(data => {
+        this.setState({ error: null, success: "Sign in successful" });
+      })
+      .catch(error => this.setState({ error: error, success: null }));
   }
   handleLogOut() {
     firebase.auth().signOut();
@@ -30,9 +32,11 @@ class Apps extends Component {
   render() {
     return (
       <div className="app">
+        <div className="mainMenuChat" style={{ width: "100%", background: "#eee" }}>
+          <MainMenu />
+        </div>
         <div>
-        <h1>Welocome to Tracken Chat</h1>
-         
+          <h1>Welocome to Tracken Chat</h1>
         </div>
         <div className="app__list">
           <Form user={this.state.user} />

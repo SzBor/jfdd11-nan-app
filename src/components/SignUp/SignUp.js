@@ -4,7 +4,6 @@ import firebase from "firebase";
 
 import "./SignUp.css";
 
-
 class SignUp extends Component {
   state = {
     name: "",
@@ -42,6 +41,7 @@ class SignUp extends Component {
             address: this.state.address
           });
         this.setState({ error: null, success: "Account created" });
+        this.props.history.push("/");
       })
       .catch(error => this.setState({ error: error, success: null }));
   };
@@ -115,17 +115,19 @@ class SignUp extends Component {
             />
           </Form.Group>
           <Form.Group>
-          <label id="termsnConditionsLabel">
-            <input
-              id="termsnConditions"
-              type="checkbox"
-              label="I agree to the Terms and Conditions"
-              required
-            />
-            I agree to the Terms and Conditions
-          </label>
+            <label id="termsnConditionsLabel">
+              <input
+                id="termsnConditions"
+                type="checkbox"
+                label="I agree to the Terms and Conditions"
+                required
+              />
+              I agree to the Terms and Conditions
+            </label>
           </Form.Group>
-          <Button type="submit">Submit</Button>
+          <Button className="submit-button" size="medium" type="submit">
+            Submit
+          </Button>
         </Form>
         {this.state.error && (
           <p style={{ color: "red" }}>{this.state.error.message}</p>
