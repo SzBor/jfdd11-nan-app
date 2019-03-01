@@ -42,3 +42,16 @@ font-size: 50px;
 color: #572172;
 }
 
+.homeView-footer {
+  position: absolute;
+  background: rgb(161, 0, 135);
+  bottom: 0px;
+  height: 100px;
+  width: 100%
+}
+
+Popup {
+  position: "fixed";
+   left: "20%";
+   width: "80%" 
+}

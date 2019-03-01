@@ -38,7 +38,7 @@ class HomeView extends Component {
                 on={"click"}
                 position={"top center"}
                 basic
-               
+                style={{ position: "fixed", left: "20%", width: "80%" }}
               />
 
               <Button
@@ -77,6 +77,13 @@ class HomeView extends Component {
             <h2>Find your package</h2>
             <SearchBar />
           </div>
+         
+        </div>
+        <div className="homeView-footer">
+            Footer
+            <div>
+              Contact us
+            </div>
         </div>
       </div>
     );
