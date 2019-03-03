@@ -8,21 +8,23 @@ import moment from "moment";
 
 import "./SendParcel.css";
 
+const initialState = {
+  selectedDay: "",
+  recipientName: "",
+  phone: "",
+  city: "",
+  postalCode: "",
+  streetName: "",
+  streetNumber: "",
+  country: "",
+  parcelWeight: "",
+  parcelDepth: "",
+  parcelHeight: "",
+  parcelWidth: ""
+};
+
 class SendParcel extends Component {
-  state = {
-    selectedDay: "",
-    recipientName: "",
-    phone: "",
-    city: "",
-    postalCode: "",
-    streetName: "",
-    streetNumber: "",
-    country: "",
-    parcelWeight: "",
-    parcelDepth: "",
-    parcelHeight: "",
-    parcelWidth: ""
-  };
+  state = initialState;
 
   addParcel = (
     {
@@ -59,7 +61,9 @@ class SendParcel extends Component {
           depth: parcelDepth,
           height: parcelHeight,
           width: parcelWidth
-        }
+        },
+        status:'pending',
+        date_order:moment(new Date()).format("YYYY-MM-DD")
       });
   };
 
@@ -83,11 +87,15 @@ class SendParcel extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.addParcel();
+    this.setState(initialState);
+    this.props.refreshView()
   };
 
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
+      <Segment color="purple">
         <Header as="h4">
           Please fill the form below to send a new package
         </Header>
@@ -198,6 +206,7 @@ class SendParcel extends Component {
         </Segment>
         <Segment basic>
           <Form.Field id="sendParcel" control={Button} content="Send parcel" />
+        </Segment>
         </Segment>
       </Form>
     );
