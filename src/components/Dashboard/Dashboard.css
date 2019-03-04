@@ -5,3 +5,7 @@
 .Dashboard .fields {
     flex-wrap: wrap;
 }
+.dashboard-interface div{
+    margin-right: 10px;
+   
+}
