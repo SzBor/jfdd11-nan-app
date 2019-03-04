@@ -1,3 +1,6 @@
+.Dashboard {
+    padding: 10px;
+}
 .Dashboard .field {
     width: unset !important;
 }
@@ -5,7 +8,16 @@
 .Dashboard .fields {
     flex-wrap: wrap;
 }
-.dashboard-interface div{
-    margin-right: 10px;
-   
+.dashboard-interface {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.dashboard-interface div {
+    margin:  0 5px 5px;
+}
+@media screen and (max-width:600px){
+    .dashboard-interface {
+        justify-content: center;
+    }
 }
