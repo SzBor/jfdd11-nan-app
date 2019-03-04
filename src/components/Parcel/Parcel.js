@@ -5,6 +5,7 @@ import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
 import { getPackagesPromise } from "../../services";
 
 import MainMenu from "../MainMenu";
+import "./Parcel.css";
 Leaflet.Icon.Default.imagePath =
   "//cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/";
 
@@ -53,7 +54,7 @@ class Parcel extends Component {
     }
 
     return (
-      <div className="TrackPanel">
+      <div className="Parcel">
         <MainMenu />
         <h2>Parcel page</h2>
 
