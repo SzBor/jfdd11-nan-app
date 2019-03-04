@@ -80,14 +80,26 @@ class Dashboard extends Component {
                 { key: 4, value: "pending", text: "Pending" }
               ]}
               onChange={this.handleOptionChange}
-            />
+            /><div>
             <Button
               onClick={() =>
                 this.toggleShowSendParcel(this.state.showSendParcel)
               }
             >
               Send new parcel
+            </Button></div>
+            <div>
+            <Button>
+              Address Book
+            </Button></div>
+            <div>
+            <Button>
+              Profile
             </Button>
+            </div><div>
+            <Button>
+              Loyality points
+            </Button></div>
           </div>
           <br />
           <br />
@@ -122,7 +134,7 @@ class Dashboard extends Component {
                   searchData: (
                     pack.delivery.name +
                     pack.delivery.city +
-                    pack.delivery.adress
+                    pack.delivery.street
                   ).toLowerCase()
                 }))
                 .filter(pack =>
