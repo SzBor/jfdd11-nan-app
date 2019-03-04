@@ -6,8 +6,18 @@
     margin-top: 10px;
   
 }
-/*.LogIn {
-    position: fixed;
-     left: 20%;
-     width: 80%
-  }*/
+.LogIn {
+    background: whitesmoke;
+    padding: 20px;
+    max-width: 525px;
+    margin: 0 auto;
+  }
+
+@media only screen and (max-width: 606px){
+.LogIn .ui.form .field {
+  width: 100%;
+}
+.LogIn{
+    width: 90%
+}
+}

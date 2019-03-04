@@ -40,7 +40,7 @@ class LogIn extends Component {
         {this.state.success && (
           <p style={{ color: "green" }}>{this.state.success}</p>
         )}
-        <Form size="large" onSubmit={this.handleSubmit} unstackable>
+        <Form size="large" onSubmit={this.handleSubmit} >
           <Form.Group widths={1}>
             <Form.Input
             icon="user"
