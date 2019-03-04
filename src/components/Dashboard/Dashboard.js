@@ -3,7 +3,7 @@ import MainMenu from "../MainMenu";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-import { Select } from "semantic-ui-react";
+import { Select, Button } from "semantic-ui-react";
 
 import "./Dashboard.css";
 import { getCustomersPromise, getPackagesPromise } from "../../services";
@@ -17,7 +17,8 @@ class Dashboard extends Component {
     customers: "",
     searchPhrase: "",
     pagination: 0,
-    option: "all"
+    option: "all",
+    showSendParcel: false
   };
 
   syncClients = () =>
@@ -48,6 +49,10 @@ class Dashboard extends Component {
     });
   };
 
+  toggleShowSendParcel = showSendParcel => {
+    this.setState({ showSendParcel: !showSendParcel });
+  };
+
   render() {
     return (
       <div className="Dashboard">
@@ -58,24 +63,42 @@ class Dashboard extends Component {
           cover={() => <p>Dashboard is available for logged in users only.</p>}
         >
           <h1>Dashboard</h1>
-          <div className="ui input">
-            <input
-              placeholder="Search..."
-              value={this.state.searchPhrase}
-              onChange={this.handleChange}
+          <div className="dashboard-interface">
+            <div className="ui input">
+              <input
+                placeholder="Search..."
+                value={this.state.searchPhrase}
+                onChange={this.handleChange}
+              />
+            </div>
+            <Select
+              placeholder="Select status"
+              options={[
+                { key: 1, value: "all", text: "All" },
+                { key: 2, value: "received", text: "Received" },
+                { key: 3, value: "send", text: "Send" },
+                { key: 4, value: "pending", text: "Pending" }
+              ]}
+              onChange={this.handleOptionChange}
             />
+            <Button
+              onClick={() =>
+                this.toggleShowSendParcel(this.state.showSendParcel)
+              }
+            >
+              Send new parcel
+            </Button>
           </div>
-          <Select
-            placeholder="Select status"
-            options={[
-              { key: 1, value: "all", text: "All" },
-              { key: 2, value: "received", text: "Received" },
-              { key: 3, value: "send", text: "Send" },
-              { key: 4, value: "pending", text: "Pending" }
-            ]}
-            onChange={this.handleOptionChange}
-          /><br /><br />
-          <SendParcel refreshView={() => this.syncPackages()} />
+          <br />
+          <br />
+          {this.state.showSendParcel && (
+            <SendParcel
+              closeSendParcel={() =>
+                this.toggleShowSendParcel(this.state.showSendParcel)
+              }
+              refreshView={() => this.syncPackages()}
+            />
+          )}
 
           <table className="ui celled table">
             <thead>
@@ -130,7 +153,8 @@ class Dashboard extends Component {
                     </td>
                     <td>{pack.delivery.name}</td>
                     <td>
-                      {pack.delivery.city}, {pack.delivery.address}
+                      {pack.delivery.city} {pack.delivery.postalcode},{" "}
+                      {pack.delivery.street} {pack.delivery.number}
                     </td>
                     <td>
                       <Link to={`/dashboard/${pack.id}`}>

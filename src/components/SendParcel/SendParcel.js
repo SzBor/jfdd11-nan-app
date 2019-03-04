@@ -89,7 +89,8 @@ class SendParcel extends Component {
     event.preventDefault();
     this.addParcel();
     this.setState(initialState);
-    this.props.refreshView()
+    this.props.refreshView();
+    this.props.closeSendParcel();
   };
 
   render() {
