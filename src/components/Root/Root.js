@@ -16,7 +16,6 @@ class Root extends Component {
             style={{
               flexGrow: 1,
               minHeight: "100px",
-              padding: 20,
               boxSizing: "border-box"
             }}
           >
