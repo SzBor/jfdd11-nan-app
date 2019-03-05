@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form } from "semantic-ui-react";
-
+import firebase from "firebase";
 import "./ContactsBook.css";
 import MainMenu from "../MainMenu";
 
@@ -37,7 +37,7 @@ class ContactsBook extends Component {
               name="name"
               value={this.state.name}
               onChange={this.handleChange}
-              required
+             
             />
             <Form.Input
               label="Last Name"
@@ -47,7 +47,7 @@ class ContactsBook extends Component {
               name="surname"
               value={this.state.surname}
               onChange={this.handleChange}
-              required
+             
             />
           </Form.Group>
           <Form.Group>
@@ -59,7 +59,7 @@ class ContactsBook extends Component {
               name="email"
               value={this.state.email}
               onChange={this.handleChange}
-              required
+              
             />
             <Form.Input
               label="Phone"
@@ -69,7 +69,7 @@ class ContactsBook extends Component {
               name="phone"
               value={this.state.surname}
               onChange={this.handleChange}
-              required
+            
             />
           </Form.Group>
           <Form.Group>
