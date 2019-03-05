@@ -22,6 +22,7 @@ const initialState = {
   parcelHeight: "",
   parcelWidth: ""
 };
+const googleApiKey = "AIzaSyAUsnERWvgUrNKQy4YvHAaeg99HdhJLpTM";
 
 class SendParcel extends Component {
   state = initialState;
@@ -62,10 +63,16 @@ class SendParcel extends Component {
           height: parcelHeight,
           width: parcelWidth
         },
-        status:'pending',
-        date_order:moment(new Date()).format("YYYY-MM-DD")
+        status: "pending",
+        date_order: moment(new Date()).format("YYYY-MM-DD")
       });
   };
+
+  syncGeoLocation = () =>
+  fetch(
+    `https://maps.googleapis.com/maps/api/geocode/json?key=
+    ${googleApiKey}&address=${this.state.city}+${this.state.postalCode}+${this.state.streetName}+${this.state.streetNumber}`
+  ).then(response => response.json()).then(results=>console.log(results.results));
 
   handleChange = event => {
     const id = event.target.id;
@@ -75,6 +82,7 @@ class SendParcel extends Component {
     });
   };
 
+ 
   handleDayChange = (selectedDay, modifiers, dayPickerInput) => {
     const input = dayPickerInput.getInput();
     this.setState({
@@ -91,123 +99,128 @@ class SendParcel extends Component {
     this.setState(initialState);
     this.props.refreshView();
     this.props.closeSendParcel();
+    this.syncGeoLocation()
   };
 
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-      <Segment color="purple">
-        <Header as="h4">
-          Please fill the form below to send a new package
-        </Header>
         <Segment color="purple">
-          <DayPickerInput
-            placeholder={moment(new Date()).format("YYYY-MM-DD")}
-            onDayChange={this.handleDayChange}
-            selectedDay={this.state.selectedDay}
-          />
-        </Segment>
-        <Header as="h4">Recipient details</Header>
-        <Segment color="purple">
-          <Form.Group widths="equal">
-            <Form.Field
-              id="recipientName"
-              control={Input}
-              label="Recipient name"
-              placeholder="Recipient name"
-              value={this.state.recipientName}
-              onChange={this.handleChange}
+          <Header as="h4">
+            Please fill the form below to send a new package
+          </Header>
+          <Segment color="purple">
+            <DayPickerInput
+              placeholder={moment(new Date()).format("YYYY-MM-DD")}
+              onDayChange={this.handleDayChange}
+              selectedDay={this.state.selectedDay}
             />
+          </Segment>
+          <Header as="h4">Recipient details</Header>
+          <Segment color="purple">
+            <Form.Group widths="equal">
+              <Form.Field
+                id="recipientName"
+                control={Input}
+                label="Recipient name"
+                placeholder="Recipient name"
+                value={this.state.recipientName}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                id="phone"
+                control={Input}
+                label="Phone number"
+                placeholder="Phone number"
+                value={this.state.phone}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                id="city"
+                control={Input}
+                label="City"
+                placeholder="City"
+                value={this.state.city}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                id="postalCode"
+                control={Input}
+                label="Postal Code"
+                placeholder="Postal Code"
+                value={this.state.postalCode}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                id="streetName"
+                control={Input}
+                label="Street name"
+                placeholder="Street name"
+                value={this.state.streetName}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                id="streetNumber"
+                control={Input}
+                label="Street number"
+                placeholder="Steet number"
+                value={this.state.streetNumber}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                id="country"
+                control={Input}
+                label="Country"
+                placeholder="Country"
+                value={this.state.country}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+          </Segment>
+          <Header as="h4">Parcel details</Header>
+          <Segment color="purple">
+            <Form.Group widths="equal">
+              <Form.Field
+                id="parcelWeight"
+                control={Input}
+                label="Parcel weight"
+                placeholder="Parcel weight"
+                value={this.state.parcelWeight}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                id="parcelWidth"
+                control={Input}
+                label="Parcel width"
+                placeholder="Parcel width"
+                value={this.state.parcelWidth}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                id="parcelHeight"
+                control={Input}
+                label="Parcel height"
+                placeholder="Parcel height"
+                value={this.state.parcelHeight}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                id="parcelDepth"
+                control={Input}
+                label="Parcel depth"
+                placeholder="Parcel depth"
+                value={this.state.parcelDepth}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+          </Segment>
+          <Segment basic>
             <Form.Field
-              id="phone"
-              control={Input}
-              label="Phone number"
-              placeholder="Phone number"
-              value={this.state.phone}
-              onChange={this.handleChange}
+              id="sendParcel"
+              control={Button}
+              content="Send parcel"
             />
-            <Form.Field
-              id="city"
-              control={Input}
-              label="City"
-              placeholder="City"
-              value={this.state.city}
-              onChange={this.handleChange}
-            />
-            <Form.Field
-              id="postalCode"
-              control={Input}
-              label="Postal Code"
-              placeholder="Postal Code"
-              value={this.state.postalCode}
-              onChange={this.handleChange}
-            />
-            <Form.Field
-              id="streetName"
-              control={Input}
-              label="Street name"
-              placeholder="Street name"
-              value={this.state.streetName}
-              onChange={this.handleChange}
-            />
-            <Form.Field
-              id="streetNumber"
-              control={Input}
-              label="Street number"
-              placeholder="Steet number"
-              value={this.state.streetNumber}
-              onChange={this.handleChange}
-            />
-            <Form.Field
-              id="country"
-              control={Input}
-              label="Country"
-              placeholder="Country"
-              value={this.state.country}
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-        </Segment>
-        <Header as="h4">Parcel details</Header>
-        <Segment color="purple">
-          <Form.Group widths="equal">
-            <Form.Field
-              id="parcelWeight"
-              control={Input}
-              label="Parcel weight"
-              placeholder="Parcel weight"
-              value={this.state.parcelWeight}
-              onChange={this.handleChange}
-            />
-            <Form.Field
-              id="parcelWidth"
-              control={Input}
-              label="Parcel width"
-              placeholder="Parcel width"
-              value={this.state.parcelWidth}
-              onChange={this.handleChange}
-            />
-            <Form.Field
-              id="parcelHeight"
-              control={Input}
-              label="Parcel height"
-              placeholder="Parcel height"
-              value={this.state.parcelHeight}
-              onChange={this.handleChange}
-            />
-            <Form.Field
-              id="parcelDepth"
-              control={Input}
-              label="Parcel depth"
-              placeholder="Parcel depth"
-              value={this.state.parcelDepth}
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-        </Segment>
-        <Segment basic>
-          <Form.Field id="sendParcel" control={Button} content="Send parcel" />
-        </Segment>
+          </Segment>
         </Segment>
       </Form>
     );
