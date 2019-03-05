@@ -20,7 +20,9 @@ const initialState = {
   parcelWeight: "",
   parcelDepth: "",
   parcelHeight: "",
-  parcelWidth: ""
+  parcelWidth: "",
+  lat:"",
+  lng:""
 };
 const googleApiKey = "AIzaSyAUsnERWvgUrNKQy4YvHAaeg99HdhJLpTM";
 
@@ -40,14 +42,16 @@ class SendParcel extends Component {
       parcelWeight,
       parcelDepth,
       parcelHeight,
-      parcelWidth
+      parcelWidth,
+      lat,
+      lng
     } = this.state
   ) => {
     firebase
       .database()
       .ref("packages")
       .push({
-        date_send: selectedDay,
+        date_send: selectedDay ? selectedDay : moment(new Date()).format("YYYY-MM-DD"),
         delivery: {
           name: recipientName,
           phone,
@@ -63,6 +67,8 @@ class SendParcel extends Component {
           height: parcelHeight,
           width: parcelWidth
         },
+        latitude:lat,
+        longitude:lng,
         status: "pending",
         date_order: moment(new Date()).format("YYYY-MM-DD")
       });
@@ -72,7 +78,7 @@ class SendParcel extends Component {
   fetch(
     `https://maps.googleapis.com/maps/api/geocode/json?key=
     ${googleApiKey}&address=${this.state.city}+${this.state.postalCode}+${this.state.streetName}+${this.state.streetNumber}`
-  ).then(response => response.json()).then(results=>console.log(results.results));
+  ).then(response => response.json()).then(data=>data.results).then(results=>results[0].geometry.location)
 
   handleChange = event => {
     const id = event.target.id;
@@ -82,7 +88,6 @@ class SendParcel extends Component {
     });
   };
 
- 
   handleDayChange = (selectedDay, modifiers, dayPickerInput) => {
     const input = dayPickerInput.getInput();
     this.setState({
@@ -95,11 +100,13 @@ class SendParcel extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.addParcel();
+    this.syncGeoLocation().then(coords => this.setState(()=>({lat:coords.lat,lng:coords.lng})))
+    setTimeout(this.addParcel,1000)
     this.setState(initialState);
     this.props.refreshView();
     this.props.closeSendParcel();
-    this.syncGeoLocation()
+    
+    console.log(this.state.lat)
   };
 
   render() {

@@ -35,7 +35,6 @@ class Parcel extends Component {
     // this.syncPackages();
     const { parcelId } = this.props.match.params;
     getPackagesPromise().then(data => {
-      console.log(data);
       this.setState({
         parcel: data.find(parcel => parcel.id === parcelId)
       });
