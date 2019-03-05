@@ -1,5 +1,12 @@
 import firebase from "firebase";
 
+//const googleApiKey = 'AIzaSyAUsnERWvgUrNKQy4YvHAaeg99HdhJLpTM';
+
+/* export const getGeoLocation = () => {
+  fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=${googleApiKey}address=`)
+    .then(response => response.json())
+} */
+
 export const getCustomersPromise = () =>
 firebase
 .database()

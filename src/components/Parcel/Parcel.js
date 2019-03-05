@@ -76,7 +76,7 @@ class Parcel extends Component {
           </Marker>
 
           <Marker
-            position={[parcel.longitude, parcel.latitude]}
+            position={[parcel.latitude, parcel.longitude]}
           >
             <Popup>Delivery address</Popup>
           </Marker>
