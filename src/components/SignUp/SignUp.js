@@ -78,16 +78,20 @@ class SignUp extends Component {
             <Form.Input
               label="Postal code"
               placeholder="Postal code"
+              type="text"
               width={2}
               value={this.state.zipCode}
               onChange={this.handleChange}
+              name="Postal Code"
             />
             <Form.Input
               label="Address"
+              type="text"
               placeholder="Address"
               width={8}
               value={this.state.address}
               onChange={this.handleChange}
+              name="Address"
             />
           </Form.Group>
           <Form.Group>
