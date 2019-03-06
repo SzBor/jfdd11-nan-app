@@ -77,12 +77,14 @@ class SignUp extends Component {
           <Form.Group>
             <Form.Input
               label="Postal code"
-              placeholder="Postal code"
+              placeholder="xx-xxx"
               type="text"
               width={2}
               value={this.state.zipCode}
               onChange={this.handleChange}
               name="zipCode"
+              pattern="[0-9]{2}-[0-9]{3}"
+              title="Correct format: 'xx-xxx'"
             />
             <Form.Input
               label="Address"
