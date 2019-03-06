@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from "react-router-dom";
-import { Menu, Button } from "semantic-ui-react";
+import { Menu, Button, Responsive } from "semantic-ui-react";
 import image from "./trackenLogo.svg";
 import firebase from "firebase";
 import "./MainMenu.css";
 import Auth from "../Auth/Auth";
+
+const NavItem = ({ to, children, exact }) => (
+  <Menu.Item to={to} as={NavLink} exact={exact}>
+    {children}
+  </Menu.Item>
+);
 
 class MainMenu extends Component {
   state = {
@@ -16,86 +22,74 @@ class MainMenu extends Component {
     firebase.auth().onAuthStateChanged(user => this.setState({ user }));
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  handleToggle = () => this.setState({ isOpen: !this.state.isOpen });
 
-  render() {
-    const { activeItem } = this.state;
-    const { user } = this.state;
+  renderMenu(isTogglable = false) {
+    const { user, isOpen } = this.state;
     return (
-      <Menu stackable>
-        <Menu.Item>
-          <img src={image} alt="tracken-logo" />
-        </Menu.Item>
-
-        <Menu.Item
-          name="Home"
-          active={activeItem === "Home"}
-          onClick={this.handleItemClick}
-          exact
-          to="/"
-          as={NavLink}
-        >
-          Home
-        </Menu.Item>
-
-        <Menu.Item
-          name="dashboard"
-          active={activeItem === "dashboard"}
-          onClick={this.handleItemClick}
-          to="/dashboard"
-          as={NavLink}
-        >
-          Dashboard
-        </Menu.Item>
-        <Auth>
-     <Menu.Item
-          name="contacts-book"
-          active={activeItem === "contacts-book"}
-          onClick={this.handleItemClick}
-          to="/contacts-book"
-          as={NavLink}
-        >
-          Contacts Book
-        </Menu.Item>
-        
-           <Menu.Item
-            name="chat"
-            active={activeItem === "chat"}
-            onClick={this.handleItemClick}
-            to="/chat"
-            as={NavLink}
-          >
-            Chat
-          </Menu.Item> 
-       
-
-        
+      <div>
+        <Menu stackable>
           <Menu.Item>
-            {user && (
-              <p>
-                <span id="loggenInAs">Logged in as:</span>
-                <span id="loggedInUser">{user.email} </span>
+            <img className="menuLogo" src={image} alt="tracken-logo" />
 
-                <Button
-                  id="signOutButton"
-                  negative
-                  size="mini"
-                  onClick={() =>
-                    firebase
-                      .auth()
-                      .signOut()
-                      .then(() => this.props.history.push("/"))
-                  }
-                >
-                  Sign out
-                </Button>
-              </p>
+            {isTogglable && (
+              <Button className="menuButton" onClick={this.handleToggle}>
+                <p>Show Menu</p>
+              </Button>
             )}
           </Menu.Item>
-        </Auth>
-      </Menu>
+          {((isTogglable === true && isOpen) || isTogglable === false) && (
+            <>
+              <NavItem exact to="/" as={NavLink}>
+                Home
+              </NavItem>
+              <NavItem to="/dashboard" as={NavLink}>
+                Dashboard
+              </NavItem>
+              <Auth>
+                <NavItem to="/contacts-book" as={NavLink}>
+                  Contacts Book
+                </NavItem>
+                <NavItem to="/chat" as={NavLink}>
+                  Chat
+                </NavItem>
+                <Menu.Item>
+                  {user && (
+                    <p>
+                      <span id="loggenInAs">Logged in as:</span>
+                      <span id="loggedInUser">{user.email} </span>
+                      <Button
+                        id="signOutButton"
+                        negative
+                        size="mini"
+                        onClick={() =>
+                          firebase
+                            .auth()
+                            .signOut()
+                            .then(() => this.props.history.push("/"))
+                        }
+                      >
+                        Sign out
+                      </Button>
+                    </p>
+                  )}
+                </Menu.Item>
+              </Auth>
+            </>
+          )}
+        </Menu>
+      </div>
+    );
+  }
+
+  render() {
+    const threshold = Responsive.onlyMobile.maxWidth;
+    return (
+      <div>
+        <Responsive maxWidth={threshold}>{this.renderMenu(true)}</Responsive>
+        <Responsive minWidth={threshold + 1}>{this.renderMenu()}</Responsive>
+      </div>
     );
   }
 }
-
 export default withRouter(MainMenu);
