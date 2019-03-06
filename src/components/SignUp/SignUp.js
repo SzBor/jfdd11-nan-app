@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Icon } from "semantic-ui-react";
 import firebase from "firebase";
 
 import "./SignUp.css";
@@ -49,7 +49,13 @@ class SignUp extends Component {
   render() {
     return (
       <div className="SignUp">
-        <Form onSubmit={this.handleSubmit}>
+       <Button animated circular>
+      <Button.Content visible>Home</Button.Content>
+      <Button.Content hidden>
+        <Icon name='arrow left' />
+      </Button.Content>
+    </Button>
+        <Form className="signUpForm" onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Input
               label="First name"
@@ -90,7 +96,7 @@ class SignUp extends Component {
               label="Address"
               type="text"
               placeholder="Address"
-              width={8}
+              width={6}
               value={this.state.address}
               onChange={this.handleChange}
               name="address"
