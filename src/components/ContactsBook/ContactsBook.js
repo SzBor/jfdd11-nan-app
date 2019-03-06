@@ -10,6 +10,10 @@ class ContactsBook extends Component {
     surname: "",
     zipCode: "",
     address: "",
+    city: "",
+    street:"",
+    streetNumber:"",
+    aptNumber:"",
     phone: "",
     email: "",
     error: null,
@@ -20,6 +24,34 @@ class ContactsBook extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+  };
+  handleSubmit = event => {
+    event.preventDefault();
+
+    firebase
+      .auth()
+
+      .then(data => {
+        const ContactId = firebase.auth().currentContact.uid;
+        firebase
+          .database()
+          .ref("contactsBook")
+          .child(ContactId)
+          .set({
+            name: this.state.name,
+            surname: this.state.surname,
+            zipCode: this.state.zipCode,
+            address: this.state.address,
+            city:this.state.city,
+            street:this.state.street,
+            streetNumber:this.state.streetNumber,
+            aptNumber:this.state.aptNumber,
+            phone:this.state.phone,
+            email:this.state.email
+          });
+        this.props.history.push("/ContactsBook");
+      })
+      .catch(error => this.setState({ error: error, success: null }));
   };
 
   render() {
@@ -64,10 +96,11 @@ class ContactsBook extends Component {
             <Form.Input
               label="Phone"
               placeholder="Phone"
+              
               width={5}
-              type="text"
+              type="phone"
               name="phone"
-              value={this.state.surname}
+              value={this.state.phone}
               onChange={this.handleChange}
             
             />
@@ -77,20 +110,26 @@ class ContactsBook extends Component {
               label="Address"
               placeholder="Coutry"
               width={3}
-              value={this.state.zipCode}
+              name="address"
+              type="text"
+              value={this.state.address}
               onChange={this.handleChange}
             />
             <Form.Input
               label="City"
               placeholder="City"
               width={3}
-              value={this.state.zipCode}
+              type="text"
+              name="city"
+              value={this.state.city}
               onChange={this.handleChange}
             />
             <Form.Input
               label="ZIP code"
               placeholder="ZIP code"
               width={3}
+              type="text"
+              name="zipCode"
               value={this.state.zipCode}
               onChange={this.handleChange}
             />
@@ -100,32 +139,33 @@ class ContactsBook extends Component {
               label="Street"
               placeholder="Street"
               width={3}
-              value={this.state.zipCode}
+              type="text"
+              name="street"
+              value={this.state.street}
               onChange={this.handleChange}
             />
             <Form.Input
               label="Street number"
               placeholder="Street number"
               width={3}
-              value={this.state.zipCode}
+              type="text"
+              name="streetNumber"
+              value={this.state.streetNumber}
               onChange={this.handleChange}
             />
             <Form.Input
               label="Apt. number"
               placeholder="Apt. number"
               width={3}
-              value={this.state.zipCode}
+              type="text"
+              name="aptNumber"
+              value={this.state.aptNumber}
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Add Contact</Button>
         </Form>
-        {this.state.error && (
-          <p style={{ color: "red" }}>{this.state.error.message}</p>
-        )}
-        {this.state.success && (
-          <p style={{ color: "green" }}>{this.state.success}</p>
-        )}
+       
       </div>
     );
   }
