@@ -82,7 +82,7 @@ class SignUp extends Component {
               width={2}
               value={this.state.zipCode}
               onChange={this.handleChange}
-              name="Postal Code"
+              name="zipCode"
             />
             <Form.Input
               label="Address"
@@ -91,7 +91,7 @@ class SignUp extends Component {
               width={8}
               value={this.state.address}
               onChange={this.handleChange}
-              name="Address"
+              name="address"
             />
           </Form.Group>
           <Form.Group>
@@ -126,7 +126,7 @@ class SignUp extends Component {
                 label="I agree to the Terms and Conditions"
                 required
               />
-              I agree to the Terms and Conditions
+              I agree to the Terms and Conditions < span id="requiredStar">*</span>
             </label>
           </Form.Group>
           <Button className="submit-button" size="medium" type="submit">

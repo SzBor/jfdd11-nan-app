@@ -1,4 +1,6 @@
-.SignUp {}
+.SignUp {
+    padding: 10px;
+}
 
 #termsnConditions {
     cursor: pointer;
@@ -17,4 +19,9 @@
 
 .SignUp .submit-button {
     width:100px;
+}
+
+#requiredStar{
+
+    color: red;
 }
