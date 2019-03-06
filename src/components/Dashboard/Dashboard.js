@@ -40,7 +40,8 @@ class Dashboard extends Component {
   handlePaginationChange = event => {
     const paginationPage = event.target.value;
     this.setState({
-      pagination: paginationPage * 10
+      pagination: paginationPage * 10,
+  
     });
   };
   handleOptionChange = (event, data) => {
@@ -109,7 +110,7 @@ class Dashboard extends Component {
                 this.toggleShowSendParcel(this.state.showSendParcel)
               }
             >
-              Send new parcel
+            {this.state.showSendParcel ? 'Cancel' : 'Send new parcel' }
             </Button></div>
  {/*            <div>
             <Button>
@@ -180,17 +181,14 @@ class Dashboard extends Component {
             </tbody>
           </table>
           <div className="ui text container">
-            {Array.from({
-              length: Math.ceil(filteredPackages.length / 10)
-            }).map((button, index) => (
-              <button
-                className="ui button"
-                key={index}
+            {Array.from({length: Math.ceil(filteredPackages.length / 10)})
+            .map((button, index) => (
+              <Button 
                 value={index}
                 onClick={this.handlePaginationChange}
               >
                 {index + 1}
-              </button>
+              </Button>
             ))}
           </div>
         </Auth>
