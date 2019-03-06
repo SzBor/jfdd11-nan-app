@@ -36,7 +36,6 @@ class HomeView extends Component {
                 on={"click"}
                 position={"top center"}
                 basic
-               
               />
 
               <Button

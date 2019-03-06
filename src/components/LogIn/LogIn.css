@@ -1,5 +1,5 @@
 .LogIn .ui.button {
-    margin-top: 10px;
+    margin: 10px 0;
   
 }
 .LogIn .ui.form .field>label {
@@ -12,6 +12,9 @@
     max-width: 525px;
     margin: 0 auto;
   }
+  .LogIn .ui.form .field {
+    width: 100%;
+  }
 
 @media only screen and (max-width: 606px){
 .LogIn .ui.form .field {
@@ -21,3 +24,4 @@
     width: 90%
 }
 }
+

@@ -52,7 +52,7 @@ class LogIn extends Component {
               label="Email"
               placeholder="email"
             />
-            <Form.Input
+            <Form.Input 
               icon="lock"
               iconPosition="left"
               onChange={this.handleChange}
