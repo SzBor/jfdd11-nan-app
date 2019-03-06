@@ -77,17 +77,23 @@ class SignUp extends Component {
           <Form.Group>
             <Form.Input
               label="Postal code"
-              placeholder="Postal code"
+              placeholder="xx-xxx"
+              type="text"
               width={2}
               value={this.state.zipCode}
               onChange={this.handleChange}
+              name="zipCode"
+              pattern="[0-9]{2}-[0-9]{3}"
+              title="Correct format: 'xx-xxx'"
             />
             <Form.Input
               label="Address"
+              type="text"
               placeholder="Address"
               width={8}
               value={this.state.address}
               onChange={this.handleChange}
+              name="address"
             />
           </Form.Group>
           <Form.Group>
@@ -122,7 +128,7 @@ class SignUp extends Component {
                 label="I agree to the Terms and Conditions"
                 required
               />
-              I agree to the Terms and Conditions
+              I agree to the Terms and Conditions < span id="requiredStar">*</span>
             </label>
           </Form.Group>
           <Button className="submit-button" size="medium" type="submit">
