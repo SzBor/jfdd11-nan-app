@@ -1,16 +1,4 @@
-
-
-#termsnConditions {
-    cursor: pointer;
-    color: rgba(0, 0, 0, .87);
-    width: 17px;
-    height: 17px;
-    border: 1px solid #d4d4d5;
-    margin-right: 0.5em;
+.ContactsBook{
+    padding: 10px;
 }
 
-#termsnConditionsLabel {
-    padding-top: 1em;
-    padding-bottom: 0.5em;
-    padding-left: 0.5em;
-}
