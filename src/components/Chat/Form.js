@@ -26,7 +26,7 @@ class Form extends Component {
   }
   handleSend = () => {
     if (this.state.message) {
-      var newItem = {
+      let newItem = {
         userName: this.state.userName,
         message: this.state.message
       };
