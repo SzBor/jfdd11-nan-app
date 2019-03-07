@@ -2,34 +2,58 @@ import React, { Component } from "react";
 import MainMenu from "../MainMenu";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import firebase from 'firebase';
 
 import { Select, Button } from "semantic-ui-react";
 
 import "./Dashboard.css";
-import { getCustomersPromise, getPackagesPromise } from "../../services";
+import { getPackagesPromise } from "../../services";
 import SendParcel from "../SendParcel/SendParcel";
 import Auth from "../Auth/Auth";
 import { withAuth } from "../../contexts/AuthContext";
+
+
+
 class Dashboard extends Component {
   state = {
     packages: [],
-    customers: "",
     searchPhrase: "",
     pagination: 0,
     option: "all",
-    showSendParcel: false
+    showSendParcel: false,
+    name:'',
+    surname:'',
   };
 
-  syncClients = () =>
-    getCustomersPromise().then(clients => this.setState({ clients }));
+  syncClients = () => {
+    if (user !== null) {
+      const userId = user.uid;
+      const email = user.email;
+      firebase
+      .database()
+      .ref(`users/${userId}`)
+      .once('value')
+      .then(snapshot => snapshot.val())
+      .then(user => {
+        if (user ===null){
+          return;
+        }
+        this.setState({
+          name:user.name,
+          surname:user.surname,
+          email:email
+        })
+      })
+    }
+  }
 
   syncPackages = () =>
     getPackagesPromise().then(packages => this.setState({ packages }));
 
   componentDidMount() {
+    const {user} = this.props.authContext;
     this.syncPackages();
     this.syncClients();
-    
   }
 
   handleChange = event => {
@@ -51,11 +75,12 @@ class Dashboard extends Component {
   };
 
   toggleShowSendParcel = showSendParcel => {
-    this.setState({ showSendParcel: !showSendParcel });
+    this.setState({ showSendParcel: !this.state.showSendParcel });
   };
 
   render() {
-    const filteredPackages = this.state.packages
+    const {name, surname, packages, pagination, option, searchPhrase, showSendParcel} = this.state
+    const filteredPackages = packages    
     .slice()
     .sort((a, b) =>
       moment(a.date_send).isAfter(b.date_send) ? -1 : 1
@@ -70,13 +95,13 @@ class Dashboard extends Component {
     }))
     .filter(pack =>
       pack.searchData.includes(
-        this.state.searchPhrase.toLowerCase()
+        searchPhrase.toLowerCase()
       )
     )
     .filter(pack =>
-      this.state.option === "all"
+      option === "all"
         ? true
-        : pack.status === this.state.option
+        : pack.status === option
     )
     return (
       <div className="Dashboard">
@@ -86,12 +111,12 @@ class Dashboard extends Component {
         <Auth
           cover={() => <p>Dashboard is available for logged in users only.</p>}
         >
-          <h1>Dashboard</h1>
+          <h1>Dashboard</h1><h4>{user ? `Witaj ${name} ${surname}` : ''}</h4>
           <div className="dashboard-interface">
             <div className="ui input">
               <input
                 placeholder="Search..."
-                value={this.state.searchPhrase}
+                value={searchPhrase}
                 onChange={this.handleChange}
               />
             </div>
@@ -107,10 +132,10 @@ class Dashboard extends Component {
             /><div>
             <Button
               onClick={() =>
-                this.toggleShowSendParcel(this.state.showSendParcel)
+                this.toggleShowSendParcel(showSendParcel)
               }
             >
-            {this.state.showSendParcel ? 'Cancel' : 'Send new parcel' }
+            {showSendParcel ? 'Cancel' : 'Send new parcel' }
             </Button></div>
  {/*            <div>
             <Button>
@@ -127,10 +152,10 @@ class Dashboard extends Component {
           </div>
           <br />
           <br />
-          {this.state.showSendParcel && (
+          {showSendParcel && (
             <SendParcel
               closeSendParcel={() =>
-                this.toggleShowSendParcel(this.state.showSendParcel)
+                this.toggleShowSendParcel(showSendParcel)
               }
               refreshView={() => this.syncPackages()}
             />
@@ -177,18 +202,19 @@ class Dashboard extends Component {
                     </td>
                   </tr>
                 ))
-                .slice(this.state.pagination, this.state.pagination + 10)}
+                .slice(pagination, pagination + 10)}
             </tbody>
           </table>
           <div className="ui text container">
             {Array.from({length: Math.ceil(filteredPackages.length / 10)})
             .map((button, index) => (
-              <Button 
+              <button className="ui button"
+                key={index}
                 value={index}
                 onClick={this.handlePaginationChange}
               >
                 {index + 1}
-              </Button>
+              </button>
             ))}
           </div>
         </Auth>

@@ -111,9 +111,6 @@ class SendParcel extends Component {
     this.props.refreshView();
     this.props.closeSendParcel();
     })
-    
-    
-    console.log(this.state.lat)
   };
 
   render() {
