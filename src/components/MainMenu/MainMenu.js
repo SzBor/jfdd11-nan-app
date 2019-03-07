@@ -5,6 +5,7 @@ import image from "./trackenLogo.svg";
 import firebase from "firebase";
 import "./MainMenu.css";
 import Auth from "../Auth/Auth";
+import ProfilePage from "../ProfilePage";
 
 const NavItem = ({ to, children, exact }) => (
   <Menu.Item to={to} as={NavLink} exact={exact}>
@@ -52,6 +53,9 @@ class MainMenu extends Component {
                 </NavItem>
                 <NavItem to="/chat" as={NavLink}>
                   Chat
+                </NavItem>
+                <NavItem to="/profile-page" as={ProfilePage}>
+                  My Profile
                 </NavItem>
                 <Menu.Item>
                   {user && (

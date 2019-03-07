@@ -52,6 +52,7 @@ class SendParcel extends Component {
       .ref("packages")
       .push({
         date_send: selectedDay ? selectedDay : moment(new Date()).format("YYYY-MM-DD"),
+        client_id:this.props.clientID,
         delivery: {
           name: recipientName,
           phone,

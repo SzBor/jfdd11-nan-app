@@ -12,8 +12,6 @@ import SendParcel from "../SendParcel/SendParcel";
 import Auth from "../Auth/Auth";
 import { withAuth } from "../../contexts/AuthContext";
 
-
-
 class Dashboard extends Component {
   state = {
     packages: [],
@@ -26,6 +24,7 @@ class Dashboard extends Component {
   };
 
   syncClients = () => {
+    const {user} = this.props.authContext
     if (user !== null) {
       const userId = user.uid;
       const email = user.email;
@@ -51,7 +50,6 @@ class Dashboard extends Component {
     getPackagesPromise().then(packages => this.setState({ packages }));
 
   componentDidMount() {
-    const {user} = this.props.authContext;
     this.syncPackages();
     this.syncClients();
   }
@@ -79,9 +77,11 @@ class Dashboard extends Component {
   };
 
   render() {
+    const {user} = this.props.authContext
     const {name, surname, packages, pagination, option, searchPhrase, showSendParcel} = this.state
     const filteredPackages = packages    
     .slice()
+    .filter(pack=>pack.client_id===user.uid)
     .sort((a, b) =>
       moment(a.date_send).isAfter(b.date_send) ? -1 : 1
     )
@@ -136,16 +136,9 @@ class Dashboard extends Component {
               }
             >
             {showSendParcel ? 'Cancel' : 'Send new parcel' }
-            </Button></div>
- {/*            <div>
-            <Button>
-              Address Book
-            </Button></div>
-            <div>
-            <Button>
-              Profile
             </Button>
-            </div><div>
+            </div>
+            {/* <div>
             <Button>
               Loyality points
             </Button></div> */}
@@ -153,7 +146,7 @@ class Dashboard extends Component {
           <br />
           <br />
           {showSendParcel && (
-            <SendParcel
+            <SendParcel clientID={user.uid}
               closeSendParcel={() =>
                 this.toggleShowSendParcel(showSendParcel)
               }
