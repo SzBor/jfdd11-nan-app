@@ -1,5 +1,12 @@
-.SignUp {
-    padding: 10px;
+.signUp {
+    background: rgb(241, 241, 241);
+}
+
+.signUpForm {
+    width: 500px;
+    margin: 0 auto;
+    height: 100vh;
+    padding-top: 50px;
 }
 
 #termsnConditions {
@@ -17,18 +24,36 @@
     padding-left: 0.5em;
 }
 
-.SignUp .submit-button {
-    width:100px;
+.signUp .submit-button {
+    width: 100px;
+    background: #a333c8;
 }
 
-#requiredStar{
-
+#requiredStar {
     color: red;
 }
 
-.signUpForm{
-    /* border: 5px solid; */
-    padding:10px;
-    
+.ui.circular.button {
+    background: #a333c8;
+    height: 40px;
+}
 
+.ui.circular.button:hover {
+    background: rgba(0, 0, 0, .25);
+}
+
+.menuLogo {
+    height: 50px;
+    padding-left: 100px;
+}
+.topMenu{
+    margin: 0 ;
+}
+
+@media only screen and (max-width: 767px) {
+    .signUpForm {
+        height: 100vh;
+        width: 100%;
+       padding-top: 0;
+    }
 }
