@@ -10,7 +10,6 @@ import { getCustomersPromise, getPackagesPromise } from "../../services";
 import SendParcel from "../SendParcel/SendParcel";
 import Auth from "../Auth/Auth";
 import { withAuth } from "../../contexts/AuthContext";
-
 class Dashboard extends Component {
   state = {
     packages: [],
@@ -30,6 +29,7 @@ class Dashboard extends Component {
   componentDidMount() {
     this.syncPackages();
     this.syncClients();
+    
   }
 
   handleChange = event => {
@@ -40,7 +40,8 @@ class Dashboard extends Component {
   handlePaginationChange = event => {
     const paginationPage = event.target.value;
     this.setState({
-      pagination: paginationPage * 10
+      pagination: paginationPage * 10,
+  
     });
   };
   handleOptionChange = (event, data) => {
@@ -54,6 +55,29 @@ class Dashboard extends Component {
   };
 
   render() {
+    const filteredPackages = this.state.packages
+    .slice()
+    .sort((a, b) =>
+      moment(a.date_send).isAfter(b.date_send) ? -1 : 1
+    )
+    .map(pack => ({
+      ...pack,
+      searchData: (
+        pack.delivery.name +
+        pack.delivery.city +
+        pack.delivery.street
+      ).toLowerCase()
+    }))
+    .filter(pack =>
+      pack.searchData.includes(
+        this.state.searchPhrase.toLowerCase()
+      )
+    )
+    .filter(pack =>
+      this.state.option === "all"
+        ? true
+        : pack.status === this.state.option
+    )
     return (
       <div className="Dashboard">
         <div style={{ width: "100%", background: "#eee" }}>
@@ -86,9 +110,9 @@ class Dashboard extends Component {
                 this.toggleShowSendParcel(this.state.showSendParcel)
               }
             >
-              Send new parcel
+            {this.state.showSendParcel ? 'Cancel' : 'Send new parcel' }
             </Button></div>
-            <div>
+ {/*            <div>
             <Button>
               Address Book
             </Button></div>
@@ -99,7 +123,7 @@ class Dashboard extends Component {
             </div><div>
             <Button>
               Loyality points
-            </Button></div>
+            </Button></div> */}
           </div>
           <br />
           <br />
@@ -124,29 +148,7 @@ class Dashboard extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.packages
-                .slice()
-                .sort((a, b) =>
-                  moment(a.date_send).isAfter(b.date_send) ? -1 : 1
-                )
-                .map(pack => ({
-                  ...pack,
-                  searchData: (
-                    pack.delivery.name +
-                    pack.delivery.city +
-                    pack.delivery.street
-                  ).toLowerCase()
-                }))
-                .filter(pack =>
-                  pack.searchData.includes(
-                    this.state.searchPhrase.toLowerCase()
-                  )
-                )
-                .filter(pack =>
-                  this.state.option === "all"
-                    ? true
-                    : pack.status === this.state.option
-                )
+              {filteredPackages
                 .map(pack => (
                   <tr key={pack.id}>
                     <td>{pack.date_order}</td>
@@ -179,17 +181,14 @@ class Dashboard extends Component {
             </tbody>
           </table>
           <div className="ui text container">
-            {Array.from({
-              length: Math.ceil(this.state.packages.length / 10)
-            }).map((button, index) => (
-              <button
-                className="ui button"
-                key={index}
+            {Array.from({length: Math.ceil(filteredPackages.length / 10)})
+            .map((button, index) => (
+              <Button 
                 value={index}
                 onClick={this.handlePaginationChange}
               >
                 {index + 1}
-              </button>
+              </Button>
             ))}
           </div>
         </Auth>

@@ -35,7 +35,6 @@ class Parcel extends Component {
     // this.syncPackages();
     const { parcelId } = this.props.match.params;
     getPackagesPromise().then(data => {
-      console.log(data);
       this.setState({
         parcel: data.find(parcel => parcel.id === parcelId)
       });
@@ -76,7 +75,7 @@ class Parcel extends Component {
           </Marker>
 
           <Marker
-            position={[parcel.longitude, parcel.latitude]}
+            position={[parcel.latitude, parcel.longitude]}
           >
             <Popup>Delivery address</Popup>
           </Marker>
