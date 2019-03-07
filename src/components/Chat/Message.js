@@ -5,7 +5,7 @@ class Message extends Component {
     return (
       <div className="message">
         <span className="message__author"> {this.props.message.userName}:</span>{" "}
-        {this.props.message.message}{" "}
+        {this.props.message.content}{" "}
       </div>
     );
   }
