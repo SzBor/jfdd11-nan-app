@@ -6,30 +6,31 @@ import moment from "moment";
 import { Select, Button } from "semantic-ui-react";
 
 import "./Dashboard.css";
-import { getCustomersPromise, getPackagesPromise } from "../../services";
+import { getPackagesPromise } from "../../services";
 import SendParcel from "../SendParcel/SendParcel";
 import Auth from "../Auth/Auth";
 import { withAuth } from "../../contexts/AuthContext";
+
 class Dashboard extends Component {
   state = {
     packages: [],
-    customers: "",
     searchPhrase: "",
     pagination: 0,
     option: "all",
-    showSendParcel: false
+    showSendParcel: false,
+    user: {
+      name: "",
+      surname: "",
+      uid: "",
+      email: ""
+    }
   };
-
-  syncClients = () =>
-    getCustomersPromise().then(clients => this.setState({ clients }));
 
   syncPackages = () =>
     getPackagesPromise().then(packages => this.setState({ packages }));
 
   componentDidMount() {
     this.syncPackages();
-    this.syncClients();
-    
   }
 
   handleChange = event => {
@@ -40,8 +41,7 @@ class Dashboard extends Component {
   handlePaginationChange = event => {
     const paginationPage = event.target.value;
     this.setState({
-      pagination: paginationPage * 10,
-  
+      pagination: paginationPage * 10
     });
   };
   handleOptionChange = (event, data) => {
@@ -50,34 +50,33 @@ class Dashboard extends Component {
     });
   };
 
-  toggleShowSendParcel = showSendParcel => {
-    this.setState({ showSendParcel: !showSendParcel });
+  toggleShowSendParcel = () => {
+    this.setState({ showSendParcel: !this.state.showSendParcel });
   };
 
   render() {
-    const filteredPackages = this.state.packages
-    .slice()
-    .sort((a, b) =>
-      moment(a.date_send).isAfter(b.date_send) ? -1 : 1
-    )
-    .map(pack => ({
-      ...pack,
-      searchData: (
-        pack.delivery.name +
-        pack.delivery.city +
-        pack.delivery.street
-      ).toLowerCase()
-    }))
-    .filter(pack =>
-      pack.searchData.includes(
-        this.state.searchPhrase.toLowerCase()
-      )
-    )
-    .filter(pack =>
-      this.state.option === "all"
-        ? true
-        : pack.status === this.state.option
-    )
+    const { user, userData } = this.props.authContext;
+    const {
+      packages,
+      pagination,
+      option,
+      searchPhrase,
+      showSendParcel
+    } = this.state;
+    const filteredPackages = packages
+      .slice()
+      .filter(pack => pack.client_id === user.uid)
+      .sort((a, b) => (moment(a.date_send).isAfter(b.date_send) ? -1 : 1))
+      .map(pack => ({
+        ...pack,
+        searchData: (
+          pack.delivery.name +
+          pack.delivery.city +
+          pack.delivery.street
+        ).toLowerCase()
+      }))
+      .filter(pack => pack.searchData.includes(searchPhrase.toLowerCase()))
+      .filter(pack => (option === "all" ? true : pack.status === option));
     return (
       <div className="Dashboard">
         <div style={{ width: "100%", background: "#eee" }}>
@@ -87,11 +86,12 @@ class Dashboard extends Component {
           cover={() => <p>Dashboard is available for logged in users only.</p>}
         >
           <h1>Dashboard</h1>
+          <h4>{user ? `Witaj, ${userData.name} ${userData.surname}` : ""}</h4>
           <div className="dashboard-interface">
             <div className="ui input">
               <input
                 placeholder="Search..."
-                value={this.state.searchPhrase}
+                value={searchPhrase}
                 onChange={this.handleChange}
               />
             </div>
@@ -104,34 +104,23 @@ class Dashboard extends Component {
                 { key: 4, value: "pending", text: "Pending" }
               ]}
               onChange={this.handleOptionChange}
-            /><div>
-            <Button
-              onClick={() =>
-                this.toggleShowSendParcel(this.state.showSendParcel)
-              }
-            >
-            {this.state.showSendParcel ? 'Cancel' : 'Send new parcel' }
-            </Button></div>
- {/*            <div>
-            <Button>
-              Address Book
-            </Button></div>
+            />
             <div>
-            <Button>
-              Profile
-            </Button>
-            </div><div>
+              <Button onClick={() => this.toggleShowSendParcel(showSendParcel)}>
+                {showSendParcel ? "Cancel" : "Send new parcel"}
+              </Button>
+            </div>
+            {/* <div>
             <Button>
               Loyality points
             </Button></div> */}
           </div>
           <br />
           <br />
-          {this.state.showSendParcel && (
+          {showSendParcel && (
             <SendParcel
-              closeSendParcel={() =>
-                this.toggleShowSendParcel(this.state.showSendParcel)
-              }
+              clientID={user.uid}
+              closeSendParcel={() => this.toggleShowSendParcel(showSendParcel)}
               refreshView={() => this.syncPackages()}
             />
           )}
@@ -177,18 +166,21 @@ class Dashboard extends Component {
                     </td>
                   </tr>
                 ))
-                .slice(this.state.pagination, this.state.pagination + 10)}
+                .slice(pagination, pagination + 10)}
             </tbody>
           </table>
           <div className="ui text container">
-            {Array.from({length: Math.ceil(filteredPackages.length / 10)})
-            .map((button, index) => (
-              <Button 
+            {Array.from({
+              length: Math.ceil(filteredPackages.length / 10)
+            }).map((button, index) => (
+              <button
+                className="ui button"
+                key={index}
                 value={index}
                 onClick={this.handlePaginationChange}
               >
                 {index + 1}
-              </Button>
+              </button>
             ))}
           </div>
         </Auth>

@@ -1,5 +1,6 @@
 .app {
     text-align: center;
+    padding: 10px;
 }
 
 .app__logo {
@@ -50,4 +51,17 @@
 
 .app .mainMenuChat{
     margin-bottom: 10px;
+}
+
+li{
+    list-style: none;
+}
+button {
+    padding: 0 30px;
+    background-color:grey;
+    color:black;
+    border: 0;
+    border-radius: 5px 5px 5px 5px;
+    outline: 0;
+    cursor: pointer;
 }
