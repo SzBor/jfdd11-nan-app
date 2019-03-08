@@ -33,17 +33,19 @@ class HomeView extends Component {
       latitude: 52.6269375,
       longitude: 16.4463703,
       status: "pending"
-    }
+    },
+    searchPhrase:""
   };
 
   componentDidMount() {
     const { parcelId } = this.props.match.params;
     getPackagesPromise().then(data => {
       this.setState({
-        parcel: data.find(parcel => parcel.id === "-LZoFSPwNb7sLajyxjK") || null
+        parcel: data.find(parcel => parcel.id === "-LZoFSPw4Nb7sLajyxjK") || null
       });
     });
   }
+
 
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
@@ -98,14 +100,14 @@ class HomeView extends Component {
           </div>
           <div className="homeView-search">
             <h2>Find your package</h2>
-            <SearchBar />
+            <SearchBar   />
           </div>
         </div>
         {/*         <div className="homeView-footer">
           Footer
           <div>Contact us</div>
         </div> */}
-        {(parcel === null)? <p style={{textAlign:"center"}}>"Incorrect package number "</p>:<table className="ui celled table">
+        {(parcel === null)? <p style={{textAlign:"center"}}> {this.state.searchPhrase}"Incorrect package number "</p>:<table className="ui celled table">
           <thead>
             <tr>
               <th>Sending Date</th>
