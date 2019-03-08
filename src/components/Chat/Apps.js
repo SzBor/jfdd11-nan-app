@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Apps.css";
 import Form from "../Chat/Form.js";
-
+import { Dropdown, Menu } from 'semantic-ui-react'
 import firebase from "firebase";
 import MainMenu from "../MainMenu";
 
@@ -50,7 +50,7 @@ class Apps extends Component {
       .off("value", this.readusers);
   }
 
-  startChar = chatBuddyId => {
+  startChat = chatBuddyId => {
     const myId = this.state.user && this.state.user.uid;
 
     if (myId === null || chatBuddyId === null) {
@@ -120,16 +120,24 @@ class Apps extends Component {
             {users &&
               users.map(user => (
                 <li key={user.id}>
-                  {user.name}{" "}
-                  <button onClick={() => this.startChar(user.id)}>Call</button>
+                  
+                  <button onClick={() => this.startChat(user.id)}>Start Chat with Admin </button>
                 </li>
               ))}
           </ul>
           {this.state.currentChatId}
-
+          <Menu vertical>
+            <Dropdown item text='Chats'>
+              <Dropdown.Menu>
           {this.state.user && this.state.users && Object.keys(this.state.users[this.state.user.uid].chatIds || {}).map(
-            id => <button key={id} onClick={() => this.setState({ currentChatId: id })}>{id}</button>
-          )}
+            id => 
+            
+                (<Dropdown.Item key={id} onClick={() => this.setState({ currentChatId: id })}>{id}</Dropdown.Item>)
+                )}
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu>
+          
         </div>
         <div className="app__list">
           {this.state.currentChatId && (
