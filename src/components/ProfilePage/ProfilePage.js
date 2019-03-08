@@ -3,7 +3,6 @@ import { Form, Segment, Button } from "semantic-ui-react";
 import MainMenu from "../MainMenu";
 
 import "./ProfilePage.css";
-
 class ProfilePage extends Component {
   state = {};
 
@@ -18,7 +17,6 @@ class ProfilePage extends Component {
         <Button toggle active={active} onClick={this.handleClick}>
           Edit
         </Button>
-
         <Segment color="purple">
           <Form>
             <Form.Group widths="equal">
@@ -30,7 +28,7 @@ class ProfilePage extends Component {
               />
               <Form.Input
                 fluid
-                id="ffirst_name"
+                id="first_name"
                 label="First name"
                 placeholder="First name"
               />
