@@ -7,6 +7,7 @@ import Chat from "../Chat";
 import Dashboard from "../Dashboard";
 import SignUp from "../SignUp";
 import ContactsBook from "../ContactsBook/ContactsBook";
+import ProfilePage from "../ProfilePage"
 class Root extends Component {
   render() {
     return (
@@ -25,6 +26,7 @@ class Root extends Component {
             <Route path="/sign-up" component={SignUp} />
             <Route path="/chat" component={Chat} />
             <Route path="/contacts-book" component={ContactsBook} />
+            <Route path="/profile-page" component={ProfilePage} />
           </div>
         </div>
       </Router>
