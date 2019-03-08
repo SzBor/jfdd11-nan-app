@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+
 import { Button, Form, Icon } from "semantic-ui-react";
 import firebase from "firebase";
 import image from "./trackenLogo.svg";
@@ -54,23 +56,22 @@ class SignUp extends Component {
   render() {
     return (
       <div className="signUp">
-        <div className="signUpForm">
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Group className="topMenu">
-              <Button animated circular>
-                <Button.Content visible>Home</Button.Content>
-                <Button.Content hidden id="hiddenButton">
-                  <Icon name="arrow left" />
-                </Button.Content>
-              </Button>
-              <img className="menuLogo" src={image} alt="tracken-logo" />
-            </Form.Group>
+        <img className="menuLogo" src={image} alt="tracken-logo" />
 
+        <div className="signUpForm">
+          <Form
+            onSubmit={this.handleSubmit}
+            style={{
+              padding: 20,
+              boxShadow: "0 5px 10px rgba(0, 0, 0, 0.5",
+              background: "white"
+            }}
+          >
             <Form.Group>
               <Form.Input
                 label="First name"
                 placeholder="First Name"
-                width={8}
+                width={12}
                 type="text"
                 name="name"
                 value={this.state.name}
@@ -82,7 +83,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Last Name"
                 placeholder="Last Name"
-                width={8}
+                width={12}
                 type="text"
                 name="surname"
                 value={this.state.surname}
@@ -95,7 +96,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Phone Number"
                 placeholder="xxx-xxx-xxx"
-                width={8}
+                width={12}
                 type="text"
                 pattern="[0-9]{10}"
                 name="phoneNumber"
@@ -109,16 +110,18 @@ class SignUp extends Component {
               <Form.Input
                 label="Company Name"
                 placeholder="Company Name"
-                width={9}
+                width={12}
                 type="text"
                 name="companyName"
                 value={this.state.companyName}
                 onChange={this.handleChange}
               />
+            </Form.Group>
+            <Form.Group>
               <Form.Input
                 label="NIP"
                 placeholder="NIP number"
-                width={8}
+                width={12}
                 type="text"
                 pattern="[0-9]{10}"
                 name="nip"
@@ -131,7 +134,7 @@ class SignUp extends Component {
                 label="Postal code"
                 placeholder="xx-xxx"
                 type="text"
-                width={3}
+                width={4}
                 value={this.state.zipCode}
                 onChange={this.handleChange}
                 name="zipCode"
@@ -153,7 +156,7 @@ class SignUp extends Component {
                 label="Address"
                 type="text"
                 placeholder="Address"
-                width={10}
+                width={12}
                 value={this.state.address}
                 onChange={this.handleChange}
                 name="address"
@@ -164,7 +167,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Email"
                 placeholder="Email"
-                width={9}
+                width={12}
                 type="email"
                 name="email"
                 value={this.state.email}
@@ -176,7 +179,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Password"
                 placeholder="Password"
-                width={9}
+                width={12}
                 type="password"
                 name="password"
                 value={this.state.password}
@@ -196,9 +199,18 @@ class SignUp extends Component {
                 <span id="requiredStar">*</span>
               </label>
             </Form.Group>
-            <Button className="submit-button" size="medium" type="submit">
-              Submit
-            </Button>
+            <Form.Group className="menuButtons">
+              <Button className="submit-button" size="medium" type="submit">
+                Submit
+              </Button>
+
+              <Button as={NavLink} to="/" animated>
+                <Button.Content visible>Home</Button.Content>
+                <Button.Content hidden id="hiddenButton">
+                  <Icon name="arrow left" />
+                </Button.Content>
+              </Button>
+            </Form.Group>
           </Form>
         </div>
         {this.state.error && (
