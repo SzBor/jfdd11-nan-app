@@ -30,7 +30,7 @@ class ContactsBook extends Component {
 
     firebase
       .auth()
-
+      .signInWithEmailAndPassword()
       .then(data => {
         const ContactId = firebase.auth().currentContact.uid;
         firebase

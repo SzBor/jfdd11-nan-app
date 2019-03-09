@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
+
+import { Button, Form, Icon } from "semantic-ui-react";
 import firebase from "firebase";
+import image from "./trackenLogo.svg";
 
 import "./SignUp.css";
 
@@ -8,8 +11,12 @@ class SignUp extends Component {
   state = {
     name: "",
     surname: "",
+    phoneNumber: "",
     zipCode: "",
+    city: "",
     address: "",
+    companyName: "",
+    nip: "",
     email: "",
     password: "",
     error: null,
@@ -48,93 +55,164 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className="SignUp">
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group>
-            <Form.Input
-              label="First name"
-              placeholder="First Name"
-              width={5}
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
-              required
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Input
-              label="Last Name"
-              placeholder="Last Name"
-              width={5}
-              type="text"
-              name="surname"
-              value={this.state.surname}
-              onChange={this.handleChange}
-              required
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Input
-              label="Postal code"
-              placeholder="xx-xxx"
-              type="text"
-              width={2}
-              value={this.state.zipCode}
-              onChange={this.handleChange}
-              name="zipCode"
-              pattern="[0-9]{2}-[0-9]{3}"
-              title="Correct format: 'xx-xxx'"
-            />
-            <Form.Input
-              label="Address"
-              type="text"
-              placeholder="Address"
-              width={8}
-              value={this.state.address}
-              onChange={this.handleChange}
-              name="address"
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Input
-              label="Email"
-              placeholder="Email"
-              width={5}
-              type="email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              required
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Input
-              label="Password"
-              placeholder="Password"
-              width={4}
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              required
-            />
-          </Form.Group>
-          <Form.Group>
-            <label id="termsnConditionsLabel">
-              <input
-                id="termsnConditions"
-                type="checkbox"
-                label="I agree to the Terms and Conditions"
+      <div className="signUp">
+        <img className="menuLogo" src={image} alt="tracken-logo" />
+
+        <div className="signUpForm">
+          <Form
+            onSubmit={this.handleSubmit}
+            style={{
+              padding: 20,
+              boxShadow: "0 5px 10px rgba(0, 0, 0, 0.5",
+              background: "white"
+            }}
+          >
+            <Form.Group>
+              <Form.Input
+                label="First name"
+                placeholder="First Name"
+                width={12}
+                type="text"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleChange}
                 required
               />
-              I agree to the Terms and Conditions < span id="requiredStar">*</span>
-            </label>
-          </Form.Group>
-          <Button className="submit-button" size="medium" type="submit">
-            Submit
-          </Button>
-        </Form>
+            </Form.Group>
+            <Form.Group>
+              <Form.Input
+                label="Last Name"
+                placeholder="Last Name"
+                width={12}
+                type="text"
+                name="surname"
+                value={this.state.surname}
+                onChange={this.handleChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Input
+                label="Phone Number"
+                placeholder="xxx-xxx-xxx"
+                width={12}
+                type="text"
+                pattern="[0-9]{10}"
+                name="phoneNumber"
+                value={this.state.phoneNumber}
+                onChange={this.handleChange}
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
+                title="Correct format: 'xxx-xxx-xxx'"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Input
+                label="Company Name"
+                placeholder="Company Name"
+                width={12}
+                type="text"
+                name="companyName"
+                value={this.state.companyName}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Input
+                label="NIP"
+                placeholder="NIP number"
+                width={12}
+                type="text"
+                pattern="[0-9]{10}"
+                name="nip"
+                value={this.state.nip}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Input
+                label="Postal code"
+                placeholder="xx-xxx"
+                type="text"
+                width={4}
+                value={this.state.zipCode}
+                onChange={this.handleChange}
+                name="zipCode"
+                pattern="[0-9]{2}-[0-9]{3}"
+                title="Correct format: 'xx-xxx'"
+              />
+              <Form.Input
+                label="City"
+                type="text"
+                placeholder="City"
+                width={8}
+                value={this.state.city}
+                onChange={this.handleChange}
+                name="city"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Input
+                label="Address"
+                type="text"
+                placeholder="Address"
+                width={12}
+                value={this.state.address}
+                onChange={this.handleChange}
+                name="address"
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Input
+                label="Email"
+                placeholder="Email"
+                width={12}
+                type="email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Input
+                label="Password"
+                placeholder="Password"
+                width={12}
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group>
+              <label id="termsnConditionsLabel">
+                <input
+                  id="termsnConditions"
+                  type="checkbox"
+                  label="I agree to the Terms and Conditions"
+                  required
+                />
+                I agree to the Terms and Conditions{" "}
+                <span id="requiredStar">*</span>
+              </label>
+            </Form.Group>
+            <Form.Group className="menuButtons">
+              <Button className="submit-button" size="medium" type="submit">
+                Submit
+              </Button>
+
+              <Button as={NavLink} to="/" animated>
+                <Button.Content visible>Home</Button.Content>
+                <Button.Content hidden id="hiddenButton">
+                  <Icon name="arrow left" />
+                </Button.Content>
+              </Button>
+            </Form.Group>
+          </Form>
+        </div>
         {this.state.error && (
           <p style={{ color: "red" }}>{this.state.error.message}</p>
         )}

@@ -3,11 +3,12 @@ import { Form, Segment, Button } from "semantic-ui-react";
 import MainMenu from "../MainMenu";
 
 import "./ProfilePage.css";
-
 class ProfilePage extends Component {
   state = {};
 
-  handleClick = () => this.setState({ active: !this.state.active });
+  handleClick = () => this.setState({ 
+    active: !this.state.active 
+  });
 
   render() {
     const { active } = this.state;
@@ -15,11 +16,16 @@ class ProfilePage extends Component {
       <div className="ProfilePage">
         <MainMenu />
         <br />
-        <Button toggle active={active} onClick={this.handleClick}>
+        {active ? 
+        (<Button toggle active={active} onClick={this.handleClick}>
+        Save
+        </Button>) :
+        (<Button toggle active={active} onClick={this.handleClick}>
           Edit
-        </Button>
-
-        <Segment color="purple">
+        </Button>)
+        }
+        {active ? 
+        (<Segment color="purple">
           <Form>
             <Form.Group widths="equal">
               <Form.Input
@@ -30,7 +36,7 @@ class ProfilePage extends Component {
               />
               <Form.Input
                 fluid
-                id="ffirst_name"
+                id="first_name"
                 label="First name"
                 placeholder="First name"
               />
@@ -65,9 +71,9 @@ class ProfilePage extends Component {
               <Form.Input fluid id="phone" label="Phone" placeholder="Phone" />
             </Form.Group>
           </Form>
-        </Segment>
-
-        <Segment color="purple">
+        </Segment>)
+:
+        (<Segment color="purple">
           <Form>
             <Form.Group widths="equal">
               <div className="field">
@@ -111,7 +117,7 @@ class ProfilePage extends Component {
               </div>
             </Form.Group>
           </Form>
-        </Segment>
+        </Segment>)}
       </div>
     );
   }

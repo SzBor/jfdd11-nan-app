@@ -3,32 +3,27 @@ import "./Form.css";
 import Message from "../Chat/Message";
 import firebase from "firebase";
 class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  
+   state = {
       userName: "not registered",
       message: "",
       list: []
     };
-    this.messageRef = firebase
+    messageRef = firebase
       .database()
-      .ref()
+      .ref('chats').child(this.props.chatId)
       .child("messages");
-    this.listenMessages();
-  }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.user) {
-      this.setState({ userName: nextProps.user.email });
-    }
-  }
+    
+
+  
   handleChange = (event) => {
     this.setState({ message: event.target.value });
   }
   handleSend = () => {
     if (this.state.message) {
       let newItem = {
-        userName: this.state.userName,
-        message: this.state.message
+        authorId: this.props.user.uid,
+        content: this.state.message
       };
       this.messageRef.push(newItem);
       this.setState({ message: "" });
@@ -38,10 +33,10 @@ class Form extends Component {
     if (event.key !== "Enter") return;
     this.handleSend();
   }
-  listenMessages() {
-    this.messageRef.limitToLast(10).on("value", message => {
+  componentDidMount() {
+    this.messageRef.limitToLast(15).on("value", message => {
       this.setState({
-        list: Object.values(message.val())
+        list: Object.values(message.val() || {}).map(message => ({ ...message, userName: this.props.users[message.authorId].name}))
       });
     });
   }
