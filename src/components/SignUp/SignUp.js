@@ -98,7 +98,6 @@ class SignUp extends Component {
                 placeholder="xxx-xxx-xxx"
                 width={12}
                 type="text"
-                pattern="[0-9]{10}"
                 name="phoneNumber"
                 value={this.state.phoneNumber}
                 onChange={this.handleChange}
