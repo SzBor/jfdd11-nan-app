@@ -20,10 +20,31 @@ class ProfilePage extends Component {
     number: ""
   };
   
-  handleClick = () =>
+  handleClick = () =>{
+    const {
+      company_name,
+      name,
+      surname,
+      nip,
+      phone,
+      city,
+      postalcode,
+      street,
+      number
+    } = this.props.authContext.userData
     this.setState({
-      active: !this.state.active
-    });
+      active: !this.state.active,
+      company_name,
+      name,
+      surname,
+      nip,
+      phone,
+      city,
+      postalcode,
+      street,
+      number
+    })
+  };
 
   handleChange = event => {
     const id = event.target.id;
@@ -47,7 +68,7 @@ class ProfilePage extends Component {
     } = this.state;
     const stateData = {name, surname, company_name, city, postalcode, street, number, phone, nip}
     const updateData = Object.keys(stateData).reduce((obj, element)=> {
-      if ((stateData[element])!=="" && typeof stateData[element] !== 'boolean') 
+      if ((stateData[element])!=="") 
       obj[element] = stateData[element]
       return obj;
     }, {});
@@ -96,7 +117,7 @@ class ProfilePage extends Component {
                   id="company_name"
                   label="Company name"
                   placeholder="Company name"
-                  value={company_name ? company_name : userData.company_name}
+                  value={company_name}
                   onChange={this.handleChange}
                 />
                 <Form.Input
@@ -104,7 +125,7 @@ class ProfilePage extends Component {
                   id="name"
                   label="First name"
                   placeholder="First name"
-                  value={name ? name : userData.name}
+                  value={name}
                   onChange={this.handleChange}
                 />
                 <Form.Input
@@ -112,14 +133,16 @@ class ProfilePage extends Component {
                   id="surname"
                   label="Last name"
                   placeholder="Last name"
-                  value={surname ? surname : userData.surname}
+                  value={surname}
+                  onChange={this.handleChange}
                 />
                 <Form.Input
                   fluid
                   id="nip"
                   label="NIP"
                   placeholder="NIP"
-                  value={nip ? nip : userData.nip}
+                  value={nip}
+                  onChange={this.handleChange}
                 />
               </Form.Group>
               <Form.Group widths="equal">
@@ -128,35 +151,40 @@ class ProfilePage extends Component {
                   id="city"
                   label="City"
                   placeholder="City"
-                  value={city ? city : userData.city}
+                  value={city}
+                  onChange={this.handleChange}
                 />
                 <Form.Input
                   fluid
                   id="postalcode"
                   label="Postal Code"
                   placeholder="Postal Code"
-                  value={postalcode ? postalcode : userData.postalcode}
+                  value={postalcode}
+                  onChange={this.handleChange}
                 />
                 <Form.Input
                   fluid
                   id="street"
                   label="Street"
                   placeholder="Street"
-                  value={street ? street : userData.street}
+                  value={street}
+                  onChange={this.handleChange}
                 />
                 <Form.Input
                   fluid
                   id="number"
                   label="Number"
                   placeholder="Number"
-                  value={number ? number : userData.number}
+                  value={number}
+                  onChange={this.handleChange}
                 />
                 <Form.Input
                   fluid
                   id="phone"
                   label="Phone"
                   placeholder="Phone"
-                  value={phone ? phone : userData.phone}
+                  value={phone}
+                  onChange={this.handleChange}
                 />
               </Form.Group>
             </Form>
