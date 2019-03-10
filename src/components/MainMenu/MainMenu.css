@@ -11,13 +11,8 @@
     
 }
 
-/* .menuLogo{
-
-    height: 50px;
+.mainMenuItem {
+    min-width: 110px;
+    justify-content: center;
 }
-
-.menuButton{
-    width: 100%;
-    height: 100%;
-} */
 

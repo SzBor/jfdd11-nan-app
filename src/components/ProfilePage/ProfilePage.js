@@ -99,6 +99,9 @@ class ProfilePage extends Component {
       <div className="ProfilePage">
         <MainMenu />
         <br />
+
+        <h1>{userData.name} {userData.surname} - profile page</h1>
+        <br />
         {active ? (
           <Button toggle active={active} onClick={this.handleSave}>
             Save
@@ -108,6 +111,7 @@ class ProfilePage extends Component {
             Edit
           </Button>
         )}
+        
         {active ? (
           <Segment color="purple">
             <Form>
