@@ -58,7 +58,7 @@ export default class AuthContextProvider extends Component {
 
         this.userDbRef.on("value", this.readUserData);
       } else {
-        this.userDbRef.off("value", this.readUserData);
+       // this.userDbRef.off("value", this.readUserData);
       }
     });
   }
