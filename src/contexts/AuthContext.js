@@ -11,8 +11,15 @@ export default class AuthContextProvider extends Component {
   state = {
     user: null,
     userData: {
-      name: '',
-      surname: ''
+      company_name: "",
+      name: "",
+      surname: "",
+      nip: "",
+      phone: "",
+      city: "",
+      postalcode: "",
+      street: "",
+      number: ""
     },
     signOut: () => firebase.auth().signOut(),
     signIn: (email, password) =>
@@ -31,7 +38,14 @@ export default class AuthContextProvider extends Component {
     this.setState({
       userData: {
         name: person.name,
-        surname: person.surname
+        surname: person.surname,
+        company_name: person.company_name,
+        nip: person.nip,
+        phone: person.phone,
+        city: person.city,
+        postalcode: person.postalcode,
+        street: person.street,
+        number: person.number
       }
     });
   };

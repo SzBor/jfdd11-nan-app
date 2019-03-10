@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import firebase from 'firebase'
 import { Form, Segment, Button } from "semantic-ui-react";
 import MainMenu from "../MainMenu";
 import { withAuth } from "../../contexts/AuthContext";
@@ -32,11 +33,35 @@ class ProfilePage extends Component {
     });
   };
   handleSave = () => {
+    const { user } = this.props.authContext;
+    const {
+      company_name,
+      name,
+      surname,
+      nip,
+      phone,
+      city,
+      postalcode,
+      street,
+      number
+    } = this.state;
+    const stateData = {name, surname, company_name, city, postalcode, street, number, phone, nip}
+    const updateData = Object.keys(stateData).reduce((obj, element)=> {
+      if ((stateData[element])!=="" && typeof stateData[element] !== 'boolean') 
+      obj[element] = stateData[element]
+      return obj;
+    }, {});
+        firebase
+          .database()
+          .ref("users")
+          .child(user.uid)
+          .update(updateData);
+ 
     this.handleClick();
   }
 
   render() {
-    const { userData } = this.props.authContext;
+    const { userData} = this.props.authContext;
     const {
       active,
       company_name,
