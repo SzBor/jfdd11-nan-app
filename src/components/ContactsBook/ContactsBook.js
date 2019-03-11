@@ -51,6 +51,17 @@ class ContactsBook extends Component {
       });
       this.toggleAddContact();
   };
+  deleteContact =  event => {
+    const contactId = event.target.id
+    const { user } = this.props.authContext;
+      firebase
+        .database()
+        .ref('users')
+        .child(user.uid)
+        .child("contactsBook")
+        .child(contactId)
+        .set(null)
+  }
 
   render() {
     const { showAddContact } = this.state;
@@ -190,7 +201,7 @@ class ContactsBook extends Component {
                 <td>{contact.phone}</td>
                 <td>{contact.email}</td>
                 <td>{contact.nip}</td>
-                <td>xxx</td>
+                <td><button id={contact.id} onClick={this.deleteContact}>Delete</button></td>
               </tr>
             ))}
           </tbody>
