@@ -25,6 +25,51 @@ class Apps extends Component {
     });
   };
 
+  readChats = snapshot => {
+    this.setState({
+      chats: snapshot.val()
+    })
+  }
+
+  getChats = () => {
+    const { chats, users, user } = this.state
+    if (!chats || !users || !user) {
+      return []
+    }
+
+    const chatIdsAsObject = this.state.users[this.state.user.uid].chatIds
+    const chatIdsAsArray = Object.keys(chatIdsAsObject)
+
+    const presentedChats = chatIdsAsArray
+      .map(chatId => {
+        if (chatId) {
+          return {
+            ...chats[chatId],
+            id: chatId
+          }
+        } else {
+          return null
+        }
+      })
+      .filter(chat => chat !== null)
+      .filter(chat => {
+        const { firstUserId, secondUserId } = chat
+        const loggedInUserId = user.uid
+        
+        return firstUserId !== loggedInUserId || secondUserId !== loggedInUserId 
+      })
+      .map(chat => {
+        const { firstUserId, secondUserId } = chat
+        const loggedInUserId = user.id
+        return {
+          chatId: chat.id,
+          userName: loggedInUserId === firstUserId ? users[secondUserId].name : users[firstUserId].name 
+        }
+      })
+
+    return presentedChats
+  }
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user });
@@ -37,6 +82,10 @@ class Apps extends Component {
       .database()
       .ref("users")
       .on("value", this.readUsers);
+    firebase
+      .database()
+      .ref("chats")
+      .on("value", this.readChats)
   }
 
   componentWillUnmount() {
@@ -48,6 +97,10 @@ class Apps extends Component {
       .database()
       .ref("users")
       .off("value", this.readusers);
+    firebase
+      .database()
+      .ref("users")
+      .off("value", this.readChats);
   }
 
   startChat = chatBuddyId => {
@@ -115,7 +168,7 @@ class Apps extends Component {
           <MainMenu />
         </div>
         <div>
-          <h1>Welocome to Tracken Chat</h1>
+          <h1>Welcome to Tracken Chat</h1>
           <ul>
             {users &&
               users.map(user => (
@@ -125,21 +178,28 @@ class Apps extends Component {
                 </li>
               ))}
           </ul>
-          {this.state.currentChatId}
-          <Menu vertical>
-            <Dropdown item text='Chats'>
-              <Dropdown.Menu>
-          {this.state.user && this.state.users && Object.keys(this.state.users[this.state.user.uid].chatIds || {}).map(
-            id => 
-            
-                (<Dropdown.Item key={id} onClick={() => this.setState({ currentChatId: id })}>{id}</Dropdown.Item>)
-                )}
-              </Dropdown.Menu>
-            </Dropdown>
-          </Menu>
+          
+       
           
         </div>
         <div className="app__list">
+        <Menu vertical style={{
+          width: "auto"
+        }}>
+            <Dropdown item text={(this.state.currentChatUserName)} style={{
+              textAlign: "center"
+            }}>
+              <Dropdown.Menu>
+          {this.state.user && this.state.users && this.getChats().map(
+            chat => {
+              return (<Dropdown.Item key={chat.chatId} onClick={() => this.setState({
+                currentChatId: chat.chatId,
+                currentChatUserName: chat.userName
+              })}>{chat.userName}</Dropdown.Item>)
+            })}
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu>
           {this.state.currentChatId && (
             <Form user={this.state.user} users={this.state.users} key={this.state.currentChatId} chatId={this.state.currentChatId} />
           )}

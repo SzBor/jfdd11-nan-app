@@ -57,8 +57,8 @@ li{
     list-style: none;
 }
 button {
-    padding: 0 30px;
-    background-color:grey;
+    padding: 0 10px;
+    background-color:red;
     color:black;
     border: 0;
     border-radius: 5px 5px 5px 5px;
