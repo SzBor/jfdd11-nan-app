@@ -11,11 +11,11 @@ class SignUp extends Component {
   state = {
     name: "",
     surname: "",
-    phoneNumber: "",
-    zipCode: "",
+    phone: "",
+    postalcode: "",
     city: "",
-    address: "",
-    companyName: "",
+    street: "",
+    company_name: "",
     nip: "",
     email: "",
     password: "",
@@ -44,8 +44,13 @@ class SignUp extends Component {
           .set({
             name: this.state.name,
             surname: this.state.surname,
-            zipCode: this.state.zipCode,
-            address: this.state.address
+            postalcode: this.state.postalcode,
+            street: this.state.street,
+            city: this.state.city,
+            phone: this.state.phone,
+            company_name: this.state.company_name,
+            nip: this.state.nip,
+            number: this.state.number
           });
         this.setState({ error: null, success: "Account created" });
         this.props.history.push("/");
@@ -98,9 +103,8 @@ class SignUp extends Component {
                 placeholder="xxx-xxx-xxx"
                 width={12}
                 type="text"
-                pattern="[0-9]{10}"
-                name="phoneNumber"
-                value={this.state.phoneNumber}
+                name="phone"
+                value={this.state.phone}
                 onChange={this.handleChange}
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
                 title="Correct format: 'xxx-xxx-xxx'"
@@ -112,8 +116,8 @@ class SignUp extends Component {
                 placeholder="Company Name"
                 width={12}
                 type="text"
-                name="companyName"
-                value={this.state.companyName}
+                name="company_name"
+                value={this.state.company_name}
                 onChange={this.handleChange}
               />
             </Form.Group>
@@ -135,9 +139,9 @@ class SignUp extends Component {
                 placeholder="xx-xxx"
                 type="text"
                 width={4}
-                value={this.state.zipCode}
+                value={this.state.postalcode}
                 onChange={this.handleChange}
-                name="zipCode"
+                name="postalcode"
                 pattern="[0-9]{2}-[0-9]{3}"
                 title="Correct format: 'xx-xxx'"
               />
@@ -153,13 +157,22 @@ class SignUp extends Component {
             </Form.Group>
             <Form.Group>
               <Form.Input
-                label="Address"
+                label="street"
                 type="text"
-                placeholder="Address"
-                width={12}
-                value={this.state.address}
+                placeholder="street"
+                width={9}
+                value={this.state.street}
                 onChange={this.handleChange}
-                name="address"
+                name="street"
+              />
+              <Form.Input
+                label="number"
+                type="number"
+                placeholder="number"
+                width={3}
+                value={this.state.number}
+                onChange={this.handleChange}
+                name="number"
               />
             </Form.Group>
 
