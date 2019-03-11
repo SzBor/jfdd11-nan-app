@@ -1,5 +1,6 @@
 .app {
     text-align: center;
+    padding: 10px;
 }
 
 .app__logo {
@@ -51,6 +52,7 @@
 .app .mainMenuChat{
     margin-bottom: 10px;
 }
+
 li{
     list-style: none;
 }
