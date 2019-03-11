@@ -17,24 +17,6 @@ class CustomButton extends Component {
 }
 
 class HomeView extends Component {
-  state = {
-    parcel: {
-      client_id: "-LZZyhU5d6efiXiWz1B-",
-      date_order: "2018-02-23",
-      date_send: "2018-12-04",
-      dimensions: {
-        depth: "",
-        height: "",
-        weight: "34",
-        width: "24"
-      },
-      id: "-LZoFSPw4Nb7sLajyxjK",
-      latitude: 52.6269375,
-      longitude: 16.4463703,
-      status: "pending"
-    },
-    searchPhrase: ""
-  };
 
  
   hideFixedMenu = () => this.setState({ fixed: false });
