@@ -8,7 +8,6 @@ import Auth from "../Auth/Auth";
 import { withAuth } from "../../contexts/AuthContext";
 import firebase from "firebase";
 import image from "../MainMenu/trackenLogo.svg";
-
 import "./HomeView.css";
 
 class CustomButton extends Component {
@@ -18,8 +17,8 @@ class CustomButton extends Component {
 }
 
 class HomeView extends Component {
-  state = {};
 
+ 
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
 
@@ -72,13 +71,10 @@ class HomeView extends Component {
           </div>
           <div className="homeView-search">
             <h2>Find your package</h2>
-            <SearchBar />
+            <SearchBar handleParcel={this.setParcel} />
           </div>
         </div>
-{/*         <div className="homeView-footer">
-          Footer
-          <div>Contact us</div>
-        </div> */}
+       
       </div>
     );
   }
