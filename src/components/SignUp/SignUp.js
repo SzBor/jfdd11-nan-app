@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-import { Button, Form, Icon } from "semantic-ui-react";
+import { Button, Form, Icon, Modal, Header } from "semantic-ui-react";
 import firebase from "firebase";
 import image from "./trackenLogo.svg";
 
@@ -21,7 +21,8 @@ class SignUp extends Component {
     email: "",
     password: "",
     error: null,
-    success: null
+    success: null,
+    // number:"",
   };
 
   handleChange = event => {
@@ -70,14 +71,15 @@ class SignUp extends Component {
             style={{
               padding: 20,
               boxShadow: "0 5px 10px rgba(0, 0, 0, 0.5",
-              background: "white"
+              background: "white",
+             
             }}
           >
             <Form.Group>
               <Form.Input
                 label="First name"
                 placeholder="First Name"
-                width={12}
+                width={13}
                 type="text"
                 name="name"
                 value={this.state.name}
@@ -89,7 +91,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Last Name"
                 placeholder="Last Name"
-                width={12}
+                width={13}
                 type="text"
                 name="surname"
                 value={this.state.surname}
@@ -102,7 +104,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Phone Number"
                 placeholder="xxx-xxx-xxx"
-                width={12}
+                width={13}
                 type="text"
                 name="phone"
                 value={this.state.phone}
@@ -115,7 +117,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Company Name"
                 placeholder="Company Name"
-                width={12}
+                width={13}
                 type="text"
                 name="company_name"
                 value={this.state.company_name}
@@ -126,12 +128,13 @@ class SignUp extends Component {
               <Form.Input
                 label="NIP"
                 placeholder="NIP number"
-                width={12}
+                width={13}
                 type="text"
                 pattern="[0-9]{10}"
                 name="nip"
                 value={this.state.nip}
                 onChange={this.handleChange}
+                title="Please enter 10 digits number"
               />
             </Form.Group>
             <Form.Group>
@@ -150,7 +153,7 @@ class SignUp extends Component {
                 label="City"
                 type="text"
                 placeholder="City"
-                width={8}
+                width={9}
                 value={this.state.city}
                 onChange={this.handleChange}
                 name="city"
@@ -158,22 +161,23 @@ class SignUp extends Component {
             </Form.Group>
             <Form.Group>
               <Form.Input
-                label="street"
+                label="Street Name"
                 type="text"
-                placeholder="street"
+                placeholder="Street Name"
                 width={9}
                 value={this.state.street}
                 onChange={this.handleChange}
                 name="street"
               />
               <Form.Input
-                label="number"
+                label="Number"
                 type="number"
-                placeholder="number"
-                width={3}
+                placeholder="Number"
+                width={4}
                 value={this.state.number}
                 onChange={this.handleChange}
                 name="number"
+               
               />
             </Form.Group>
 
@@ -181,7 +185,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Email"
                 placeholder="Email"
-                width={12}
+                width={13}
                 type="email"
                 name="email"
                 value={this.state.email}
@@ -193,7 +197,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Password"
                 placeholder="Password"
-                width={12}
+                width={13}
                 type="password"
                 name="password"
                 value={this.state.password}
@@ -227,12 +231,14 @@ class SignUp extends Component {
             </Form.Group>
           </Form>
         </div>
+        
         {this.state.error && (
           <p style={{ color: "red" }}>{this.state.error.message}</p>
         )}
         {this.state.success && (
           <p style={{ color: "green" }}>{this.state.success}</p>
         )}
+        
       </div>
     );
   }
