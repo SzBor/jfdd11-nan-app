@@ -174,7 +174,7 @@ class Apps extends Component {
               users.map(user => (
                 <li key={user.id}>
                   
-                  <button onClick={() => this.startChat(user.id)}>Start Chat with Admin </button>
+                  <button  className="ui button active" onClick={() => this.startChat(user.id)}>Start Chat with Admin </button>
                 </li>
               ))}
           </ul>

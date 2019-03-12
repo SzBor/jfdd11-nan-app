@@ -52,11 +52,13 @@
 .app .mainMenuChat{
     margin-bottom: 10px;
 }
-
+ul{
+padding-inline-start:1px;
+}
 li{
     list-style: none;
 }
-button {
+/* button {
     padding: 0 10px;
     background-color:red;
     color:black;
@@ -64,4 +66,4 @@ button {
     border-radius: 5px 5px 5px 5px;
     outline: 0;
     cursor: pointer;
-}
+} */

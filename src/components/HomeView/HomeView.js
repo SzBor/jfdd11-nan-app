@@ -31,7 +31,6 @@ class HomeView extends Component {
               <Modal
                 content={<LogIn />}
                 trigger={<Button inverted>Log in</Button>}
-                hideOnScroll={false}
                 on={"click"}
                 position={"top center"}
                 basic
