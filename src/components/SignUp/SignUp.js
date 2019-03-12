@@ -15,6 +15,7 @@ class SignUp extends Component {
     postalcode: "",
     city: "",
     street: "",
+    number:"",
     company_name: "",
     nip: "",
     email: "",

@@ -48,8 +48,8 @@ class MainMenu extends Component {
                 Dashboard
               </NavItem>
               <Auth>
-                <NavItem to="/contacts-book" as={NavLink}>
-                  Contacts Book
+                <NavItem to="/contacts" as={NavLink}>
+                  My Contacts
                 </NavItem>
                 <NavItem to="/chat" as={NavLink}>
                   Chat
