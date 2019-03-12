@@ -79,7 +79,7 @@ class ContactsBook extends Component {
         </div>
         {showAddContact && 
         (<Segment color="purple">
-          <Form onSubmit={this.handleSubmit}>
+          <Form>
             <Form.Group widths="equal">
               <Form.Input
                 label="Company name"
@@ -166,10 +166,10 @@ class ContactsBook extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Button type="submit" onClick={this.handleSubmit}>
+          </Form>
+          <Button type="submit" onClick={this.handleSubmit}>
               Add Contact
             </Button>
-          </Form>
         </Segment>)
         }
         <table className="ui celled table">
@@ -201,7 +201,7 @@ class ContactsBook extends Component {
                 <td>{contact.phone}</td>
                 <td>{contact.email}</td>
                 <td>{contact.nip}</td>
-                <td><button id={contact.id} onClick={this.deleteContact}>Delete</button></td>
+                <td><Button id={contact.id} onClick={this.deleteContact}>Delete</Button></td>
               </tr>
             ))}
           </tbody>
