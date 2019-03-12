@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Segment, Header } from "semantic-ui-react";
+import { Form, Input, Button, Segment, Header, Popup } from "semantic-ui-react";
+import ContactsBook from "../ContactsBook/ContactsBook"
 import firebase from "firebase";
+
 
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
@@ -127,6 +129,9 @@ class SendParcel extends Component {
               onDayChange={this.handleDayChange}
               selectedDay={this.state.selectedDay}
             />
+            <Popup wide trigger={<Button content='Contacts Book' />} on='click'>
+            <ContactsBook />
+            </Popup>
           </Segment>
           <Header as="h4">Recipient details</Header>
           <Segment color="purple">
