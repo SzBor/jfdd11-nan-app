@@ -19,7 +19,8 @@ export default class AuthContextProvider extends Component {
       city: "",
       postalcode: "",
       street: "",
-      number: ""
+      number: "",
+      contactsBook:[]
     },
     signOut: () => firebase.auth().signOut(),
     signIn: (email, password) =>
@@ -45,7 +46,11 @@ export default class AuthContextProvider extends Component {
         city: person.city,
         postalcode: person.postalcode,
         street: person.street,
-        number: person.number
+        number: person.number,
+        contactsBook: Object.entries(person.contactsBook|| {}).map(([id, value]) => ({
+          id,
+          ...value
+        }))
       }
     });
   };
