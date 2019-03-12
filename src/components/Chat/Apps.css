@@ -52,7 +52,9 @@
 .app .mainMenuChat{
     margin-bottom: 10px;
 }
-
+ul{
+padding-inline-start:1px;
+}
 li{
     list-style: none;
 }
