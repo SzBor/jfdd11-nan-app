@@ -6,7 +6,7 @@ import { getPackagesPromise } from "../../services";
 class SearchBar extends Component {
   state = {
     searchPhrase: "",
-    parcel: null
+    parcel: ""
   };
 
   handleSubmit = event => {
@@ -20,7 +20,7 @@ class SearchBar extends Component {
   };
   handleChange = event => {
     this.setState({
-      searchPhrase: event.target.value
+      searchPhrase: "-"+event.target.value
     });
   };
 
@@ -37,18 +37,20 @@ class SearchBar extends Component {
               action="Search"
               placeholder="Enter package number"
             />
-        {console.log(this.state)}
           </Form.Field>
         </Form>
         
         </div>
         <div className="parcel-details">
-          {parcel === null ? (
+          { (parcel === "") && 
           <p style={{ textAlign: "center" }}>
-            {" "}
-            "Incorrect package number "
+            
           </p>
-        ) : (
+         }
+        {(parcel === null) && <p style={{ textAlign: "center" }}>
+        "Incorrect package number "
+        </p> }
+        { (parcel)  && 
           <table className="ui celled table">
             <thead>
               <tr>
@@ -89,7 +91,7 @@ class SearchBar extends Component {
               </tr>
             </tbody>
           </table>
-        )}
+        }
         </div>
         </>
     );
