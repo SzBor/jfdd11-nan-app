@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-import { Button, Form, Icon } from "semantic-ui-react";
+import { Button, Form, Icon, Modal, Header } from "semantic-ui-react";
 import firebase from "firebase";
 import image from "./trackenLogo.svg";
 
@@ -20,7 +20,8 @@ class SignUp extends Component {
     email: "",
     password: "",
     error: null,
-    success: null
+    success: null,
+    // number:"",
   };
 
   handleChange = event => {
@@ -229,12 +230,14 @@ class SignUp extends Component {
             </Form.Group>
           </Form>
         </div>
+        
         {this.state.error && (
           <p style={{ color: "red" }}>{this.state.error.message}</p>
         )}
         {this.state.success && (
           <p style={{ color: "green" }}>{this.state.success}</p>
         )}
+        
       </div>
     );
   }
