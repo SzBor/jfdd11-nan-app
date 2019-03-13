@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Segment, Header, Popup } from "semantic-ui-react";
-import ContactsBook from "../ContactsBook/ContactsBook"
+import ContactsBook from "../ContactsBook/ContactsBook";
 import firebase from "firebase";
-
 
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
@@ -15,6 +14,7 @@ const initialState = {
   recipientName: "",
   phone: "",
   city: "",
+  email: "",
   postalCode: "",
   streetName: "",
   streetNumber: "",
@@ -23,8 +23,8 @@ const initialState = {
   parcelDepth: "",
   parcelHeight: "",
   parcelWidth: "",
-  lat:"",
-  lng:""
+  lat: "",
+  lng: ""
 };
 const googleApiKey = "AIzaSyAUsnERWvgUrNKQy4YvHAaeg99HdhJLpTM";
 
@@ -41,6 +41,7 @@ class SendParcel extends Component {
       streetName,
       streetNumber,
       country,
+      email,
       parcelWeight,
       parcelDepth,
       parcelHeight,
@@ -53,8 +54,10 @@ class SendParcel extends Component {
       .database()
       .ref("packages")
       .push({
-        date_send: selectedDay ? selectedDay : moment(new Date()).format("YYYY-MM-DD"),
-        client_id:this.props.clientID,
+        date_send: selectedDay
+          ? selectedDay
+          : moment(new Date()).format("YYYY-MM-DD"),
+        client_id: this.props.clientID,
         delivery: {
           name: recipientName,
           phone,
@@ -62,7 +65,8 @@ class SendParcel extends Component {
           postalcode: postalCode,
           street: streetName,
           number: streetNumber,
-          country
+          country,
+          email
         },
         dimensions: {
           weight: parcelWeight,
@@ -70,23 +74,29 @@ class SendParcel extends Component {
           height: parcelHeight,
           width: parcelWidth
         },
-        latitude:lat,
-        longitude:lng,
+        latitude: lat,
+        longitude: lng,
         status: "pending",
         date_order: moment(new Date()).format("YYYY-MM-DD")
       });
   };
 
   syncGeoLocation = () =>
-  fetch(
-    `https://maps.googleapis.com/maps/api/geocode/json?key=
-    ${googleApiKey}&address=${this.state.city}+${this.state.postalCode}+${this.state.streetName}+${this.state.streetNumber}`
-  ).then(response => response.json())
-  .then(data=>data.results)
-  .then(results=>results[0].geometry.location)
-  .then(coords => this.setState({
-    lat:coords.lat,lng:coords.lng
-  }))
+    fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?key=
+    ${googleApiKey}&address=${this.state.city}+${this.state.postalCode}+${
+        this.state.streetName
+      }+${this.state.streetNumber}`
+    )
+      .then(response => response.json())
+      .then(data => data.results)
+      .then(results => results[0].geometry.location)
+      .then(coords =>
+        this.setState({
+          lat: coords.lat,
+          lng: coords.lng
+        })
+      );
 
   handleChange = event => {
     const id = event.target.id;
@@ -106,32 +116,57 @@ class SendParcel extends Component {
     });
   };
 
-  handleSubmit = event => {
+  handleSendParcel = event => {
     event.preventDefault();
-    this.syncGeoLocation().then(()=>{
-      this.addParcel()
+    this.syncGeoLocation().then(() => {
+      this.addParcel();
       this.setState(initialState);
-    this.props.refreshView();
-    this.props.closeSendParcel();
-    })
+      this.props.refreshView();
+      this.props.closeSendParcel();
+    });
+  };
+
+  handleCopyContact = contact => {
+    this.setState({
+      recipientName: `${contact.company_name} ${contact.name} ${
+        contact.surname
+      }`,
+      phone: contact.phone,
+      city: contact.city,
+      email: contact.email,
+      postalCode: contact.postalcode,
+      streetName: contact.street,
+      streetNumber: contact.number,
+      country: contact.country
+    });
   };
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSendParcel}>
         <Segment color="purple">
           <Header as="h4">
             Please fill the form below to send a new package
           </Header>
           <Segment color="purple">
-            <DayPickerInput
-              placeholder={moment(new Date()).format("YYYY-MM-DD")}
-              onDayChange={this.handleDayChange}
-              selectedDay={this.state.selectedDay}
-            />
-            <Popup wide trigger={<Button content='Contacts Book' />} on='click'>
-            <ContactsBook />
-            </Popup>
+            <div className="sendParcel_div--pickerandpopup">
+              <DayPickerInput
+                placeholder={moment(new Date()).format("YYYY-MM-DD")}
+                onDayChange={this.handleDayChange}
+                selectedDay={this.state.selectedDay}
+              />
+  
+              <Popup
+                keepInViewPort
+                trigger={<Button type="button" content="Contacts Book" />}
+                on="click"
+              >
+                <ContactsBook
+                  perPage={2}
+                  onCopyContact={this.handleCopyContact}
+                />
+              </Popup>
+            </div>
           </Segment>
           <Header as="h4">Recipient details</Header>
           <Segment color="purple">
@@ -142,14 +177,6 @@ class SendParcel extends Component {
                 label="Recipient name"
                 placeholder="Recipient name"
                 value={this.state.recipientName}
-                onChange={this.handleChange}
-              />
-              <Form.Field
-                id="phone"
-                control={Input}
-                label="Phone number"
-                placeholder="Phone number"
-                value={this.state.phone}
                 onChange={this.handleChange}
               />
               <Form.Field
@@ -190,6 +217,22 @@ class SendParcel extends Component {
                 label="Country"
                 placeholder="Country"
                 value={this.state.country}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                id="phone"
+                control={Input}
+                label="Phone number"
+                placeholder="Phone number"
+                value={this.state.phone}
+                onChange={this.handleChange}
+              />
+              <Form.Field
+                id="email"
+                control={Input}
+                label="Email"
+                placeholder="Email"
+                value={this.state.email}
                 onChange={this.handleChange}
               />
             </Form.Group>

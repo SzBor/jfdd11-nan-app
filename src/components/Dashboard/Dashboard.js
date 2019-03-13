@@ -110,10 +110,6 @@ class Dashboard extends Component {
                 {showSendParcel ? "Cancel" : "Send new parcel"}
               </Button>
             </div>
-            {/* <div>
-            <Button>
-              Loyality points
-            </Button></div> */}
           </div>
           <br />
           <br />
@@ -169,7 +165,7 @@ class Dashboard extends Component {
                 .slice(pagination, pagination + 10)}
             </tbody>
           </table>
-          <div className="ui text container">
+          <div className="pagination">
             {Array.from({
               length: Math.ceil(filteredPackages.length / 10)
             }).map((button, index) => (

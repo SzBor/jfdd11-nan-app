@@ -5,7 +5,21 @@ import "./ContactsBook.css";
 import { withAuth } from "../../contexts/AuthContext";
 
 class ContactsBook extends Component {
-
+  state = {
+    searchPhrase: "",
+    pagination: 0,
+  }
+  handleChange = event => {
+    this.setState({
+      searchPhrase: event.target.value
+    });
+  };
+  handlePaginationChange = event => {
+    const paginationPage = event.target.value;
+    this.setState({
+      pagination: paginationPage * (this.props.perPage || 10)
+    });
+  };
   deleteContact =  event => {
     const contactId = event.target.id
     const { user } = this.props.authContext;
@@ -19,13 +33,29 @@ class ContactsBook extends Component {
   }
 
   render() {
-    
+    const { pagination, searchPhrase } = this.state;
     const {
       userData: { contactsBook }
     } = this.props.authContext;
+    const recordsOnPage = this.props.perPage || 10;
+    const shearchedContactBook = contactsBook.map(contact => ({
+      ...contact,
+      searchData: (
+        contact.company_name +
+        contact.name +
+        contact.surname.street
+      ).toLowerCase()
+    }))
+    .filter(contact => contact.searchData.includes(searchPhrase.toLowerCase()))
     return (
       <div className="ContactsBook">
- 
+        <div className="ui input">
+              <input
+                placeholder="Search..."
+                value={searchPhrase}
+                onChange={this.handleChange}
+              />
+            </div>
         <table className="ui celled table">
           <thead>
             <tr>
@@ -43,7 +73,7 @@ class ContactsBook extends Component {
             </tr>
           </thead>
           <tbody>
-            {contactsBook.map(contact => (
+            {shearchedContactBook.map(contact => (
               <tr key={contact.id}>
                 <td>{contact.company_name}</td>
                 <td>{contact.name}</td>
@@ -55,11 +85,27 @@ class ContactsBook extends Component {
                 <td>{contact.phone}</td>
                 <td>{contact.email}</td>
                 <td>{contact.nip}</td>
-                <td><Button id={contact.id} onClick={this.deleteContact}>Delete</Button></td>
+                <td><Button onClick={() => this.props.onCopyContact(contact)}>Copy</Button>
+                <Button id={contact.id} onClick={this.deleteContact}>Delete</Button>
+                </td>
               </tr>
-            ))}
+            )).slice(pagination, pagination + recordsOnPage)}
           </tbody>
         </table>
+        <div className="pagination">
+            {Array.from({
+              length: Math.ceil(shearchedContactBook.length / recordsOnPage)
+            }).map((button, index) => (
+              <button
+                className="ui button"
+                key={index}
+                value={index}
+                onClick={this.handlePaginationChange}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
       </div>
     );
   }
