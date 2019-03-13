@@ -7,6 +7,13 @@ import image from "./trackenLogo.svg";
 
 import "./SignUp.css";
 
+class CustomButton extends Component {
+  render() {
+    return <NavLink {...this.props} />;
+  }
+}
+
+
 class SignUp extends Component {
   state = {
     name: "",
@@ -64,10 +71,7 @@ class SignUp extends Component {
       <div className="signUp">
         <img className="menuLogo" src={image} alt="tracken-logo" />
 
-        
-
         <div className="signUpForm">
-       
           <Form
             onSubmit={this.handleSubmit}
             style={{
@@ -222,7 +226,7 @@ class SignUp extends Component {
                 Submit
               </Button>
 
-              <Button as={NavLink} to="/" animated>
+              <Button as={CustomButton} to="/" animated>
                 <Button.Content visible>Home</Button.Content>
                 <Button.Content hidden id="hiddenButton">
                   <Icon name="arrow left" />
@@ -230,19 +234,17 @@ class SignUp extends Component {
               </Button>
             </Form.Group>
             <div className="errorMessage">
-        {this.state.error && (
-          <Message negative compact floating>
-            <Message.Header>
-              An error occured
-              </Message.Header>
-              <p style={{ color: "red" }}>{this.state.error.message}</p>
-            {" "}
-          </Message>
-        )}
-        </div>
+              {this.state.error && (
+                <Message negative compact floating>
+                  <Message.Header>An error occured</Message.Header>
+                  <p style={{ color: "red" }}>
+                    {this.state.error.message}
+                  </p>{" "}
+                </Message>
+              )}
+            </div>
           </Form>
         </div>
-        
 
         {this.state.success && (
           <p style={{ color: "green" }}>{this.state.success}</p>

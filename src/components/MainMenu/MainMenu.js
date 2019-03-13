@@ -13,6 +13,8 @@ const NavItem = ({ to, children, exact }) => (
   </Menu.Item>
 );
 
+
+
 class MainMenu extends Component {
   state = {
     user: null,
