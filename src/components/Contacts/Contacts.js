@@ -83,6 +83,7 @@ class Contacts extends Component {
                 name="name"
                 value={this.state.name}
                 onChange={this.handleChange}
+                required
               />
               <Form.Input
                 label="Surname"
@@ -91,6 +92,7 @@ class Contacts extends Component {
                 name="surname"
                 value={this.state.surname}
                 onChange={this.handleChange}
+                
               />
             </Form.Group>
             <Form.Group widths="equal">
