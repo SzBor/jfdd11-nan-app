@@ -48,7 +48,7 @@ class SearchBar extends Component {
           {parcel && (
             <div className="detailsTable">
               <div>
-                <h4>Sending Date</h4>
+                <h4>Send Date</h4>
                 <p>{parcel.date_send}</p>
               </div>
               <div>
