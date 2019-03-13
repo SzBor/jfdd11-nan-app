@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from "react-router-dom";
-import { Menu, Button, Responsive } from "semantic-ui-react";
+import { Menu, Button, Responsive, Icon } from "semantic-ui-react";
 import image from "./trackenLogo.svg";
 import firebase from "firebase";
 import "./MainMenu.css";
@@ -13,8 +13,6 @@ const NavItem = ({ to, children, exact }) => (
   </Menu.Item>
 );
 
-
-
 class MainMenu extends Component {
   state = {
     user: null,
@@ -23,9 +21,21 @@ class MainMenu extends Component {
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => this.setState({ user }));
+
+    window.addEventListener("click", this.closeMenu);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.closeMenu);
   }
 
-  handleToggle = () => this.setState({ isOpen: !this.state.isOpen });
+  closeMenu = () => {
+    this.setState({ isOpen: false });
+  };
+
+  handleToggle = event => {
+    event.stopPropagation();
+    this.setState({ isOpen: !this.state.isOpen });
+  };
 
   renderMenu(isTogglable = false) {
     const { user, isOpen } = this.state;
@@ -33,16 +43,30 @@ class MainMenu extends Component {
       <div>
         <Menu stackable>
           <Menu.Item>
-            <img className="menuLogo" src={image} alt="tracken-logo" />
+            <img className="mainMenuLogo" src={image} alt="tracken-logo" />
 
             {isTogglable && (
-              <Button className="menuButton" onClick={this.handleToggle}>
-                <p>Show Menu</p>
+              <Button id="mainMenuButton" onClick={this.handleToggle}>
+                <Icon name="bars" size="big" color="black" />
               </Button>
             )}
           </Menu.Item>
           {((isTogglable === true && isOpen) || isTogglable === false) && (
-            <>
+            <div
+              style={
+                isTogglable
+                  ? {
+                      display: "block",
+                      position: "absolute",
+                      zIndex: 9999,
+                      top: 70,
+                      background: "white",
+                      boxShadow: "0 3px 5px rgba(0, 0, 0, 0.5)",
+                      width: 353
+                    }
+                  : { display: "inherit" }
+              }
+            >
               <NavItem exact to="/" as={NavLink}>
                 Home
               </NavItem>
@@ -59,7 +83,8 @@ class MainMenu extends Component {
                 <NavItem to="/profile-page" as={ProfilePage}>
                   My Profile
                 </NavItem>
-                <Menu.Item>
+
+                <Menu.Item id="mainMenuUser">
                   {user && (
                     <p>
                       <span id="loggenInAs">Logged in as:</span>
@@ -81,7 +106,7 @@ class MainMenu extends Component {
                   )}
                 </Menu.Item>
               </Auth>
-            </>
+            </div>
           )}
         </Menu>
       </div>

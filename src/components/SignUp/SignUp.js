@@ -61,7 +61,7 @@ class SignUp extends Component {
             // number: this.state.number
           });
         this.setState({ error: null, success: "Account created" });
-        this.props.history.push("/");
+        this.props.history.push("/dashboard");
       })
       .catch(error => this.setState({ error: error, success: null }));
   };
@@ -69,7 +69,7 @@ class SignUp extends Component {
   render() {
     return (
       <div className="signUp">
-        <img className="menuLogo" src={image} alt="tracken-logo" />
+        <img className="signUpFormMenuIcon" src={image} alt="tracken-logo" />
 
         <div className="signUpForm">
           <Form
@@ -221,7 +221,7 @@ class SignUp extends Component {
                 <span id="requiredStar">*</span>
               </label>
             </Form.Group>
-            <Form.Group className="menuButtons">
+            <Form.Group className="c">
               <Button className="submit-button" size="medium" type="submit">
                 Submit
               </Button>
@@ -233,7 +233,7 @@ class SignUp extends Component {
                 </Button.Content>
               </Button>
             </Form.Group>
-            <div className="errorMessage">
+            <div className="signUpFormMenuErrorMessage">
               {this.state.error && (
                 <Message negative compact floating>
                   <Message.Header>An error occured</Message.Header>
