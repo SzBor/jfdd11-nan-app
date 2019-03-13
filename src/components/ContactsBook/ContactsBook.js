@@ -5,7 +5,16 @@ import "./ContactsBook.css";
 import { withAuth } from "../../contexts/AuthContext";
 
 class ContactsBook extends Component {
-
+  state = {
+    searchPhrase: "",
+    pagination: 0,
+  }
+  handlePaginationChange = event => {
+    const paginationPage = event.target.value;
+    this.setState({
+      pagination: paginationPage * 10
+    });
+  };
   deleteContact =  event => {
     const contactId = event.target.id
     const { user } = this.props.authContext;
@@ -19,10 +28,11 @@ class ContactsBook extends Component {
   }
 
   render() {
-    
+    const { pagination } = this.state;
     const {
       userData: { contactsBook }
     } = this.props.authContext;
+    const recordsOnPage = 10;
     return (
       <div className="ContactsBook">
  
@@ -55,11 +65,27 @@ class ContactsBook extends Component {
                 <td>{contact.phone}</td>
                 <td>{contact.email}</td>
                 <td>{contact.nip}</td>
-                <td><Button id={contact.id} onClick={this.deleteContact}>Delete</Button></td>
+                <td><Button onClick={() => this.props.onCopyContact(contact)}>Copy</Button>
+                <Button id={contact.id} onClick={this.deleteContact}>Delete</Button>
+                </td>
               </tr>
-            ))}
+            )).slice(pagination, pagination + 10)}
           </tbody>
         </table>
+        <div className="pagination">
+            {Array.from({
+              length: Math.ceil(contactsBook.length / recordsOnPage)
+            }).map((button, index) => (
+              <button
+                className="ui button"
+                key={index}
+                value={index}
+                onClick={this.handlePaginationChange}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
       </div>
     );
   }
