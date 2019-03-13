@@ -41,7 +41,7 @@ class SearchBar extends Component {
           </Form>
         </div>
         <DetailsTable />
-        <div className="parcel-details">
+        <div id="detailsParcel" >
           {parcel === "" && <p style={{ textAlign: "center" }} />}
           {parcel === null && (
             <p style={{ textAlign: "center" }}>"Incorrect package number "</p>

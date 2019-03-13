@@ -1,26 +1,27 @@
-
 .ui.input.search-bar {
-    border-top: 2px solid #a333c8;
-    border-radius: 5px;
-} 
+  border-top: 2px solid #a333c8;
+  border-radius: 5px;
+}
 
 .detailsTable {
-    display: flex;
-    flex-wrap: nowrap;
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: nowrap;
 }
-.detailsTable>div{
-    border: 1px solid purple
- }
-  
+.detailsTable > div {
+  border: 1px solid purple;
+}
 
-@media (max-width:480px) {
-    .detailsTable {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-    }
-    .detailsTable>div{
-       border: 1px solid purple
-    }
-     
+@media (max-width: 480px) {
+  .detailsTable {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  .detailsTable > div {
+    width: 100%;
+    justify-content: center;
+    border: 1px solid purple;
+  }
 }
