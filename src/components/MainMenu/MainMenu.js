@@ -13,8 +13,6 @@ const NavItem = ({ to, children, exact }) => (
   </Menu.Item>
 );
 
-
-
 class MainMenu extends Component {
   state = {
     user: null,
@@ -23,9 +21,21 @@ class MainMenu extends Component {
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => this.setState({ user }));
+
+    window.addEventListener("click", this.closeMenu);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("click", this.closeMenu);
   }
 
-  handleToggle = () => this.setState({ isOpen: !this.state.isOpen });
+  closeMenu = () => {
+    this.setState({ isOpen: false });
+  };
+
+  handleToggle = event => {
+    event.stopPropagation();
+    this.setState({ isOpen: !this.state.isOpen });
+  };
 
   renderMenu(isTogglable = false) {
     const { user, isOpen } = this.state;
@@ -42,7 +52,21 @@ class MainMenu extends Component {
             )}
           </Menu.Item>
           {((isTogglable === true && isOpen) || isTogglable === false) && (
-            <>
+            <div
+              style={
+                isTogglable
+                  ? {
+                      display: "block",
+                      position: "absolute",
+                      zIndex: 9999,
+                      top: 64,
+                      background: "white",
+                      boxShadow: "0 3px 5px rgba(0, 0, 0, 0.5)",
+                      width: 353
+                    }
+                  : { display: "inherit" }
+              }
+            >
               <NavItem exact to="/" as={NavLink}>
                 Home
               </NavItem>
@@ -81,7 +105,7 @@ class MainMenu extends Component {
                   )}
                 </Menu.Item>
               </Auth>
-            </>
+            </div>
           )}
         </Menu>
       </div>
