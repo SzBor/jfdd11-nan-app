@@ -38,7 +38,7 @@ class Apps extends Component {
     }
 
     const chatIdsAsObject = this.state.users[this.state.user.uid].chatIds
-    const chatIdsAsArray = Object.keys(chatIdsAsObject)
+    const chatIdsAsArray = Object.keys(chatIdsAsObject || {})
 
     const presentedChats = chatIdsAsArray
       .map(chatId => {
