@@ -110,10 +110,6 @@ class Dashboard extends Component {
                 {showSendParcel ? "Cancel" : "Send new parcel"}
               </Button>
             </div>
-            {/* <div>
-            <Button>
-              Loyality points
-            </Button></div> */}
           </div>
           <br />
           <br />

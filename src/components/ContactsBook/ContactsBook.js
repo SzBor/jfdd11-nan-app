@@ -9,10 +9,15 @@ class ContactsBook extends Component {
     searchPhrase: "",
     pagination: 0,
   }
+  handleChange = event => {
+    this.setState({
+      searchPhrase: event.target.value
+    });
+  };
   handlePaginationChange = event => {
     const paginationPage = event.target.value;
     this.setState({
-      pagination: paginationPage * 10
+      pagination: paginationPage * (this.props.perPage || 10)
     });
   };
   deleteContact =  event => {
@@ -28,14 +33,29 @@ class ContactsBook extends Component {
   }
 
   render() {
-    const { pagination } = this.state;
+    const { pagination, searchPhrase } = this.state;
     const {
       userData: { contactsBook }
     } = this.props.authContext;
-    const recordsOnPage = 10;
+    const recordsOnPage = this.props.perPage || 10;
+    const shearchedContactBook = contactsBook.map(contact => ({
+      ...contact,
+      searchData: (
+        contact.company_name +
+        contact.name +
+        contact.surname.street
+      ).toLowerCase()
+    }))
+    .filter(contact => contact.searchData.includes(searchPhrase.toLowerCase()))
     return (
       <div className="ContactsBook">
- 
+        <div className="ui input">
+              <input
+                placeholder="Search..."
+                value={searchPhrase}
+                onChange={this.handleChange}
+              />
+            </div>
         <table className="ui celled table">
           <thead>
             <tr>
@@ -53,7 +73,7 @@ class ContactsBook extends Component {
             </tr>
           </thead>
           <tbody>
-            {contactsBook.map(contact => (
+            {shearchedContactBook.map(contact => (
               <tr key={contact.id}>
                 <td>{contact.company_name}</td>
                 <td>{contact.name}</td>
@@ -69,12 +89,12 @@ class ContactsBook extends Component {
                 <Button id={contact.id} onClick={this.deleteContact}>Delete</Button>
                 </td>
               </tr>
-            )).slice(pagination, pagination + 10)}
+            )).slice(pagination, pagination + recordsOnPage)}
           </tbody>
         </table>
         <div className="pagination">
             {Array.from({
-              length: Math.ceil(contactsBook.length / recordsOnPage)
+              length: Math.ceil(shearchedContactBook.length / recordsOnPage)
             }).map((button, index) => (
               <button
                 className="ui button"

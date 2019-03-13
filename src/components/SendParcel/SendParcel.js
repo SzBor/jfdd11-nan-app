@@ -14,7 +14,7 @@ const initialState = {
   recipientName: "",
   phone: "",
   city: "",
-  email:"",
+  email: "",
   postalCode: "",
   streetName: "",
   streetNumber: "",
@@ -116,7 +116,7 @@ class SendParcel extends Component {
     });
   };
 
-  handleSubmit = event => {
+  handleSendParcel = event => {
     event.preventDefault();
     this.syncGeoLocation().then(() => {
       this.addParcel();
@@ -128,33 +128,45 @@ class SendParcel extends Component {
 
   handleCopyContact = contact => {
     this.setState({
-      recipientName: `${contact.company_name} ${contact.name} ${contact.surname}`,
-      phone:contact.phone,
-      city:contact.city,
-      email:contact.email,
-      postalCode:contact.postalcode,
+      recipientName: `${contact.company_name} ${contact.name} ${
+        contact.surname
+      }`,
+      phone: contact.phone,
+      city: contact.city,
+      email: contact.email,
+      postalCode: contact.postalcode,
       streetName: contact.street,
       streetNumber: contact.number,
-      country: contact.country,
+      country: contact.country
     });
   };
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSendParcel}>
         <Segment color="purple">
           <Header as="h4">
             Please fill the form below to send a new package
           </Header>
           <Segment color="purple">
-            <DayPickerInput
-              placeholder={moment(new Date()).format("YYYY-MM-DD")}
-              onDayChange={this.handleDayChange}
-              selectedDay={this.state.selectedDay}
-            />
-            <Popup trigger={<Button content="Contacts Book" />} on="click">
-              <ContactsBook onCopyContact={this.handleCopyContact} />
-            </Popup>
+            <div className="sendParcel_div--pickerandpopup">
+              <DayPickerInput
+                placeholder={moment(new Date()).format("YYYY-MM-DD")}
+                onDayChange={this.handleDayChange}
+                selectedDay={this.state.selectedDay}
+              />
+  
+              <Popup
+                keepInViewPort
+                trigger={<Button type="button" content="Contacts Book" />}
+                on="click"
+              >
+                <ContactsBook
+                  perPage={2}
+                  onCopyContact={this.handleCopyContact}
+                />
+              </Popup>
+            </div>
           </Segment>
           <Header as="h4">Recipient details</Header>
           <Segment color="purple">

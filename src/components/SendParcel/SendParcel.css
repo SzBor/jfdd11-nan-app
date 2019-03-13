@@ -1,3 +1,11 @@
 .SendParcel {
   
 }
+.sendParcel_div--pickerandpopup {
+    display:flex;
+    margin:  0 5px 5px;
+}
+.sendParcel_div--pickerandpopup div {
+
+    margin:  0 5px;
+}

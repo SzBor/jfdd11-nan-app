@@ -14,7 +14,7 @@
     align-items: center;
 }
 .dashboard-interface div {
-    margin:  0 5px 5px;
+    margin:  0 5px;
 }
 @media screen and (max-width:600px){
     .dashboard-interface {
