@@ -3,3 +3,8 @@
     border-top: 2px solid #a333c8;
     border-radius: 5px;
 } 
+
+.detailsTable {
+    display: flex;
+    border: 1px solid black
+}

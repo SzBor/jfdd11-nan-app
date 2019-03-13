@@ -3,10 +3,6 @@ import { Input, Form } from "semantic-ui-react";
 import "./SearchBar.css";
 import { getPackagesPromise } from "../../services";
 
-
-
-
-
 class SearchBar extends Component {
   state = {
     searchPhrase: "",
@@ -28,9 +24,6 @@ class SearchBar extends Component {
     });
   };
 
-  
-
-
   render() {
     const { parcel } = this.state;
     return (
@@ -47,113 +40,116 @@ class SearchBar extends Component {
             </Form.Field>
           </Form>
         </div>
-        <DetailsTable/>
+        <DetailsTable />
         <div className="parcel-details">
           {parcel === "" && <p style={{ textAlign: "center" }} />}
           {parcel === null && (
             <p style={{ textAlign: "center" }}>"Incorrect package number "</p>
           )}
           {parcel && (
-            <table className="ui celled table">
-              <thead>
-                <tr>
-                  <th>Sending Date</th>
-                  <th>Status</th>
-                  <th>Courier ID</th>
-                  <th>Delivery Date</th>
-                  <th>Dimensions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{parcel.date_send}</td>
-                  <td
-                    style={{
-                      color:
-                        parcel.status === "received"
-                          ? "#006622"
-                          : parcel.status === "send"
-                          ? "#0099ff"
-                          : "#e68a00"
-                    }}
-                  >
-                    {parcel.status}
-                  </td>
-                  <td>{parcel.courier_id}</td>
-                  <td>{parcel.date_delivery}</td>
-                  <td>
-                    depth(mm): {parcel.dimensions.depth}
-                    <br />
-                    height(mm): {parcel.dimensions.height}
-                    <br />
-                    width(mm): {parcel.dimensions.width}
-                    <br />
-                    weight(kg): {parcel.dimensions.weight}
-                    <br />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="detailsTable">
+              <div>
+                <h4>Sending Date</h4>
+                <p>{parcel.date_send}</p>
+              </div>
+              <div>
+                <h4>Status</h4>
+                <p
+                  style={{
+                    color:
+                      parcel.status === "received"
+                        ? "#006622"
+                        : parcel.status === "send"
+                        ? "#0099ff"
+                        : "#e68a00"
+                  }}
+                >
+                  {parcel.status}
+                </p>
+              </div>
+              <div>
+                <h4>Courier ID</h4>
+                <p>{parcel.courier_id}</p>
+              </div>
+              <div>
+                <h4>Delivery Date</h4>
+                <p>{parcel.date_delivery}</p>
+              </div>
+              <div>
+                <h4>Dimensions</h4>
+                <p>
+                  depth(mm): {parcel.dimensions.depth}
+                  <br />
+                  height(mm): {parcel.dimensions.height}
+                  <br />
+                  width(mm): {parcel.dimensions.width}
+                  <br />
+                  weight(kg): {parcel.dimensions.weight}
+                  <br />
+                </p>
+              </div>
+            </div>
           )}
         </div>
       </>
     );
   }
-};
+}
 
-class DetailsTable extends Component { 
-  render(){
+class DetailsTable extends Component {
+  render() {
     const { parcel } = this.props;
     return (
- <div className="parcel-details">
- {parcel === "" && <p style={{ textAlign: "center" }} />}
- {parcel === null && (
-   <p style={{ textAlign: "center" }}>"Incorrect package number "</p>
- )}
- {parcel && (
-   <table className="ui celled table">
-     <thead>
-       <tr>
-         <th>Sending Date</th>
-         <th>Status</th>
-         <th>Courier ID</th>
-         <th>Delivery Date</th>
-         <th>Dimensions</th>
-       </tr>
-     </thead>
-     <tbody>
-       <tr>
-         <td>{parcel.date_send}</td>
-         <td
-           style={{
-             color:
-               parcel.status === "received"
-                 ? "#006622"
-                 : parcel.status === "send"
-                 ? "#0099ff"
-                 : "#e68a00"
-           }}
-         >
-           {parcel.status}
-         </td>
-         <td>{parcel.courier_id}</td>
-         <td>{parcel.date_delivery}</td>
-         <td>
-           depth(mm): {parcel.dimensions.depth}
-           <br />
-           height(mm): {parcel.dimensions.height}
-           <br />
-           width(mm): {parcel.dimensions.width}
-           <br />
-           weight(kg): {parcel.dimensions.weight}
-           <br />
-         </td>
-       </tr>
-     </tbody>
-   </table>
- )}
-</div>)
- }};
-
+      <div className="parcel-details">
+        {parcel === "" && <p style={{ textAlign: "center" }} />}
+        {parcel === null && (
+          <p style={{ textAlign: "center" }}>"Incorrect package number "</p>
+        )}
+        {parcel && (
+          <table className="ui celled table">
+            <thead>
+              <tr>
+                <th>Sending Date</th>
+                <th>Status</th>
+                <th>Courier ID</th>
+                <th>Delivery Date</th>
+                <th>Dimensions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{parcel.date_send}</td>
+                <td
+                  style={{
+                    color:
+                      parcel.status === "received"
+                        ? "#006622"
+                        : parcel.status === "send"
+                        ? "#0099ff"
+                        : "#e68a00"
+                  }}
+                >
+                  {parcel.status}
+                </td>
+                <td>{parcel.courier_id}</td>
+                <td>{parcel.date_delivery}</td>
+                <td>
+                  depth(mm): {parcel.dimensions.depth}
+                  <br />
+                  height(mm): {parcel.dimensions.height}
+                  <br />
+                  width(mm): {parcel.dimensions.width}
+                  <br />
+                  weight(kg): {parcel.dimensions.weight}
+                  <br />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        )}
+      </div>
+    );
+  }
+}
 
 export default SearchBar;
