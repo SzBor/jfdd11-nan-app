@@ -34,7 +34,7 @@ class Form extends Component {
     this.handleSend();
   }
   componentDidMount() {
-    this.messageRef.limitToLast(15).on("value", message => {
+    this.messageRef.limitToLast(100).on("value", message => {
       this.setState({
         list: Object.values(message.val() || {}).map(message => ({ ...message, userName: this.props.users[message.authorId].name}))
       });
