@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-import { Button, Form, Icon } from "semantic-ui-react";
+import { Button, Form, Icon, Message } from "semantic-ui-react";
 import firebase from "firebase";
 import image from "./trackenLogo.svg";
 
 import "./SignUp.css";
+
+class CustomButton extends Component {
+  render() {
+    return <NavLink {...this.props} />;
+  }
+}
+
 
 class SignUp extends Component {
   state = {
@@ -15,7 +22,7 @@ class SignUp extends Component {
     postalcode: "",
     city: "",
     street: "",
-    number:"",
+    number: "",
     company_name: "",
     nip: "",
     email: "",
@@ -50,11 +57,11 @@ class SignUp extends Component {
             city: this.state.city,
             phone: this.state.phone,
             company_name: this.state.company_name,
-            nip: this.state.nip,
-            number: this.state.number
+            nip: this.state.nip
+            // number: this.state.number
           });
         this.setState({ error: null, success: "Account created" });
-        this.props.history.push("/");
+        this.props.history.push("/dashboard");
       })
       .catch(error => this.setState({ error: error, success: null }));
   };
@@ -62,7 +69,7 @@ class SignUp extends Component {
   render() {
     return (
       <div className="signUp">
-        <img className="menuLogo" src={image} alt="tracken-logo" />
+        <img className="signUpFormMenuIcon" src={image} alt="tracken-logo" />
 
         <div className="signUpForm">
           <Form
@@ -77,7 +84,7 @@ class SignUp extends Component {
               <Form.Input
                 label="First name"
                 placeholder="First Name"
-                width={12}
+                width={13}
                 type="text"
                 name="name"
                 value={this.state.name}
@@ -89,7 +96,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Last Name"
                 placeholder="Last Name"
-                width={12}
+                width={13}
                 type="text"
                 name="surname"
                 value={this.state.surname}
@@ -102,7 +109,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Phone Number"
                 placeholder="xxx-xxx-xxx"
-                width={12}
+                width={13}
                 type="text"
                 name="phone"
                 value={this.state.phone}
@@ -115,7 +122,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Company Name"
                 placeholder="Company Name"
-                width={12}
+                width={13}
                 type="text"
                 name="company_name"
                 value={this.state.company_name}
@@ -126,12 +133,13 @@ class SignUp extends Component {
               <Form.Input
                 label="NIP"
                 placeholder="NIP number"
-                width={12}
+                width={13}
                 type="text"
                 pattern="[0-9]{10}"
                 name="nip"
                 value={this.state.nip}
                 onChange={this.handleChange}
+                title="Please enter 10 digits number"
               />
             </Form.Group>
             <Form.Group>
@@ -150,7 +158,7 @@ class SignUp extends Component {
                 label="City"
                 type="text"
                 placeholder="City"
-                width={8}
+                width={9}
                 value={this.state.city}
                 onChange={this.handleChange}
                 name="city"
@@ -158,19 +166,19 @@ class SignUp extends Component {
             </Form.Group>
             <Form.Group>
               <Form.Input
-                label="street"
+                label="Street Name"
                 type="text"
-                placeholder="street"
+                placeholder="Street Name"
                 width={9}
                 value={this.state.street}
                 onChange={this.handleChange}
                 name="street"
               />
               <Form.Input
-                label="number"
+                label="Number"
                 type="number"
-                placeholder="number"
-                width={3}
+                placeholder="Number"
+                width={4}
                 value={this.state.number}
                 onChange={this.handleChange}
                 name="number"
@@ -181,7 +189,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Email"
                 placeholder="Email"
-                width={12}
+                width={13}
                 type="email"
                 name="email"
                 value={this.state.email}
@@ -193,7 +201,7 @@ class SignUp extends Component {
               <Form.Input
                 label="Password"
                 placeholder="Password"
-                width={12}
+                width={13}
                 type="password"
                 name="password"
                 value={this.state.password}
@@ -213,23 +221,31 @@ class SignUp extends Component {
                 <span id="requiredStar">*</span>
               </label>
             </Form.Group>
-            <Form.Group className="menuButtons">
+            <Form.Group className="c">
               <Button className="submit-button" size="medium" type="submit">
                 Submit
               </Button>
 
-              <Button as={NavLink} to="/" animated>
+              <Button as={CustomButton} to="/" animated>
                 <Button.Content visible>Home</Button.Content>
                 <Button.Content hidden id="hiddenButton">
                   <Icon name="arrow left" />
                 </Button.Content>
               </Button>
             </Form.Group>
+            <div className="signUpFormMenuErrorMessage">
+              {this.state.error && (
+                <Message negative compact floating>
+                  <Message.Header>An error occured</Message.Header>
+                  <p style={{ color: "red" }}>
+                    {this.state.error.message}
+                  </p>{" "}
+                </Message>
+              )}
+            </div>
           </Form>
         </div>
-        {this.state.error && (
-          <p style={{ color: "red" }}>{this.state.error.message}</p>
-        )}
+
         {this.state.success && (
           <p style={{ color: "green" }}>{this.state.success}</p>
         )}
