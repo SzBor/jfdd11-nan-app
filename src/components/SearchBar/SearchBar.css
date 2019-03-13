@@ -6,5 +6,21 @@
 
 .detailsTable {
     display: flex;
-    border: 1px solid black
+    flex-wrap: nowrap;
+}
+.detailsTable>div{
+    border: 1px solid purple
+ }
+  
+
+@media (max-width:480px) {
+    .detailsTable {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .detailsTable>div{
+       border: 1px solid purple
+    }
+     
 }
