@@ -83,7 +83,8 @@ class MainMenu extends Component {
                 <NavItem to="/profile-page" as={ProfilePage}>
                   My Profile
                 </NavItem>
-                <Menu.Item>
+
+                <Menu.Item id="mainMenuUser">
                   {user && (
                     <p>
                       <span id="loggenInAs">Logged in as:</span>
