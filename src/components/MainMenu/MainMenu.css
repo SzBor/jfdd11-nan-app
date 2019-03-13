@@ -8,6 +8,9 @@
 
 #signOutButton {
     margin-left: 30px;
-    
 }
 
+#mainMenuButton {
+    width: 64px;
+    margin-left: 220px;
+}

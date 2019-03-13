@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from "react-router-dom";
-import { Menu, Button, Responsive } from "semantic-ui-react";
+import { Menu, Button, Responsive, Icon } from "semantic-ui-react";
 import image from "./trackenLogo.svg";
 import firebase from "firebase";
 import "./MainMenu.css";
@@ -43,11 +43,11 @@ class MainMenu extends Component {
       <div>
         <Menu stackable>
           <Menu.Item>
-            <img className="menuLogo" src={image} alt="tracken-logo" />
+            <img className="mainMenuLogo" src={image} alt="tracken-logo" />
 
             {isTogglable && (
-              <Button className="menuButton" onClick={this.handleToggle}>
-                <p>Show Menu</p>
+              <Button id="mainMenuButton" onClick={this.handleToggle}>
+                <Icon name="bars" size="big" color="black" />
               </Button>
             )}
           </Menu.Item>
@@ -59,7 +59,7 @@ class MainMenu extends Component {
                       display: "block",
                       position: "absolute",
                       zIndex: 9999,
-                      top: 64,
+                      top: 70,
                       background: "white",
                       boxShadow: "0 3px 5px rgba(0, 0, 0, 0.5)",
                       width: 353
