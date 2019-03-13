@@ -1,6 +1,5 @@
 .signUp {
     background: rgb(241, 241, 241);
-   
 }
 
 .signUpForm {
@@ -8,7 +7,6 @@
     margin: 0 auto;
     height: 100vh;
     padding-top: 10px;
-    
 }
 
 #termsnConditions {
@@ -24,7 +22,6 @@
     padding-top: 1em;
     padding-bottom: 0.5em;
     padding-left: 0.7em;
-    
 }
 
 .signUp .submit-button {
@@ -49,11 +46,13 @@
     display: flex;
 }
 
-.menuButtons{
+.menuButtons {
     padding-left: 10px;
 }
 
-
+.errorMessage {
+    margin: 0 auto;
+}
 
 @media only screen and (max-width: 767px) {
     .signUpForm {
@@ -69,6 +68,9 @@
     }
     .menuLogo {
         height: 100px;
+        padding-top: 5px;
+    }
+    .errorMessage {
         padding-top: 5px;
     }
 }

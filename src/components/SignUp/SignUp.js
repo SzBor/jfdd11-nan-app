@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-import { Button, Form, Icon, Modal, Header } from "semantic-ui-react";
+import { Button, Form, Icon, Message } from "semantic-ui-react";
 import firebase from "firebase";
 import image from "./trackenLogo.svg";
 
 import "./SignUp.css";
+
+class CustomButton extends Component {
+  render() {
+    return <NavLink {...this.props} />;
+  }
+}
+
 
 class SignUp extends Component {
   state = {
@@ -15,14 +22,13 @@ class SignUp extends Component {
     postalcode: "",
     city: "",
     street: "",
-    number:"",
+    number: "",
     company_name: "",
     nip: "",
     email: "",
     password: "",
     error: null,
-    success: null,
-    // number:"",
+    success: null
   };
 
   handleChange = event => {
@@ -51,8 +57,8 @@ class SignUp extends Component {
             city: this.state.city,
             phone: this.state.phone,
             company_name: this.state.company_name,
-            nip: this.state.nip,
-            number: this.state.number
+            nip: this.state.nip
+            // number: this.state.number
           });
         this.setState({ error: null, success: "Account created" });
         this.props.history.push("/");
@@ -71,8 +77,7 @@ class SignUp extends Component {
             style={{
               padding: 20,
               boxShadow: "0 5px 10px rgba(0, 0, 0, 0.5",
-              background: "white",
-             
+              background: "white"
             }}
           >
             <Form.Group>
@@ -177,7 +182,6 @@ class SignUp extends Component {
                 value={this.state.number}
                 onChange={this.handleChange}
                 name="number"
-               
               />
             </Form.Group>
 
@@ -222,23 +226,29 @@ class SignUp extends Component {
                 Submit
               </Button>
 
-              <Button as={NavLink} to="/" animated>
+              <Button as={CustomButton} to="/" animated>
                 <Button.Content visible>Home</Button.Content>
                 <Button.Content hidden id="hiddenButton">
                   <Icon name="arrow left" />
                 </Button.Content>
               </Button>
             </Form.Group>
+            <div className="errorMessage">
+              {this.state.error && (
+                <Message negative compact floating>
+                  <Message.Header>An error occured</Message.Header>
+                  <p style={{ color: "red" }}>
+                    {this.state.error.message}
+                  </p>{" "}
+                </Message>
+              )}
+            </div>
           </Form>
         </div>
-        
-        {this.state.error && (
-          <p style={{ color: "red" }}>{this.state.error.message}</p>
-        )}
+
         {this.state.success && (
           <p style={{ color: "green" }}>{this.state.success}</p>
         )}
-        
       </div>
     );
   }
