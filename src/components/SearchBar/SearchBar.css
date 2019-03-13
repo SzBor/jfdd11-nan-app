@@ -2,14 +2,21 @@
   border-top: 2px solid #a333c8;
   border-radius: 5px;
 }
-
+.detailsTable > div > p {
+    padding: 0 10px 10px;
+  }
 .detailsTable {
   margin-top: 50px;
   display: flex;
   flex-wrap: nowrap;
 }
 .detailsTable > div {
-  border: 1px solid purple;
+    padding-top:5px;
+  justify-content: center;
+  text-align: center;
+  text-justify: newspaper;
+  background: rgb(251, 252, 252);
+  border: 1px solid rgb(151, 137, 151);
 }
 
 @media (max-width: 480px) {
@@ -24,4 +31,5 @@
     justify-content: center;
     border: 1px solid purple;
   }
+ 
 }
