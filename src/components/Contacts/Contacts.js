@@ -22,6 +22,13 @@ class Contacts extends Component {
   };
 
   handleChange = event => {
+    if (event.target.name === "phone") {
+      
+      if (event.target.value !== '' && !event.target.value.match(/^[\d-]+$/gi)) {
+        return;
+      }
+    }
+  
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -105,12 +112,15 @@ class Contacts extends Component {
                 onChange={this.handleChange}
               />
               <Form.Input
-                label="Phone"
-                placeholder="Phone"
-                type="phone"
+                label="Phone Number"
+                placeholder="xxx-xxx-xxx"
+                width={13}
+                type="text"
                 name="phone"
                 value={this.state.phone}
                 onChange={this.handleChange}
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
+                title="Correct format: 'xxx-xxx-xxx'"
               />
               <Form.Input
                 label="Country"
@@ -133,7 +143,7 @@ class Contacts extends Component {
               <Form.Input
                 label="Postal code"
                 placeholder="Postal code"
-                type="text"
+                type="number"
                 name="postalcode"
                 value={this.state.postalcode}
                 onChange={this.handleChange}
