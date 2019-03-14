@@ -57,8 +57,8 @@ class SignUp extends Component {
             city: this.state.city,
             phone: this.state.phone,
             company_name: this.state.company_name,
-            nip: this.state.nip
-            // number: this.state.number
+            nip: this.state.nip,
+            number: this.state.number
           });
         this.setState({ error: null, success: "Account created" });
         this.props.history.push("/dashboard");
