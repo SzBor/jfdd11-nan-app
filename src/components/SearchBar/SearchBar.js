@@ -63,16 +63,16 @@ class SearchBar extends Component {
                         : "#e68a00"
                   }}
                 >
-                  {parcel.status}
+                  {parcel.status || "-"}
                 </p>
               </div>
               <div>
                 <h4>Courier ID</h4>
-                <p>{parcel.courier_id}</p>
+                <p>{parcel.courier_id || "-"}</p>
               </div>
               <div>
                 <h4>Delivery Date</h4>
-                <p>{parcel.date_delivery}</p>
+                <p>{parcel.date_delivery || "-"}</p>
               </div>
               <div>
                 <h4>Dimensions</h4>
