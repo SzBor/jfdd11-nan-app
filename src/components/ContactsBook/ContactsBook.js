@@ -56,36 +56,36 @@ class ContactsBook extends Component {
                 onChange={this.handleChange}
               />
             </div>
-        <table className="ui celled table">
-          <thead>
-            <tr>
-              <th>Company name</th>
-              <th>Name</th>
-              <th>Surname</th>
-              <th>City</th>
-              <th>Postal code</th>
-              <th>Street</th>
-              <th>Number</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>NIP</th>
+        <table className="ui celled table contacts_table">
+          <thead className="contacts_table">
+            <tr className="contacts_table">
+              <th className="contacts_table">Company name</th>
+              <th className="contacts_table">Name</th>
+              <th className="contacts_table">Surname</th>
+              <th className="contacts_table">City</th>
+              <th className="contacts_table">Postal code</th>
+              <th className="contacts_table">Street</th>
+              <th className="contacts_table">Number</th>
+              <th className="contacts_table">Phone</th>
+              <th className="contacts_table">Email</th>
+              <th className="contacts_table">NIP</th>
               <th />
             </tr>
           </thead>
-          <tbody>
+          <tbody className="contacts_table">
             {shearchedContactBook.map(contact => (
-              <tr key={contact.id}>
-                <td>{contact.company_name}</td>
-                <td>{contact.name}</td>
-                <td>{contact.surname}</td>
-                <td>{contact.city}</td>
-                <td>{contact.postalcode}</td>
-                <td>{contact.street}</td>
-                <td>{contact.number}</td>
-                <td>{contact.phone}</td>
-                <td>{contact.email}</td>
-                <td>{contact.nip}</td>
-                <td className="td_buttons"><Button className={this.props.additionalClass || "hideCopy"} onClick={() => this.props.onCopyContact(contact)} circular color='facebook' icon='copy' />
+              <tr key={contact.id} className="contacts_table">
+                <td className="contacts_table">{contact.company_name}</td>
+                <td className="contacts_table">{contact.name}</td>
+                <td className="contacts_table">{contact.surname}</td>
+                <td className="contacts_table">{contact.city}</td>
+                <td className="contacts_table">{contact.postalcode}</td>
+                <td className="contacts_table">{contact.street}</td>
+                <td className="contacts_table">{contact.number}</td>
+                <td className="contacts_table">{contact.phone}</td>
+                <td className="contacts_table">{contact.email}</td>
+                <td className="contacts_table">{contact.nip}</td>
+                <td className="td_buttons contacts_table"><Button className={this.props.additionalClass || "hideCopy"} onClick={() => this.props.onCopyContact(contact)} circular color='facebook' icon='copy' />
                 <Button id={contact.id} onClick={this.deleteContact} circular color='red' icon='delete' />
                 </td>
               </tr>
