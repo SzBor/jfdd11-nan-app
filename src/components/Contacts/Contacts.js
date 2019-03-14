@@ -6,20 +6,21 @@ import MainMenu from '../MainMenu';
 import ContactsBook from '../ContactsBook';
 import { Form, Segment, Button } from 'semantic-ui-react';
 
+const initialState = {
+  name: "",
+  surname: "",
+  postalcode: "",
+  country: "",
+  city: "",
+  street: "",
+  number: "",
+  company: "",
+  phone: "",
+  email: "",
+  showAddContact: false
+};
 class Contacts extends Component {
-  state = {
-    name: "",
-    surname: "",
-    postalcode: "",
-    country: "",
-    city: "",
-    street: "",
-    number: "",
-    company: "",
-    phone: "",
-    email: "",
-    showAddContact: false
-  };
+  state = initialState;
 
   handleChange = event => {
     if (event.target.name === "phone") {
@@ -57,7 +58,7 @@ class Contacts extends Component {
         phone: this.state.phone,
         email: this.state.email
       });
-      this.toggleAddContact();
+      this.setState(initialState);
   };
   render() {
     const { showAddContact } = this.state;
