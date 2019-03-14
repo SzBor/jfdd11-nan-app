@@ -13,7 +13,6 @@ class CustomButton extends Component {
   }
 }
 
-
 class SignUp extends Component {
   state = {
     name: "",
@@ -32,6 +31,11 @@ class SignUp extends Component {
   };
 
   handleChange = event => {
+    if (event.target.name === "phone") {
+      if (event.target.value !== '' && !event.target.value.match(/^[\d-]+$/gi)) {
+        return;
+      }
+    }
     this.setState({
       [event.target.name]: event.target.value
     });
