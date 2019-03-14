@@ -6,6 +6,7 @@ import firebase from "firebase";
 import "./MainMenu.css";
 import Auth from "../Auth/Auth";
 import ProfilePage from "../ProfilePage";
+import { withAuth } from "../../contexts/AuthContext";
 
 const NavItem = ({ to, children, exact }) => (
   <Menu.Item to={to} as={NavLink} exact={exact}>
@@ -20,8 +21,6 @@ class MainMenu extends Component {
   };
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => this.setState({ user }));
-
     window.addEventListener("click", this.closeMenu);
   }
   componentWillUnmount() {
@@ -38,7 +37,9 @@ class MainMenu extends Component {
   };
 
   renderMenu(isTogglable = false) {
-    const { user, isOpen } = this.state;
+    const { isOpen } = this.state;
+    const { user } = this.props.authContext;
+
     return (
       <div>
         <Menu stackable>
@@ -123,4 +124,4 @@ class MainMenu extends Component {
     );
   }
 }
-export default withRouter(MainMenu);
+export default withAuth(withRouter(MainMenu));
