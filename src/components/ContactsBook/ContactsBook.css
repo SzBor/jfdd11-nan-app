@@ -1,5 +1,13 @@
 .ContactsBook{
 
 }
-
-
+td.td_buttons {
+    display: flex;
+    justify-content: center;
+}
+td.td_buttons .hideCopy {
+    display: none;
+}
+td.td_buttons .showCopy {
+    display: block;
+}

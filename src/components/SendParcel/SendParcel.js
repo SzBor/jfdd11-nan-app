@@ -163,6 +163,7 @@ class SendParcel extends Component {
               >
                 <ContactsBook
                   perPage={2}
+                  additionalClass={'showCopy'}
                   onCopyContact={this.handleCopyContact}
                 />
               </Popup>
