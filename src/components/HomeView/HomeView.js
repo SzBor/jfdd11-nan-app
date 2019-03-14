@@ -17,8 +17,6 @@ class CustomButton extends Component {
 }
 
 class HomeView extends Component {
-
- 
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
 
@@ -72,8 +70,10 @@ class HomeView extends Component {
             <h2>Find your package</h2>
             <SearchBar handleParcel={this.setParcel} />
           </div>
+          <footer>
+            <p>Created by Team NaN</p>
+          </footer>
         </div>
-       
       </div>
     );
   }
