@@ -8,7 +8,6 @@ import Auth from "../Auth/Auth";
 import ProfilePage from "../ProfilePage";
 import { withAuth } from "../../contexts/AuthContext";
 
-
 const NavItem = ({ to, children, exact }) => (
   <Menu.Item to={to} as={NavLink} exact={exact}>
     {children}
@@ -22,15 +21,10 @@ class MainMenu extends Component {
   };
 
   componentDidMount() {
-    
-
     window.addEventListener("click", this.closeMenu);
   }
   componentWillUnmount() {
     window.removeEventListener("click", this.closeMenu);
-    
-
-    
   }
 
   closeMenu = () => {
@@ -44,7 +38,7 @@ class MainMenu extends Component {
 
   renderMenu(isTogglable = false) {
     const { isOpen } = this.state;
-    const {user} = this.props.authContext
+    const { user } = this.props.authContext;
 
     return (
       <div>
