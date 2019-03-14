@@ -85,8 +85,8 @@ class ContactsBook extends Component {
                 <td>{contact.phone}</td>
                 <td>{contact.email}</td>
                 <td>{contact.nip}</td>
-                <td><Button onClick={() => this.props.onCopyContact(contact)}>Copy</Button>
-                <Button id={contact.id} onClick={this.deleteContact}>Delete</Button>
+                <td><Button onClick={() => this.props.onCopyContact(contact)} circular color='facebook' icon='copy' />
+                <Button id={contact.id} onClick={this.deleteContact} circular color='red' icon='delete' />
                 </td>
               </tr>
             )).slice(pagination, pagination + recordsOnPage)}
