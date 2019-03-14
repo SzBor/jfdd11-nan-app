@@ -1,6 +1,6 @@
 .app {
     text-align: center;
-    padding: 10px;
+    padding: 20px;
 }
 
 .app__list {
@@ -20,22 +20,29 @@
     opacity: .8;
     outline: 0;
 }*/
-
+.ui.item.dropdown{
+    text-align: center;
+}
+.ui.vertical.menu {
+    width: auto;
+    
+}
 .app__button:hover {
     opacity: 1;
 }
 
-
-
-.app .mainMenuChat{
+.app .mainMenuChat {
     margin-bottom: 10px;
 }
-ul{
-padding-inline-start:1px;
+
+ul {
+    padding-inline-start: 1px;
 }
-li{
+
+li {
     list-style: none;
 }
+
 /* button {
     padding: 0 10px;
     background-color:red;
@@ -45,3 +52,29 @@ li{
     outline: 0;
     cursor: pointer;
 } */
+
+@media only screen and (max-width: 767px) {
+    .app {
+        text-align: center;
+    }
+    .app__list {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0;
+    }
+    .app__button:hover {
+        opacity: 1;
+    }
+    .app .mainMenuChat {
+        margin-bottom: 10px;
+    }
+    ul {
+        padding-inline-start: 1px;
+    }
+    li {
+        list-style: none;
+    }
+    .ui.vertical.menu {
+        width: 200px;
+    }
+}

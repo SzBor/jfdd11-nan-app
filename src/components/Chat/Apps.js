@@ -183,9 +183,7 @@ class Apps extends Component {
           
         </div>
         <div className="app__list">
-        <Menu vertical style={{
-          width: "auto"
-        }}>
+        <Menu horizontal>
             <Dropdown item text={(this.state.currentChatUserName)} style={{
               textAlign: "center"
             }}>
