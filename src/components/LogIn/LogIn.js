@@ -25,8 +25,8 @@ class LogIn extends Component {
     const { signIn } = this.props.authContext;
     signIn(this.state.email, this.state.password)
       .then(data => {
-        this.props.history.push("/dashboard");
         this.setState({ error: null, success: "Sign in successful" });
+        this.props.history.push("/dashboard");
       })
       .catch(error => this.setState({ error: error, success: null }));
   };

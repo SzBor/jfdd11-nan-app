@@ -36,6 +36,22 @@ class SignUp extends Component {
         return;
       }
     }
+    if (event.target.name === "nip") {
+      if (event.target.value !== '' && !event.target.value.match(/^[\d-]+$/gi)) {
+        return;
+      }
+    }
+    if (event.target.name === "postalcode") {
+      if (event.target.value !== '' && !event.target.value.match(/^[\d-]+$/gi)) {
+        return;
+      }
+    }
+    if (event.target.name === "number") {
+      if (event.target.value !== '' && !event.target.value.match(/^[\d-]+$/gi)) {
+        return;
+      }
+    }
+   
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -179,7 +195,7 @@ class SignUp extends Component {
                 name="street"
               />
               <Form.Input
-                label="Number"
+                label="Street Number"
                 type="number"
                 placeholder="Number"
                 width={4}
@@ -225,8 +241,8 @@ class SignUp extends Component {
                 <span id="requiredStar">*</span>
               </label>
             </Form.Group>
-            <Form.Group className="c">
-              <Button className="submit-button" size="medium" type="submit">
+            <Form.Group className="signUpFormMenuButtons">
+              <Button className="submitButtonSignUp" size="medium" type="submit">
                 Submit
               </Button>
 
