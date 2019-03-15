@@ -28,8 +28,10 @@
 
 footer {
   height: 70px;
+  width:100%;
   border-top:1px solid white;
   background: #efefef;
+  position: absolute;
   right: 0;
   bottom: 0;
   left: 0;

@@ -1,7 +1,6 @@
 
 .HomeView {
   background: rgb(241, 241, 241);
-  height: 100vh;
 }
 
 .homeView-buttons {
@@ -10,8 +9,11 @@
   padding: 5px;
   
 }
-.homeView-search form {
-  width:400px;
+
+
+.homeView-search form.form {
+  max-width:400px;
+  width: 100%;
 }
 
 .homeView-search {
@@ -34,6 +36,12 @@
   padding: 10px 10px 10px 0;
   max-width: 100hh;
   margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .tracken-logo {
+    flex-direction: column
+  }
 }
 
 .tracken-logo p {

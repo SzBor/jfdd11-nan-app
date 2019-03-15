@@ -28,7 +28,7 @@ class SearchBar extends Component {
     const { parcel } = this.state;
     return (
       <>
-        <div>
+        
           <Form onSubmit={this.handleSubmit}>
             <Form.Field>
               <Input
@@ -39,7 +39,7 @@ class SearchBar extends Component {
               />
             </Form.Field>
           </Form>
-        </div>
+        
         <div id="detailsParcel" >
           {parcel === "" && <p style={{ textAlign: "center" }} />}
           {parcel === null && (
