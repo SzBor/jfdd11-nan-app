@@ -38,7 +38,7 @@ class MainMenu extends Component {
 
   renderMenu(isTogglable = false) {
     const { isOpen } = this.state;
-    const { user } = this.props.authContext;
+    const user  = this.props.authContext.user;
 
     return (
       <div>

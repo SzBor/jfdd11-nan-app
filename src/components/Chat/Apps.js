@@ -4,6 +4,8 @@ import Form from "../Chat/Form.js";
 import { Dropdown, Menu } from 'semantic-ui-react'
 import firebase from "firebase";
 import MainMenu from "../MainMenu";
+import { withAuth } from "../../contexts/AuthContext";
+
 
 class Apps extends Component {
   state = {
@@ -32,12 +34,13 @@ class Apps extends Component {
   }
 
   getChats = () => {
-    const { chats, users, user } = this.state
+    const { chats, users } = this.state
+    const user = this.props.authContext.user
     if (!chats || !users || !user) {
       return []
     }
 
-    const chatIdsAsObject = this.state.users[this.state.user.uid].chatIds
+    const chatIdsAsObject = this.state.users[user.uid].chatIds
     const chatIdsAsArray = Object.keys(chatIdsAsObject || {})
 
     const presentedChats = chatIdsAsArray
@@ -71,9 +74,7 @@ class Apps extends Component {
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user });
-    });
+    
     firebase
       .database()
       .ref("admins")
@@ -104,7 +105,7 @@ class Apps extends Component {
   }
 
   startChat = chatBuddyId => {
-    const myId = this.state.user && this.state.user.uid;
+    const myId = this.props.authContext.user && this.props.authContext.user.uid;
 
     if (myId === null || chatBuddyId === null) {
       return;
@@ -188,7 +189,7 @@ class Apps extends Component {
               textAlign: "center"
             }}>
               <Dropdown.Menu>
-          {this.state.user && this.state.users && this.getChats().map(
+          {this.props.authContext.user && this.state.users && this.getChats().map(
             chat => {
               return (<Dropdown.Item key={chat.chatId} onClick={() => this.setState({
                 currentChatId: chat.chatId,
@@ -199,11 +200,11 @@ class Apps extends Component {
             </Dropdown>
           </Menu>
           {this.state.currentChatId && (
-            <Form user={this.state.user} users={this.state.users} key={this.state.currentChatId} chatId={this.state.currentChatId} />
+            <Form user={this.props.authContext.user} users={this.state.users} key={this.state.currentChatId} chatId={this.state.currentChatId} />
           )}
         </div>
       </div>
     );
   }
 }
-export default Apps;
+export default withAuth(Apps);
