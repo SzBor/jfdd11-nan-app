@@ -43,12 +43,13 @@ class MainMenu extends Component {
     return (
       <div>
         <Menu stackable>
-          <Menu.Item>
+          <Menu.Item id="mainMenuHeaderContainer">
             <img className="mainMenuLogo" src={image} alt="tracken-logo" />
+            <div id="mainMenuTextContainer">TRACKEN</div>
 
             {isTogglable && (
               <Button id="mainMenuButton" onClick={this.handleToggle}>
-                <Icon name="bars" size="big" color="black" />
+                <Icon id="hamburgerIcon"name="bars" size="big" color="black" />
               </Button>
             )}
           </Menu.Item>

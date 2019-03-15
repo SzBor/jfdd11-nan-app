@@ -12,6 +12,21 @@
 
 #mainMenuButton {
     width: 64px;
-    margin-left: 220px;
 }
+
+#mainMenuTextContainer {
+    width: 100%;
+    font-family: 'Coiny', cursive;
+    font-size: 25px;
+    color: #572172;
+    text-align: center;
+    
+}
+
+#mainMenuHeaderContainer{
+
+    padding-right: 10px;
+}
+
+
 
