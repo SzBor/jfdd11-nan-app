@@ -38,12 +38,6 @@
   margin: 0 auto;
 }
 
-@media (max-width: 600px) {
-  .tracken-logo {
-    flex-direction: column
-  }
-}
-
 .tracken-logo p {
   padding-right: 10px;
 font-family: 'Coiny', cursive;
@@ -52,9 +46,17 @@ color: #572172;
 }
 
 .homeView-footer {
-  position: absolute;
-  background: rgb(161, 0, 135);
+  position: fixed;
+  background: rgb(255, 215, 248);
   bottom: 0px;
   height: 100px;
   width: 100%
 }
+@media (max-width: 600px) {
+  .tracken-logo {
+    flex-direction: column
+  }
+}
+
+.homeView-footer p {
+ text-align: center }

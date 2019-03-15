@@ -70,7 +70,7 @@ class HomeView extends Component {
             <h2>Find your package</h2>
             <SearchBar handleParcel={this.setParcel} />
           </div>
-          <footer>
+          <footer className="homeView-footer">
             <p>Created by Team NaN</p>
           </footer>
         </div>
