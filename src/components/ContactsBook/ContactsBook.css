@@ -1,83 +1,46 @@
-table.contacts_table { 
-    width: 100%; 
-    border-collapse: collapse; 
-  }
+
 
 td.td_buttons {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
+
 td.td_buttons .hideCopy {
-    display: none;
+	display: none;
 }
+
 td.td_buttons .showCopy {
-    display: block;
+	display: block;
 }
-th { 
-    background: #333; 
-    color: white; 
-    font-weight: bold; 
-  }
-  td, th { 
-    padding: 6px; 
-    border: 1px solid #ccc; 
-    text-align: left; 
-  }
 
+th.contacts_table {
+	background: #333;
+	color: white;
+	font-weight: bold;
+}
 
-@media only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-    tr:nth-of-type(odd) { 
-        background: #eee; 
-      }
+.contacts_table td, th {
+	padding: 6px;
+	border: 1px solid #ccc;
+	text-align: left;
+}
+.span__title--td {
+	display:none;
+}
 
-	/* Force table to not be like tables anymore */
-	.contacts_table table, thead, tbody, th, td, tr { 
-		display: block; 
+@media only screen and (max-width: 767px) {
+	.span__title--td {
+		display:inline-block;
+		font-weight: 600;
+		text-align: right;
+		width: 140px;
+		vertical-align: top;
 	}
-	
-	/* Hide table headers (but not display: none;, for accessibility) */
-	.contacts_table thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
+.span__content--td {
+	display: inline-block;
+	width:calc(100% - 140px);
+}
+	.ui.table:not(.unstackable) thead:first-child {
+		display: none!important;
 	}
-	
-	.contacts_table tr { border: 1px solid #ccc; }
-	
-	.contacts_table td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-        padding-left: 50%; 
-        min-height: 14px;
-        padding: 0;
-	}
-	
-	.contacts_table td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-	}
-	
-	/*
-	Label the data
-	*/
-	.contacts_table td:nth-of-type(1):before { content: "Company Name"; }
-	.contacts_table td:nth-of-type(2):before { content: "Name"; }
-	.contacts_table td:nth-of-type(3):before { content: "Surname"; }
-	.contacts_table td:nth-of-type(4):before { content: "City"; }
-	.contacts_table td:nth-of-type(5):before { content: "Postal code"; }
-	.contacts_table td:nth-of-type(6):before { content: "Steet"; }
-	.contacts_table td:nth-of-type(7):before { content: "Number"; }
-	.contacts_table td:nth-of-type(8):before { content: "Phone"; }
-	.contacts_table td:nth-of-type(9):before { content: "Email"; }
-    .contacts_table td:nth-of-type(10):before { content: "NIP"; }
-    .contacts_table td:nth-of-type(11):before { content: "Options"; }
 }

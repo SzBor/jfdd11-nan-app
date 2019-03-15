@@ -57,35 +57,35 @@ class ContactsBook extends Component {
               />
             </div>
         <table className="ui celled table contacts_table">
-          <thead className="contacts_table">
-            <tr className="contacts_table">
-              <th className="contacts_table">Company name</th>
-              <th className="contacts_table">Name</th>
-              <th className="contacts_table">Surname</th>
-              <th className="contacts_table">City</th>
-              <th className="contacts_table">Postal code</th>
-              <th className="contacts_table">Street</th>
-              <th className="contacts_table">Number</th>
-              <th className="contacts_table">Phone</th>
-              <th className="contacts_table">Email</th>
-              <th className="contacts_table">NIP</th>
+          <thead>
+            <tr className="th__header--tr">
+              <th>Company name</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>City</th>
+              <th>Postal code</th>
+              <th>Street</th>
+              <th>Number</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>NIP</th>
               <th />
             </tr>
           </thead>
-          <tbody className="contacts_table">
+          <tbody>
             {shearchedContactBook.map(contact => (
-              <tr key={contact.id} className="contacts_table">
-                <td className="contacts_table">{contact.company_name}</td>
-                <td className="contacts_table">{contact.name}</td>
-                <td className="contacts_table">{contact.surname}</td>
-                <td className="contacts_table">{contact.city}</td>
-                <td className="contacts_table">{contact.postalcode}</td>
-                <td className="contacts_table">{contact.street}</td>
-                <td className="contacts_table">{contact.number}</td>
-                <td className="contacts_table">{contact.phone}</td>
-                <td className="contacts_table">{contact.email}</td>
-                <td className="contacts_table">{contact.nip}</td>
-                <td className="td_buttons contacts_table"><Button className={this.props.additionalClass || "hideCopy"} onClick={() => this.props.onCopyContact(contact)} circular color='facebook' icon='copy' />
+              <tr key={contact.id}>
+                <td><span className="span__title--td">Company name:&nbsp;&nbsp; </span>{contact.company_name}</td>
+                <td><span className="span__title--td">Name: &nbsp;&nbsp;</span>{contact.name}</td>
+                <td><span className="span__title--td">Surname: &nbsp;&nbsp;</span>{contact.surname}</td>
+                <td><span className="span__title--td">City: &nbsp;&nbsp;</span>{contact.city}</td>
+                <td><span className="span__title--td">Postal code: &nbsp;&nbsp;</span>{contact.postalcode}</td>
+                <td><span className="span__title--td">Street: &nbsp;&nbsp;</span>{contact.street}</td>
+                <td><span className="span__title--td">Number: &nbsp;&nbsp;</span>{contact.number}</td>
+                <td><span className="span__title--td">Phone:&nbsp;&nbsp;</span>{contact.phone}</td>
+                <td><span className="span__title--td">Email:&nbsp;&nbsp;</span>{contact.email}</td>
+                <td><span className="span__title--td">NIP: &nbsp;&nbsp;</span>{contact.nip}</td>
+                <td className="td_buttons"><span className="span__title--td">Options:&nbsp;&nbsp;</span><Button className={this.props.additionalClass || "hideCopy"} onClick={() => this.props.onCopyContact(contact)} circular color='facebook' icon='copy' />
                 <Button id={contact.id} onClick={this.deleteContact} circular color='red' icon='delete' />
                 </td>
               </tr>
