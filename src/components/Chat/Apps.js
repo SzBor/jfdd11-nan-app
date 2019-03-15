@@ -97,7 +97,7 @@ class Apps extends Component {
     firebase
       .database()
       .ref("users")
-      .off("value", this.readusers);
+      .off("value", this.readUsers);
     firebase
       .database()
       .ref("users")
