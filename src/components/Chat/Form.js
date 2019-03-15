@@ -40,6 +40,11 @@ class Form extends Component {
       });
     });
   }
+
+  componentWillUnmount(){
+    this.messageRef.off('value');
+  }
+
   render() {
     return (
       <div className="form">
