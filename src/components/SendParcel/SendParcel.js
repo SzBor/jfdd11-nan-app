@@ -155,7 +155,7 @@ class SendParcel extends Component {
                 onDayChange={this.handleDayChange}
                 selectedDay={this.state.selectedDay}
               />
-  
+  <div className="book__button--hide">
               <Popup
                 keepInViewPort
                 trigger={<Button type="button" content="Contacts Book" />}
@@ -166,7 +166,7 @@ class SendParcel extends Component {
                   additionalClass={'showCopy'}
                   onCopyContact={this.handleCopyContact}
                 />
-              </Popup>
+              </Popup></div>
             </div>
           </Segment>
           <Header as="h4">Recipient details</Header>
