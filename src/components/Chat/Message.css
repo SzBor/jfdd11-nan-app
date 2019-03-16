@@ -7,11 +7,11 @@
     background-color: rgba(0, 0, 0, .05);
     text-align: left;
     line-height: 1.7;
-    border-radius: 10px;
+    
     
 }
 
-.message:nth-child(even) {
+.MainMessage:nth-child(even) {
     background-color: rgba(0, 0, 0, .025);
    
 }
@@ -38,11 +38,11 @@
         background-color: rgba(0, 0, 0, .05);
         text-align: left;
         line-height: 1.7;
-        border-radius: 10px;
+        
         
     }
     
-    .message:nth-child(even) {
+    .MainMessage:nth-child(even) {
         background-color: rgba(0, 0, 0, .025);
        
     }
