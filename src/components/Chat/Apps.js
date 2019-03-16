@@ -7,7 +7,6 @@ import MainMenu from "../MainMenu";
 import { withAuth } from "../../contexts/AuthContext";
 import moment from "moment";
 
-
 class Apps extends Component {
   state = {
     user: null,
