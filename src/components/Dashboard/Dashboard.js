@@ -136,8 +136,8 @@ class Dashboard extends Component {
               {filteredPackages
                 .map(pack => (
                   <tr key={pack.id}>
-                    <td>{pack.date_order}</td>
-                    <td>{pack.date_send}</td>
+                    <td><span className="span__title--td">Date order:&nbsp;&nbsp; </span>{pack.date_order}</td>
+                    <td><span className="span__title--td">Date send:&nbsp;&nbsp; </span>{pack.date_send}</td>
                     <td
                       style={{
                         color:
@@ -148,14 +148,14 @@ class Dashboard extends Component {
                             : "#e68a00"
                       }}
                     >
-                      {pack.status}
+                      <span className="span__title--td">Status:&nbsp;&nbsp; </span>{pack.status}
                     </td>
-                    <td>{pack.delivery.name}</td>
-                    <td>
+                    <td><span className="span__title--td">Delivery name:&nbsp;&nbsp; </span>{pack.delivery.name}</td>
+                    <td><span className="span__title--td">Delivery address:&nbsp;&nbsp; </span><span className="span__content--td">
                       {pack.delivery.city} {pack.delivery.postalcode},{" "}
-                      {pack.delivery.street} {pack.delivery.number}
+                      {pack.delivery.street} {pack.delivery.number}</span>
                     </td>
-                    <td>
+                    <td><span className="span__title--td">Details:&nbsp;&nbsp; </span>
                       <Link to={`/dashboard/${pack.id}`}>
                         <button className="ui button">Details</button>
                       </Link>

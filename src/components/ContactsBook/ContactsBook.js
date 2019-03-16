@@ -56,9 +56,9 @@ class ContactsBook extends Component {
                 onChange={this.handleChange}
               />
             </div>
-        <table className="ui celled table">
+        <table className="ui celled table contacts_table">
           <thead>
-            <tr>
+            <tr className="th__header--tr">
               <th>Company name</th>
               <th>Name</th>
               <th>Surname</th>
@@ -75,17 +75,17 @@ class ContactsBook extends Component {
           <tbody>
             {shearchedContactBook.map(contact => (
               <tr key={contact.id}>
-                <td>{contact.company_name}</td>
-                <td>{contact.name}</td>
-                <td>{contact.surname}</td>
-                <td>{contact.city}</td>
-                <td>{contact.postalcode}</td>
-                <td>{contact.street}</td>
-                <td>{contact.number}</td>
-                <td>{contact.phone}</td>
-                <td>{contact.email}</td>
-                <td>{contact.nip}</td>
-                <td><Button onClick={() => this.props.onCopyContact(contact)} circular color='facebook' icon='copy' />
+                <td><span className="span__title--td">Company name:&nbsp;&nbsp; </span>{contact.company_name}</td>
+                <td><span className="span__title--td">Name: &nbsp;&nbsp;</span>{contact.name}</td>
+                <td><span className="span__title--td">Surname: &nbsp;&nbsp;</span>{contact.surname}</td>
+                <td><span className="span__title--td">City: &nbsp;&nbsp;</span>{contact.city}</td>
+                <td><span className="span__title--td">Postal code: &nbsp;&nbsp;</span>{contact.postalcode}</td>
+                <td><span className="span__title--td">Street: &nbsp;&nbsp;</span>{contact.street}</td>
+                <td><span className="span__title--td">Number: &nbsp;&nbsp;</span>{contact.number}</td>
+                <td><span className="span__title--td">Phone:&nbsp;&nbsp;</span>{contact.phone}</td>
+                <td><span className="span__title--td">Email:&nbsp;&nbsp;</span>{contact.email}</td>
+                <td><span className="span__title--td">NIP: &nbsp;&nbsp;</span>{contact.nip}</td>
+                <td className="td_buttons"><span className="span__title--td">Options:&nbsp;&nbsp;</span><Button className={this.props.additionalClass || "hideCopy"} onClick={() => this.props.onCopyContact(contact)} circular color='facebook' icon='copy' />
                 <Button id={contact.id} onClick={this.deleteContact} circular color='red' icon='delete' />
                 </td>
               </tr>
