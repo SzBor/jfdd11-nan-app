@@ -64,9 +64,11 @@ class HomeView extends Component {
           </header>
         </Auth>
         <div>
+          <div className="tracken-logo-container">
           <div className="tracken-logo">
-            <img src={image} alt="tracken-logo" />
-            <p>TRACKEN</p>
+          <img src={image} alt="tracken-logo" />
+          </div>
+            <div className="tracken-title">TRACKEN</div>
           </div>
           <div className="homeView-search">
             <h2>Find your package</h2>
