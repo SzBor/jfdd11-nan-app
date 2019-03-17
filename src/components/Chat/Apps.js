@@ -5,7 +5,6 @@ import { Dropdown, Menu } from 'semantic-ui-react'
 import firebase from "firebase";
 import MainMenu from "../MainMenu";
 import { withAuth } from "../../contexts/AuthContext";
-import moment from "moment";
 
 class Apps extends Component {
   state = {
