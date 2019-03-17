@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import MainMenu from "../MainMenu";
+import firebase from 'firebase'
 import { Link } from "react-router-dom";
 import moment from "moment";
+
 
 import { Select, Button } from "semantic-ui-react";
 
@@ -23,7 +25,8 @@ class Dashboard extends Component {
       surname: "",
       uid: "",
       email: ""
-    }
+    },
+    admin:'8Bs4aOt02UM4pih740Ql0dviPJC3'
   };
 
   syncPackages = () =>
@@ -54,6 +57,22 @@ class Dashboard extends Component {
     this.setState({ showSendParcel: !this.state.showSendParcel });
   };
 
+  handleChangeStatus = (event) => {
+    const packageId = event.target.attributes.dataid.value;
+    const packageName = event.target.name;
+    console.log(event.target)
+    console.log(packageId)
+    console.log(packageName)
+    firebase
+      .database()
+      .ref("packages")
+      .child(packageId)
+      .child('status')
+      .set(packageName)
+
+      this.syncPackages()
+  }
+
   render() {
     const { user, userData } = this.props.authContext;
     const {
@@ -61,11 +80,12 @@ class Dashboard extends Component {
       pagination,
       option,
       searchPhrase,
-      showSendParcel
+      showSendParcel,
+      admin
     } = this.state;
     const filteredPackages = packages
       .slice()
-      .filter(pack => pack.client_id === user.uid)
+      .filter(pack =>  (user.uid === admin ? true : pack.client_id === user.uid))
       .sort((a, b) => (moment(a.date_send).isAfter(b.date_send) ? -1 : 1))
       .map(pack => ({
         ...pack,
@@ -155,10 +175,15 @@ class Dashboard extends Component {
                       {pack.delivery.city} {pack.delivery.postalcode},{" "}
                       {pack.delivery.street} {pack.delivery.number}</span>
                     </td>
-                    <td><span className="span__title--td">Details:&nbsp;&nbsp; </span>
+                    <td className="td_buttons"><span className="span__title--td">Details:&nbsp;&nbsp; </span>
                       <Link to={`/dashboard/${pack.id}`}>
                         <button className="ui button">Details</button>
                       </Link>
+                      {user.uid === admin && 
+                      (<>
+                      <button className="ui button" dataid={pack.id} name="send" onClick={this.handleChangeStatus}>Send</button>
+                      <button className="ui button" dataid={pack.id} name="received" onClick={this.handleChangeStatus}>Received</button>
+                      </>)}
                     </td>
                   </tr>
                 ))
