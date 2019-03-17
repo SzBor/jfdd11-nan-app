@@ -83,6 +83,7 @@ class Dashboard extends Component {
       showSendParcel,
       admin
     } = this.state;
+    const paginationButton = pagination === 0 ? pagination : pagination/10 -1;
     const filteredPackages = packages
       .slice()
       .filter(pack =>  (user.uid === admin ? true : pack.client_id === user.uid))
@@ -100,7 +101,7 @@ class Dashboard extends Component {
     return (
       <div className="Dashboard">
         <div style={{ width: "100%", background: "#eee" }}>
-          <MainMenu />
+        <MainMenu />
         </div>
         <Auth
           cover={() => <p>Dashboard is available for logged in users only.</p>}
@@ -202,7 +203,7 @@ class Dashboard extends Component {
               >
                 {index + 1}
               </button>
-            ))}
+            )).slice(paginationButton, paginationButton +5)}
           </div>
         </Auth>
       </div>
