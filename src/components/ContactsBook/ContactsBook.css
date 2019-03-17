@@ -21,7 +21,6 @@ th.contacts_table {
 
 .contacts_table td, th {
 	padding: 6px;
-	border: 1px solid #ccc;
 	text-align: left;
 }
 .span__title--td {
