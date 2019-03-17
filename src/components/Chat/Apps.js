@@ -5,7 +5,7 @@ import { Dropdown, Menu } from 'semantic-ui-react'
 import firebase from "firebase";
 import MainMenu from "../MainMenu";
 import { withAuth } from "../../contexts/AuthContext";
-
+import moment from "moment";
 
 class Apps extends Component {
   state = {
@@ -119,12 +119,14 @@ class Apps extends Component {
     const updates = {
       [`/chats/${chatId}`]: {
         firstUserId: myId,
-        secondUserId: chatBuddyId
+        secondUserId: chatBuddyId,
+       
       },
       [`/users/${myId}/chatIds/${chatId}`]: true,
       [`/users/${chatBuddyId}/chatIds/${chatId}`]: true,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
     }
-
+    
     firebase
       .database()
       .ref().update(updates)
@@ -184,7 +186,7 @@ class Apps extends Component {
           
         </div>
         <div className="app__list">
-        <Menu horizontal>
+        <Menu horizontal="true">
             <Dropdown item text={(this.state.currentChatUserName)} style={{
               textAlign: "center"
             }}>
@@ -193,7 +195,8 @@ class Apps extends Component {
             chat => {
               return (<Dropdown.Item key={chat.chatId} onClick={() => this.setState({
                 currentChatId: chat.chatId,
-                currentChatUserName: chat.userName
+                currentChatUserName: chat.userName 
+                
               })}>{chat.userName}</Dropdown.Item>)
             })}
               </Dropdown.Menu>
