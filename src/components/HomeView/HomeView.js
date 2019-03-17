@@ -71,7 +71,7 @@ class HomeView extends Component {
             <SearchBar handleParcel={this.setParcel} />
           </div>
           <footer className="homeView-footer">
-            <p>Created by Team NaN</p>
+            <p>Copyright © 2019 Team NaN</p>
           </footer>
         </div>
       </div>

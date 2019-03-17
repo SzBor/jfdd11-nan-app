@@ -1,6 +1,9 @@
-
+body{
+  background: rgb(250, 250, 250);
+}
 .HomeView {
-  background: rgb(241, 241, 241);
+  height: 100vh;
+  background-image: linear-gradient(rgb(245, 245, 245), rgb(250, 250, 250))
 }
 
 .homeView-buttons {
@@ -9,8 +12,6 @@
   padding: 5px;
   
 }
-
-
 .homeView-search form.form {
   max-width:400px;
   width: 100%;
@@ -47,16 +48,21 @@ color: #572172;
 
 .homeView-footer {
   position: fixed;
-  background: rgb(255, 215, 248);
+  background: #572172;
   bottom: 0px;
-  height: 100px;
+  height: 50px;
   width: 100%
+
 }
-@media (max-width: 600px) {
+
+.homeView-footer p {
+  margin-top: 20px;
+  text-align: center;
+  color: rgb(250, 252, 250)
+}
+
+ @media (max-width: 600px) {
   .tracken-logo {
     flex-direction: column
   }
 }
-
-.homeView-footer p {
- text-align: center }

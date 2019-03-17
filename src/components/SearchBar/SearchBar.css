@@ -12,6 +12,9 @@
   flex-wrap: nowrap;
   box-shadow: 9px 11px 23px 3px rgba(0,0,0,0.39);
 }
+#detailsParcel {
+  padding-bottom: 90px;
+}
 .detailsTable > div {
   margin: 0 auto;
   padding: 5px;
@@ -26,16 +29,6 @@
   border-right: 1px solid #a333c8;
 }
 
-footer {
-  height: 70px;
-  width:100%;
-  border-top:1px solid white;
-  background: #efefef;
-  position: relative;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
 
 @media (max-width: 540px) {
   .detailsTable {
