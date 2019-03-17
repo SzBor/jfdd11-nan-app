@@ -17,8 +17,6 @@ class CustomButton extends Component {
 }
 
 class HomeView extends Component {
-
- 
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
 
@@ -64,18 +62,18 @@ class HomeView extends Component {
           </header>
         </Auth>
         <div>
-          <div className="tracken-logo-container">
           <div className="tracken-logo">
-          <img src={image} alt="tracken-logo" />
-          </div>
-            <div className="tracken-title">TRACKEN</div>
+            <img src={image} alt="tracken-logo" />
+            <p>TRACKEN</p>
           </div>
           <div className="homeView-search">
             <h2>Find your package</h2>
             <SearchBar handleParcel={this.setParcel} />
           </div>
+          <footer className="homeView-footer">
+            <p>Copyright © 2019 Team NaN</p>
+          </footer>
         </div>
-       
       </div>
     );
   }
