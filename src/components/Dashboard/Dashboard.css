@@ -26,6 +26,12 @@
     color: rgba(0,0,0,.87);
     border-radius: .28571429rem;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
 @media screen and (max-width:600px){
     .dashboard-interface {
         justify-content: center;
@@ -43,8 +49,10 @@
         align-content: center;
         width:100%;
     }
+    .pagination {
+        max-width: 300px;
+        margin: 0 auto;
+    }
 }
-.pagination {
-    display: flex;
-    justify-content: center;
-}
+
+

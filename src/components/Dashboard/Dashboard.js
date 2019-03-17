@@ -57,18 +57,18 @@ class Dashboard extends Component {
     this.setState({ showSendParcel: !this.state.showSendParcel });
   };
 
-  handleChangeStatus = (event) => {
-    const packageId = event.target.attributes.dataid.value;
-    const packageName = event.target.name;
-    console.log(event.target)
-    console.log(packageId)
-    console.log(packageName)
+  handleChangeStatus = (event, data) => {
+    const packageId = data.dataid;
+    const packageName = data.name;
+    const date = packageName === 'send' ? {date_send:moment(new Date()).format("YYYY-MM-DD")} : {date_delivery:moment(new Date()).format("YYYY-MM-DD")}
     firebase
       .database()
       .ref("packages")
       .child(packageId)
-      .child('status')
-      .set(packageName)
+      .update({
+        status:packageName,
+        ...date
+      })
 
       this.syncPackages()
   }
@@ -83,6 +83,7 @@ class Dashboard extends Component {
       showSendParcel,
       admin
     } = this.state;
+    const paginationButton = pagination === 0 ? pagination : pagination/10 -1;
     const filteredPackages = packages
       .slice()
       .filter(pack =>  (user.uid === admin ? true : pack.client_id === user.uid))
@@ -100,7 +101,7 @@ class Dashboard extends Component {
     return (
       <div className="Dashboard">
         <div style={{ width: "100%", background: "#eee" }}>
-          <MainMenu />
+        <MainMenu />
         </div>
         <Auth
           cover={() => <p>Dashboard is available for logged in users only.</p>}
@@ -162,9 +163,9 @@ class Dashboard extends Component {
                       style={{
                         color:
                           pack.status === "received"
-                            ? "#006622"
+                            ? "#21ba45"
                             : pack.status === "send"
-                            ? "#0099ff"
+                            ? "#2185d0"
                             : "#e68a00"
                       }}
                     >
@@ -177,12 +178,12 @@ class Dashboard extends Component {
                     </td>
                     <td className="td_buttons"><span className="span__title--td">Details:&nbsp;&nbsp; </span>
                       <Link to={`/dashboard/${pack.id}`}>
-                        <button className="ui button">Details</button>
+                        <Button circular color='grey' icon='info' />
                       </Link>
                       {user.uid === admin && 
                       (<>
-                      <button className="ui button" dataid={pack.id} name="send" onClick={this.handleChangeStatus}>Send</button>
-                      <button className="ui button" dataid={pack.id} name="received" onClick={this.handleChangeStatus}>Received</button>
+                      <Button dataid={pack.id} name="send" onClick={this.handleChangeStatus} circular color='blue' icon='send'/>
+                      <Button dataid={pack.id} name="received" onClick={this.handleChangeStatus} circular color='green' icon='check'/>
                       </>)}
                     </td>
                   </tr>
@@ -202,7 +203,7 @@ class Dashboard extends Component {
               >
                 {index + 1}
               </button>
-            ))}
+            )).slice(paginationButton, paginationButton +5)}
           </div>
         </Auth>
       </div>
