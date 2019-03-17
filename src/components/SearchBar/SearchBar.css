@@ -32,7 +32,7 @@
 
 @media (max-width: 540px) {
   .detailsTable {
-    width: 350px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import MainMenu from "../MainMenu";
+import firebase from 'firebase'
 import { Link } from "react-router-dom";
 import moment from "moment";
+
 
 import { Select, Button } from "semantic-ui-react";
 
@@ -23,7 +25,8 @@ class Dashboard extends Component {
       surname: "",
       uid: "",
       email: ""
-    }
+    },
+    admin:'8Bs4aOt02UM4pih740Ql0dviPJC3'
   };
 
   syncPackages = () =>
@@ -54,6 +57,22 @@ class Dashboard extends Component {
     this.setState({ showSendParcel: !this.state.showSendParcel });
   };
 
+  handleChangeStatus = (event) => {
+    const packageId = event.target.attributes.dataid.value;
+    const packageName = event.target.name;
+    console.log(event.target)
+    console.log(packageId)
+    console.log(packageName)
+    firebase
+      .database()
+      .ref("packages")
+      .child(packageId)
+      .child('status')
+      .set(packageName)
+
+      this.syncPackages()
+  }
+
   render() {
     const { user, userData } = this.props.authContext;
     const {
@@ -61,11 +80,12 @@ class Dashboard extends Component {
       pagination,
       option,
       searchPhrase,
-      showSendParcel
+      showSendParcel,
+      admin
     } = this.state;
     const filteredPackages = packages
       .slice()
-      .filter(pack => pack.client_id === user.uid)
+      .filter(pack =>  (user.uid === admin ? true : pack.client_id === user.uid))
       .sort((a, b) => (moment(a.date_send).isAfter(b.date_send) ? -1 : 1))
       .map(pack => ({
         ...pack,
@@ -136,8 +156,8 @@ class Dashboard extends Component {
               {filteredPackages
                 .map(pack => (
                   <tr key={pack.id}>
-                    <td>{pack.date_order}</td>
-                    <td>{pack.date_send}</td>
+                    <td><span className="span__title--td">Date order:&nbsp;&nbsp; </span>{pack.date_order}</td>
+                    <td><span className="span__title--td">Date send:&nbsp;&nbsp; </span>{pack.date_send}</td>
                     <td
                       style={{
                         color:
@@ -148,17 +168,22 @@ class Dashboard extends Component {
                             : "#e68a00"
                       }}
                     >
-                      {pack.status}
+                      <span className="span__title--td">Status:&nbsp;&nbsp; </span>{pack.status}
                     </td>
-                    <td>{pack.delivery.name}</td>
-                    <td>
+                    <td><span className="span__title--td">Delivery name:&nbsp;&nbsp; </span>{pack.delivery.name}</td>
+                    <td><span className="span__title--td">Delivery address:&nbsp;&nbsp; </span><span className="span__content--td">
                       {pack.delivery.city} {pack.delivery.postalcode},{" "}
-                      {pack.delivery.street} {pack.delivery.number}
+                      {pack.delivery.street} {pack.delivery.number}</span>
                     </td>
-                    <td>
+                    <td className="td_buttons"><span className="span__title--td">Details:&nbsp;&nbsp; </span>
                       <Link to={`/dashboard/${pack.id}`}>
                         <button className="ui button">Details</button>
                       </Link>
+                      {user.uid === admin && 
+                      (<>
+                      <button className="ui button" dataid={pack.id} name="send" onClick={this.handleChangeStatus}>Send</button>
+                      <button className="ui button" dataid={pack.id} name="received" onClick={this.handleChangeStatus}>Received</button>
+                      </>)}
                     </td>
                   </tr>
                 ))

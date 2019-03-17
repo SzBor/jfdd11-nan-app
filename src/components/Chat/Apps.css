@@ -1,6 +1,6 @@
 .app {
     text-align: center;
-    padding: 20px;
+    padding: 10px;
 }
 
 .app__list {
@@ -43,15 +43,7 @@ li {
     list-style: none;
 }
 
-/* button {
-    padding: 0 10px;
-    background-color:red;
-    color:black;
-    border: 0;
-    border-radius: 5px 5px 5px 5px;
-    outline: 0;
-    cursor: pointer;
-} */
+
 
 @media only screen and (max-width: 767px) {
     .app {
@@ -77,4 +69,18 @@ li {
     .ui.vertical.menu {
         width: 200px;
     }
+    .ui.link.menu .item:hover, .ui.menu .dropdown.item:hover, .ui.menu .link.item:hover, .ui.menu a.item:hover{
+        margin: auto;
+        background: none;
+    }
+    .ui.item.dropdown{
+        margin: auto;
+    }
+
+.ui.menu .active.item {
+    background: none;
+}
+.ui.menu .item:before{
+    background: none;
+}
 }

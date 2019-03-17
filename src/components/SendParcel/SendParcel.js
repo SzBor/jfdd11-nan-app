@@ -155,7 +155,7 @@ class SendParcel extends Component {
                 onDayChange={this.handleDayChange}
                 selectedDay={this.state.selectedDay}
               />
-  
+  <div className="book__button--hide">
               <Popup
                 keepInViewPort
                 trigger={<Button type="button" content="Contacts Book" />}
@@ -163,9 +163,10 @@ class SendParcel extends Component {
               >
                 <ContactsBook
                   perPage={2}
+                  additionalClass={'showCopy'}
                   onCopyContact={this.handleCopyContact}
                 />
-              </Popup>
+              </Popup></div>
             </div>
           </Segment>
           <Header as="h4">Recipient details</Header>
@@ -178,6 +179,7 @@ class SendParcel extends Component {
                 placeholder="Recipient name"
                 value={this.state.recipientName}
                 onChange={this.handleChange}
+                required
               />
               <Form.Field
                 id="city"
@@ -186,6 +188,7 @@ class SendParcel extends Component {
                 placeholder="City"
                 value={this.state.city}
                 onChange={this.handleChange}
+                required
               />
               <Form.Field
                 id="postalCode"
@@ -194,6 +197,7 @@ class SendParcel extends Component {
                 placeholder="Postal Code"
                 value={this.state.postalCode}
                 onChange={this.handleChange}
+                required
               />
               <Form.Field
                 id="streetName"
@@ -202,6 +206,7 @@ class SendParcel extends Component {
                 placeholder="Street name"
                 value={this.state.streetName}
                 onChange={this.handleChange}
+                required
               />
               <Form.Field
                 id="streetNumber"
@@ -210,6 +215,7 @@ class SendParcel extends Component {
                 placeholder="Steet number"
                 value={this.state.streetNumber}
                 onChange={this.handleChange}
+                required
               />
               <Form.Field
                 id="country"
@@ -226,6 +232,7 @@ class SendParcel extends Component {
                 placeholder="Phone number"
                 value={this.state.phone}
                 onChange={this.handleChange}
+                required
               />
               <Form.Field
                 id="email"
@@ -234,6 +241,7 @@ class SendParcel extends Component {
                 placeholder="Email"
                 value={this.state.email}
                 onChange={this.handleChange}
+                required
               />
             </Form.Group>
           </Segment>
@@ -247,6 +255,7 @@ class SendParcel extends Component {
                 placeholder="Parcel weight"
                 value={this.state.parcelWeight}
                 onChange={this.handleChange}
+                required
               />
               <Form.Field
                 id="parcelWidth"
@@ -255,6 +264,7 @@ class SendParcel extends Component {
                 placeholder="Parcel width"
                 value={this.state.parcelWidth}
                 onChange={this.handleChange}
+                required
               />
               <Form.Field
                 id="parcelHeight"
@@ -263,6 +273,7 @@ class SendParcel extends Component {
                 placeholder="Parcel height"
                 value={this.state.parcelHeight}
                 onChange={this.handleChange}
+                required
               />
               <Form.Field
                 id="parcelDepth"
@@ -271,6 +282,7 @@ class SendParcel extends Component {
                 placeholder="Parcel depth"
                 value={this.state.parcelDepth}
                 onChange={this.handleChange}
+                required
               />
             </Form.Group>
           </Segment>
