@@ -5,6 +5,8 @@ import { Dropdown, Menu } from 'semantic-ui-react'
 import firebase from "firebase";
 import MainMenu from "../MainMenu";
 import { withAuth } from "../../contexts/AuthContext";
+import moment from "moment";
+
 
 class Apps extends Component {
   state = {
@@ -119,11 +121,11 @@ class Apps extends Component {
       [`/chats/${chatId}`]: {
         firstUserId: myId,
         secondUserId: chatBuddyId,
-       
+        createdAt: firebase.database.ServerValue.TIMESTAMP
       },
       [`/users/${myId}/chatIds/${chatId}`]: true,
       [`/users/${chatBuddyId}/chatIds/${chatId}`]: true,
-      createdAt: firebase.database.ServerValue.TIMESTAMP,
+      
     }
     
     firebase
@@ -196,7 +198,7 @@ class Apps extends Component {
                 currentChatId: chat.chatId,
                 currentChatUserName: chat.userName 
                 
-              })}>{chat.userName}</Dropdown.Item>)
+              })}>{chat.userName} {moment(chat.createdAt).fromNow()}</Dropdown.Item>)
             })}
               </Dropdown.Menu>
             </Dropdown>
